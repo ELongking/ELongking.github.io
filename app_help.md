@@ -15,23 +15,23 @@
 
 - 第一个程序的目录脑图如下图所示：
 
-  app/
-  |——七七八八的依赖项目
-  |——app.exe
-  |——output/
-  	   |——circles/
-  	   		|——output_i.jpg
-  	   		|——...
-  	   		|——config.json
-  	   |——standard.avi
-  	   |——skeleton_points.xlsx
-  	   |——data_after_delete_extra_zero.xlsx
+  <p>app/<br>
+  |——七七八八的依赖项目<br>
+  |——app.exe<br>
+  |——output/<br>
+  &emsp;&emsp;&emsp;|——circles/<br>
+  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|——output_i.jpg<br>
+  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|——...<br>
+  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|——config.json<br>
+  &emsp;&emsp;&emsp;|——standard.avi<br>
+  &emsp;&emsp;&emsp;|——skeleton_points.xlsx<br>
+  &emsp;&emsp;&emsp;|——data_after_delete_extra_zero.xlsx<br></p>
 
 - 第二个程序的目录脑图如下图所示：
 
-  app/
-  |——七七八八的依赖项目
-  |——app.exe
+  <p>app/<br>
+  |——七七八八的依赖项目<br>
+  |——app.exe<br></p>
 
 具体的文件作用在下面对应位置解释。
 
