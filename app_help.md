@@ -39,7 +39,7 @@
   
   *该程序的主要流程是: 导入原始数据文件，生成骨架曲线并导出*
 
-  ！[flowchart_1](material/app_help/app1/APP1.png)
+![flowchart_1](material/app_help/app1/APP1.png)
 
 1. 读取文件（支持xlsx和csv两种格式）
 
