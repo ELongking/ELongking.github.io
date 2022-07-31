@@ -25,7 +25,7 @@
 
   **Bandcamp**: [Longking](https://bandcamp.com/longking)
 
-  	↑↑↑ 找到我的方式中，除了邮箱最快的两种方法 ↑↑↑
+> 鲁迅曾经说过，如果想要快速联系上龙王，这俩是除了邮箱最快的两种
 
   Netease Cloud Music: [TurritopsisNutricula_](https://music.163.com/#/user/home?id=132199990)
 
@@ -34,5 +34,3 @@
 - 基于PyQt5的抗震分析程序
   
   帮助文档[详见此处](app_help.md). 购买链接[在这里](). 依旧附带吹水环节
-
-
