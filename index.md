@@ -13,6 +13,26 @@
 - Video Game / Electronic Music / Porn Industry
 
  
-  <sub>曾经在青岛某地下俱乐部干过两年驻场</sub>
+  ~~__曾经在青岛某地下俱乐部干过两年驻场__~~
   
-  <sub>以前写过若干乐评和专栏的维护</sub>
+  ~~__以前写过若干乐评和专栏的维护__~~
+
+- 社交账号
+  
+  twitter / instagram: 都是这个名字，不过不常用
+
+  **Soundcloud**: [Longking](https://soundcloud.com/elongking)
+
+  **Bandcamp**: [Longking](https://bandcamp.com/longking)
+
+  	↑↑↑ 找到我的方式中，除了邮箱最快的两种方法 ↑↑↑
+
+  Netease Cloud Music: [TurritopsisNutricula_](https://music.163.com/#/user/home?id=132199990)
+
+## 点击跳转
+
+- 基于PyQt5的抗震分析程序
+  
+  帮助文档[详见此处](app_help.md). 购买链接[在这里](). 依旧附带吹水环节
+
+
