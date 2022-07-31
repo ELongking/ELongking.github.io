@@ -8,7 +8,7 @@
 
 - 武汉理工大学（WHUT）土木在读研究生
 
-- Deep learning / Computer Aided - Civil enginering and Composite Material
+- Deep learning / Computer Aided - Civil engineering and Composite Material
  
 - Video Game / Electronic Music / Porn Industry
  
