@@ -51,13 +51,13 @@
   |--------|--------|
   |   ...  |   ...  |
   |   ...  |   ...  |
-  |   ...  |   ...  |
+  |   ...  |   ...  |  
 
   请把表头的starin和stress等均删除，***且只许为两列的格式***
 
   此步骤是整个流程中最需要时间的地方，请耐心等待（亲测，15000组点大概需要15s的时间）
 
-  最后会生成两个文件和一个文件夹，分别为circles(文件夹) | standard.avi | data_after_delete_extra_zero.xlsx
+  最后会生成两个文件和一个文件夹，分别为circles(文件夹) / standard.avi / data_after_delete_extra_zero.xlsx
 
   **其中circles文件夹是第二个程序分析的主要数据来源**；standard.avi是视频文件；最后一个excel表格是抛去原数据中所有多余的原点所得到的数据，供用户检查所用。
 
