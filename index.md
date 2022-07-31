@@ -11,7 +11,6 @@
 - Deep learning / Computer Aided - Civil enginering and Composite Material
  
 - Video Game / Electronic Music / Porn Industry
-
  
   ~~__曾经在青岛某地下俱乐部干过两年驻场__~~
   
@@ -19,7 +18,7 @@
 
 - 社交账号
   
-  twitter / instagram: 都是这个名字，不过不常用
+  Twitter / Instagram: 都是这个名字，不过不常用
 
   **Soundcloud**: [Longking](https://soundcloud.com/elongking)
 
