@@ -4,38 +4,34 @@
 
   本程序的底层框架采用PyQt5自主编写，不放出源代码，但是如果你想要的话可以说明来意，我会酌情考虑。
   
-  <p>龙王在实习的某一天，因为工作的某些缘故，突发奇想，做了一点反编译的措施。如果您是大佬，那当我没说。<br>
-  另外，程序里面是夹带了一点私货的(不是那种，会读你数据的私货，我根本都不是做这个的也没那个兴趣)。指数据导入特定格式的时候，会有防伪的弹出框，问就是犯大吴疆土了(bushi)<p>
+  龙王在实习的某一天，因为工作的某些缘故，突发奇想，做了一点反编译的措施。如果您是大佬，那当我没说.  
+  另外，程序里面是夹带了一点私货的(不是那种，会读你数据的私货，我根本都不是做这个的也没那个兴趣)。指数据导入特定格式的时候，会有防伪的弹出框，问就是犯大吴疆土了(bushi)
   
   欢迎所有的bug反馈，尤其是在弹出特殊报错框的时候，前提是你的步骤是对的
 
-<p></p>
-    
 ## 总览
 
   无论是哪个程序，他们的文件夹的构成是大相径庭的。
 
 - 第一个程序的目录脑图如下图所示：
 
-  <p>app/<br>
-  |——七七八八的依赖项目<br>
-  |——app.exe<br>
-  |——output/<br>
-  &emsp;&emsp;&emsp;|——circles/<br>
-  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|——output_i.jpg<br>
-  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|——...<br>
-  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|——config.json<br>
-  &emsp;&emsp;&emsp;|——standard.avi<br>
-  &emsp;&emsp;&emsp;|——skeleton_points.xlsx<br>
-  &emsp;&emsp;&emsp;|——data_after_delete_extra_zero.xlsx<br></p>
+  app/  
+  |——七七八八的依赖项目  
+  |——app.exe  
+  |——output/  
+  &emsp;&emsp;&emsp;|——circles/  
+  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|——output_i.jpg  
+  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|——...  
+  &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;|——config.json  
+  &emsp;&emsp;&emsp;|——standard.avi  
+  &emsp;&emsp;&emsp;|——skeleton_points.xlsx  
+  &emsp;&emsp;&emsp;|——data_after_delete_extra_zero.xlsx  
 
 - 第二个程序的目录脑图如下图所示：
 
-  <p>app/<br>
-  |——七七八八的依赖项目<br>
-  |——app.exe<br></p>
-
-<p></p>
+  app/  
+  |——七七八八的依赖项目  
+  |——app.exe  
 
 ## 第一个程序
   
