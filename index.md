@@ -8,9 +8,9 @@
 
 - 武汉理工大学（WHUT）土木在读研究生
 
-- Deep learning / Computer-Aided Civil engineering and Composite Material
+- Deep learning / Computer Vision / Computer-Aided Civil Engineering and Cementitious Materials
  
-- Video Game / Electronic Music / Porn Industry
+- Video Game / Electronic Music / Porn Industry / Traveling
  
   ~~__曾经在青岛某地下俱乐部干过两年驻场__~~
   
