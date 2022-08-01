@@ -1,1 +1,1 @@
-My indivual website
+My individual website
