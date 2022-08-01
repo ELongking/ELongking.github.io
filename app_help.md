@@ -60,7 +60,7 @@
   |   ...  |   ...  |
   |   ...  |   ...  |   
 
-  请把表头的starin和stress等均删除，<b><i><span style="color: red;">且只许为两列的格式</span></i></b>
+  请把表头的starin和stress等均删除，<b><span style="color: red;">且只许为两列的格式</span></b>
 
   此步骤是整个流程中最需要时间的地方，请耐心等待（亲测，15000组点大概需要15s的时间）
 
@@ -96,6 +96,6 @@
 
   <b><span style="color: red;">该程序的主要流程是: 导入骨架曲线文件和周期图像及对应信息文件夹，进行分析并产生对应结果</span></b>
   
-![flowchart_2]()
+![flowchart_2](material/app_help/app2/APP2.drawio.png)
   
-- \1.
+- \1. 
