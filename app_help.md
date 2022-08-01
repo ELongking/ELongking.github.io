@@ -60,7 +60,7 @@
   |   ...  |   ...  |
   |   ...  |   ...  |   
 
-  请把表头的starin和stress等均删除，<b><span style="color: red;">且只许为两列的格式</span></b>
+  请把表头的starin和stress等均删除，<b><span style="color: red;">且只许为两列的格式</span></b>，第一列为x（应变）,第二列为y（应力）
 
   此步骤是整个流程中最需要时间的地方，请耐心等待（亲测，15000组点大概需要15s的时间）
 
