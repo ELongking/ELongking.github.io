@@ -20,9 +20,7 @@
 
 ## 总览
 
-  无论是哪个程序，他们的文件夹的构成是大相径庭的。
-
-- 第一个程序的目录脑图如下图所示：
+- 程序的目录脑图如下图所示：
 
   app/  
   |——七七八八的依赖项目  
@@ -35,16 +33,16 @@
   &emsp;&emsp;&emsp;|——standard.avi  
   &emsp;&emsp;&emsp;|——skeleton_points.xlsx  
   &emsp;&emsp;&emsp;|——data_after_delete_extra_zero.xlsx  
-
-- 第二个程序的目录脑图如下图所示：
-
-  app/  
-  |——七七八八的依赖项目  
-  |——app.exe  
   
 - 所有文件的路径（绝对路径）不能有中文和特殊符号，否则一定会报错
 
 ----------
+
+## 首页界面
+
+![homepage](material/app_help/home.png)
+
+点就完事儿
 
 ## 第一个程序
   
