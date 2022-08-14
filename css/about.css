@@ -1,0 +1,18 @@
+ol li,ul li{
+    list-style-position:inside;
+}
+
+.introduction{
+    padding-top: 100px;
+    padding-left: 5%;
+
+    font-size: 18px;
+
+}
+
+.in-part{
+    padding-bottom: 50px;
+
+    font-family: STXinwei;
+    text-align: center;
+}

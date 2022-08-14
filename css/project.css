@@ -1,0 +1,19 @@
+.part{
+    padding-top: 100px;
+    padding-left: 50px;
+
+    font-size: 24px;
+    font-family: STKaiti;
+}
+
+.part a{
+    color: orange;
+}
+
+.part a:visited{
+    color: orange;
+}
+
+.part a:hover{
+    color: gray;
+}

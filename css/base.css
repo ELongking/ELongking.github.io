@@ -1,0 +1,89 @@
+@font-face {
+    font-family:'dsi';
+    src: url(../font/Dhanikans-Signature-Italic-dafont-2.ttf);
+}
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+a{
+    color: white;
+}
+
+a:visited{
+    color: white;
+}
+
+a:hover{
+    color: gray;
+}
+
+.top-all{
+    height: 800px;
+
+    background-image: url("../texture/top.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.top{
+
+    height: 500px;
+
+    font-style: italic;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 50px;
+    word-spacing: 12px;
+    text-transform: capitalize;
+    text-align: center;
+    line-height: 600px;
+}
+
+.top-selection{
+    padding-left: 200px;
+    padding-right: 200px;
+
+    height: 260px;
+
+    font-size: 24px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    color: white;
+}
+
+.top-add{
+    padding-right: 10px;
+
+    height: 10px;
+
+    font-style: italic;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 8px;
+    color: white;
+    text-align: right;
+}
+
+.branch{
+    height: 1000px;
+
+    background-color: rgb(232,230,233);
+}
+
+.bottom{
+    height: 300px;
+
+    font-size: 28px;
+    font-style: italic;
+    font-family: dsi;
+    line-height: 50px;
+    text-align: center;
+
+    background-image: url("../texture/body.jpg");
+    background-position: center;
+    background-size: 33%;
+    background-repeat: repeat-x;
+}
