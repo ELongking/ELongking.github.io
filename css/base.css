@@ -1,6 +1,6 @@
 @font-face {
     font-family:'dsi';
-    src: url(../font/Dhanikans-Signature-Italic-dafont-2.ttf);
+    src: url("../font/Dhanikans-Signature-Italic-dafont-2.ttf");
 }
 
 *{
@@ -53,6 +53,7 @@ a:hover{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
     color: white;
+    display: flex;
 }
 
 .top-add{

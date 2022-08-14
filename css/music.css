@@ -1,0 +1,28 @@
+@font-face {
+    font-family: malvie;
+    src: url("../font/Malvie-2.otf") format("opentype");
+}
+
+
+.fav-introduction{
+    height: auto;
+    padding-top: 100px;
+    
+    color:rgb(21, 111, 248);
+    text-align: center;
+    font-family: malvie;
+    font-size: 32px;
+    line-height: 40px;
+    text-transform: capitalize;
+}
+
+.fav-introduction ul{
+    margin: 100px 0;
+}
+
+.fav-introduction ul li{
+    font-family: STKaiti;
+    font-size: 22px;
+    line-height: 56px;
+    color: gray;
+}

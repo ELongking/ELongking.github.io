@@ -2,6 +2,10 @@ ol li,ul li{
     list-style-position:inside;
 }
 
+.branch{
+    height: 700px;
+}
+
 .introduction{
     padding-top: 100px;
     padding-left: 5%;
