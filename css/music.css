@@ -3,6 +3,11 @@
     src: url("../font/Malvie-2.otf") format("opentype");
 }
 
+@font-face {
+    font-family: ksr;
+    src: url("../font/KaushanScript-Regular.otf") format("opentype");
+}
+
 
 .fav-introduction{
     height: auto;
@@ -15,14 +20,42 @@
     line-height: 40px;
     text-transform: capitalize;
 }
-
 .fav-introduction ul{
     margin: 100px 0;
 }
-
 .fav-introduction ul li{
     font-family: STKaiti;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 56px;
     color: gray;
 }
+
+.year-box{
+    position: relative;
+    margin-left: 6%;
+    list-style: none;
+
+    font-family: ksr;
+    font-size: 32px;
+    color:maroon;
+}
+
+.item{
+    font-family: ksr;
+    list-style: none;
+
+    margin-bottom: 20px;
+}
+.item ul{
+    list-style: none;
+    text-indent: 2em;
+    font-family: STKaiti;
+    font-size: 24px;
+    color: gray;
+
+    display: none;
+}
+.item:hover ul{
+    display: block;
+}
+

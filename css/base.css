@@ -8,6 +8,7 @@
     padding: 0px;
 }
 
+
 a{
     color: white;
 }
@@ -69,7 +70,11 @@ a:hover{
 }
 
 .branch{
-    height: 1000px;
+    height: auto;
+    width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+    padding-bottom: 50px;
 
     background-color: rgb(232,230,233);
 }
@@ -87,4 +92,10 @@ a:hover{
     background-position: center;
     background-size: 33%;
     background-repeat: repeat-x;
+}
+
+.shadow{
+    height: 10px;
+    border: 0;
+    box-shadow: 0 10px 10px -10px #8c8b8b inset;
 }
