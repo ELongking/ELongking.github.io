@@ -75,16 +75,18 @@ a:hover{
 	margin-right: auto;
 	margin-left: auto;
 
-    background-color: rgb(232,230,233);
+    background-image: linear-gradient(to bottom, #8c8b8b, white);
 }
 
 .bottom{
-    height: 300px;
+    height: 260px;
 
-    font-size: 28px;
+    font-size: 30px;
     font-style: italic;
+    font-weight: bold;
     font-family: dsi;
-    line-height: 50px;
+    color: black;
+    line-height: 64px;
     text-align: center;
 
     background-image: url("../texture/body.jpg");

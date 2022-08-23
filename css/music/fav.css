@@ -1,0 +1,80 @@
+@font-face {
+    font-family: radiant;
+    src: url(../../font/Radiant-2.ttf);
+}
+@font-face {
+    font-family: sjt;
+    src: url(../../font/ShouJinTi.ttf);
+}
+
+.img-text>.review{
+
+    display: inline-block;
+    width: 40%;
+    margin: auto 5%;
+
+    line-height: 26px;
+    font-size: 18px;
+    color: black;
+    font-family: sjt;
+    font-weight: bold;
+
+    text-align: justify;
+    text-align: center;
+}
+
+.img-text>img {
+    margin: auto 5%;
+    width: 30%;
+    height: auto;
+
+    object-fit: cover;
+
+    display: inline-block;
+    border: 3px solid #333333;
+    border-radius: 5% 5% 5% 5% / 5% 5% 5% 5%;
+    background: #ffffff;
+    position: relative;
+}
+
+
+.img-text{
+    display: flex;
+
+    height: auto;
+    width: 95%;
+    text-align: center;
+
+	overflow: hidden; 
+    margin: 5% 5%;
+    padding-bottom: 0%;
+	border-radius: 0%;
+	float: left;
+}
+
+
+
+.text-split {
+    visibility: visible;
+    margin: 4% auto;
+    width: 50%;
+    border: 0;
+    height: 1.5px;
+    background-image: linear-gradient(to right, rgba(200, 200, 200, 0), rgba(0, 0, 0, 0.75), rgba(200, 200, 200, 0));
+}
+
+
+.title{
+    text-align: left;
+    font-size: 22px;
+    line-height: 24px;
+    padding: 2em 0;
+}
+.title>p{
+    background: linear-gradient(to right, #434a2d, #859653);
+  	-webkit-background-clip: text;
+  	color: transparent;
+
+    padding: 10px 0;
+    font-family: radiant;
+}
