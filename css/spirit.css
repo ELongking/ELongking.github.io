@@ -1,0 +1,42 @@
+.left{
+    height: 100%;
+    width: 300px;
+    float: left;
+    background-image: url(../texture/spirit/left.jpg);
+    background-size: cover;
+    object-fit: cover;
+
+    border: solid white 2px;
+    position: fixed;
+    
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 48px;
+    color: white;
+
+}
+
+.right{
+    margin-left: 50px;
+
+    height: 100%;
+    width: calc(100% - 300px);
+    overflow: hidden;
+}
+
+.title{
+    margin-top: 5%;
+    height: 10%;
+    margin-bottom: 5%;
+}
+
+.link{
+    position: relative;
+
+    height: 30%;
+    border: solid white 1px;
+
+    border-left: none;
+    border-right: none;
+}
