@@ -93,7 +93,6 @@ a:hover{
     width: 100%;
 	margin-right: auto;
 	margin-left: auto;
-    overflow: hidden;
 
     background-image: linear-gradient(to bottom, #8c8b8b, white);
 }

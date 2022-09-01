@@ -34,44 +34,42 @@
 
     <div class="branch">
         <div class="left" id="left">
-            <div class="title">
-                <p>分享一些平常代码上遇到的小Tips (还在思考怎么写doge)</p>
+            <div class="header">
+                <p>Code Tips</p>
             </div>
-            <div class="link">
+            <div class="link" id="2022">
                 Year 2022
             </div>
             <div class="link">
-                Year 2022
+                ------
             </div>
             <div class="link">
-                Year 2022
+                ------
             </div>
             <div class="link">
-                Year 2022
+                ------
             </div>
             <div class="link">
-                Year 2022
+                ------
             </div>
-            <div class="link">
-                Year 2022
-            </div>
-            <div class="link">
-                Year 2022
-            </div>
-            <div class="link">
-                Year 2022
-            </div>
-            <div class="link">
-                Year 2022
-            </div>
-            <div class="link">
-                Year 2022
-            </div>
-            
-
         </div>
         <div class="right">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci explicabo maxime aliquam asperiores nesciunt tempore necessitatibus debitis iure, sed beatae accusamus, delectus omnis illum assumenda voluptates cupiditate, rerum doloremque ullam?
+            <div class="item">
+                <div class="main-title">
+                    2022-08-31
+                </div>
+                <div class="main-content">
+                    <div class="content-title">Instance Segmentation 调参经验</div>
+                    <div class="content">
+                        <p>最近做的一个实例分割的任务, 先上调参前后的图片对比, 模型在经过多重比对后均使用<a href="https://arxiv.org/abs/2003.10152">SOLOV2</a>, backbone为ResNet-18, 没有大量魔改模型(比如加Attn等)</p>
+                        <div class="imgbox"><img src="../assets/2022/9-1/old.jpg"> <img src="../assets/2022/9-1/new.jpg"></div>
+                        <p>差的还是挺明显的。</p>
+                        <p>数据集概况: 三类, 其中第一类为主要类别, 后两类是我希望让网络学到的废类别(相当于一种先验知识)。不然是很容易将这三类互相搞混的(实验得到)。三类数目分别为4700 3600 700, 每张图片大概有100-200个目标(三类加在一起)。图片大小为1200*800的双通道图(Hik原本拍出来的是3072*2048)。</p>
+                        <p>设备概况: 一张NVIDIA-V100 48G, Python 3.9, Torch 1.11, CUDA 11.3, 基本上Batch只能有4, 训练500Epoch需要16h左右。顺带一提我这边的实验前40个Epoch AP稳定为0</p>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     
@@ -82,47 +80,6 @@
         <br>
         Goro Majima
     </div>
-
-    <script type="text/javascript">
-        function htmlScroll() {
-            var top = document.body.scrollTop || document.documentElement.scrollTop;
-            if (elFix.data_top < top) {
-                elFix.style.position = 'fixed';
-                elFix.style.top = 800;
-                elFix.style.left = elFix.data_left;
-            }
-            else {
-                elFix.style.position = 'static';
-            }
-        }
-
-        function htmlPosition(obj) {
-            var o = obj;
-            var t = o.offsetTop;
-            var l = o.offsetLeft;
-            while (o = o.offsetParent) {
-                t += o.offsetTop;
-                l += o.offsetLeft;
-            }
-            obj.data_top = t;
-            obj.data_left = l;
-        }
-
-        var oldHtmlWidth = document.documentElement.offsetWidth;
-        window.onresize = function () {
-            var newHtmlWidth = document.documentElement.offsetWidth;
-            if (oldHtmlWidth == newHtmlWidth) {
-                return;
-            }
-            oldHtmlWidth = newHtmlWidth;
-            elFix.style.position = 'static';
-            htmlPosition(elFix);
-            htmlScroll();
-        }
-        window.onscroll = htmlScroll;
-
-        var elFix = document.getElementById('left');
-        htmlPosition(elFix);
 
     </script>
 </body>
