@@ -7,6 +7,9 @@
 
     <link rel="stylesheet" type="text/css" href="../css/base.css">
     <link rel="stylesheet" type="text/css" href="../css/spirit.css">
+    <link rel="icon" href="../texture/icon.png">
+
+    <script src="../jquery/jquery-3.5.1.min.js"></script>
 </head>
 
 <body>
@@ -33,40 +36,217 @@
     <HR style="border:3 double center" width="100%" color=gray SIZE=3 >
 
     <div class="branch">
-        <div class="left" id="left">
-            <div class="header">
-                <p>Code Tips</p>
-            </div>
-            <div class="link" id="2022">
-                Year 2022
-            </div>
-            <div class="link">
-                ------
-            </div>
-            <div class="link">
-                ------
-            </div>
-            <div class="link">
-                ------
-            </div>
-            <div class="link">
-                ------
-            </div>
+        <div class="nav-wrapper">
+            <ul class="left">
+                <li class="link" 
+                style="font-size: 18px; 
+                background: linear-gradient(to right, rgb(41, 41, 41), rgb(160, 160, 160));
+                -webkit-background-clip: text;
+                color: transparent;
+                font-style: italic;">Code Tips
+                    <ul class="nav">
+                        <li class="next-link"><a href="#">前页</a></li>
+                    </ul>
+
+                <li class="link">Year 2022
+                    <ul class="nav">
+                        <li class="next-link"><a href="#">实例分割 调参Tips</a></li>
+                        <li class="next-link"><a href="#">Selenium</a></li>
+                    </ul>
+                </li>
+                <li class="link">-----
+                    <ul class="nav">
+                        <li class="next-link"><a href="#">1</a></li>
+                        <li class="next-link"><a href="#">2</a></li>
+                    </ul>
+                </li>
+                <li class="link">-----
+                    <ul class="nav">
+                        <li class="next-link"><a href="#">1</a></li>
+                        <li class="next-link"><a href="#">2</a></li>
+                    </ul>
+                </li>
+                <li class="link">-----
+                    <ul class="nav">
+                        <li class="next-link"><a href="#">1</a></li>
+                        <li class="next-link"><a href="#">2</a></li>
+                    </ul>
+                </li>
+            </ul>
         </div>
+
         <div class="right">
-            <div class="item">
+            <div class="item" id="i0">
+                <div class="main-title">
+                    Welcome
+                </div>
+                <div class="main-content">
+                    <div class="content-title">写在前面</div>
+                    <div class="content" id="content" style="text-align: center;">
+                        <p>旨在分析一个普通交叉学科学生的代码日常。</p>
+                        <p>所有的分享都是基于实际自己做过的小案例, 毕竟文档大家都会看不是。</p>
+                        <p>日期均为创建时间</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item" id="i1">
                 <div class="main-title">
                     2022-08-31
                 </div>
                 <div class="main-content">
                     <div class="content-title">Instance Segmentation 调参经验</div>
-                    <div class="content">
+                    <div class="content" id="content">
                         <p>最近做的一个实例分割的任务, 先上调参前后的图片对比, 模型在经过多重比对后均使用<a href="https://arxiv.org/abs/2003.10152">SOLOV2</a>, backbone为ResNet-18, 没有大量魔改模型(比如加Attn等)</p>
-                        <div class="imgbox"><img src="../assets/2022/9-1/old.jpg"> <img src="../assets/2022/9-1/new.jpg"></div>
+                        <div class="imgbox">
+                            <img src="../assets/2022/8-31/old.jpg">
+                            <img src="../assets/2022/8-31/new.jpg">
+                        </div>
                         <p>差的还是挺明显的。</p>
-                        <p>数据集概况: 三类, 其中第一类为主要类别, 后两类是我希望让网络学到的废类别(相当于一种先验知识)。不然是很容易将这三类互相搞混的(实验得到)。三类数目分别为4700 3600 700, 每张图片大概有100-200个目标(三类加在一起)。图片大小为1200*800的双通道图(Hik原本拍出来的是3072*2048)。</p>
-                        <p>设备概况: 一张NVIDIA-V100 48G, Python 3.9, Torch 1.11, CUDA 11.3, 基本上Batch只能有4, 训练500Epoch需要16h左右。顺带一提我这边的实验前40个Epoch AP稳定为0</p>
-                        <p></p>
+                        <p>数据集概况: 三类, 其中第一类为主要类别, 后两类是我希望让网络学到的废类别(相当于一种先验知识)。不然是很容易将这三类互相搞混的(实验得到)。三类数目分别为4700 3600 300, 每张图片大概有100-200个目标(三类加在一起)。图片大小为1200*800的双通道图(Hik原本拍出来的是3072*2048)。</p>
+                        <p>设备概况: 一张NVIDIA-V100 32G, Python 3.9, Torch 1.11, CUDA 11.3, 基本上Batch只能有2, 训练500Epoch需要16h左右。顺带一提我这边的实验前40个Epoch AP稳定为0, 当时吓得以为我哪里整错了。</p>
+                        <hr class="text-hr">
+                        <p>调参嘛, 无非就是各种loss, lr, 以及结构参数之类的这些东西</p>
+                        <p>首先, 这里的类别Loss选择的是Focal Loss。
+                            由于FL主要是为了解决类别不平衡的问题, 其中alpha控制类别不平衡即alpha越小表示负样本越多; gamma控制难易样本的损失降低简单样本的损失值。
+                            而这里如果把它肯成一个二分类问题的话, 其实还算比较平衡的, 因此将默认的alpha=0.25设置成了0.4-0.45。
+                            分割Loss用的是DiceLoss, 就用的原始的参数, 还行其实。
+                        </p>
+                        <p>其次, 优化器选择的是原始的SGD(还蛮难下去的, 基本上就是前大后小), 初始学习率为0.05, 衰减方法选择的是StepLR。
+                            由于我这里的BS和GPU个数较少, 一般所推荐的初始0.1或者0.01的学习率需要降低后再进行使用。
+                            这里使用的是线性缩放原理, 参考文献为<a href="https://arxiv.org/abs/1706.02677" style="font-style: italic;">Accurate, Large Minibatch SGD:Training ImageNet in 1 Hour</a>
+                        </p>
+                        <p>第三, 预处理部分。这里的第三类(第二个坏类别)的划分依据是由于图片的尺寸限制, 使得边缘的物体被切割而成。因此取消了所有的裁剪类型的数据增强, 包括mixup, clip等。
+                            同时为了弥补这方面的损失, 提高了Flip, Resize, ColorJitter等方法的比例. 另外Simple Copy Paste在该任务上效果较好。RandAugment暂时没有用, 不知道效果如何。
+                        </p>
+                        <p>同时, 以上调参大大增强了小目标的检测能力, 比Backbone为ResNet-50的原始SoloV2模型mAPs高了将近10倍, 蛮离谱的。</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item" id="i2">
+                <div class="main-title">
+                    2022-09-02
+                </div>
+                <div class="main-content">
+                    <div class="content-title">Selenium 爬虫框架</div>
+                    <div class="content" id="content">
+                        <p>起因来源于实习中的一个小任务, 平常是基本不做爬虫的</p>
+                        <p>既然提到了Selenium这个框架, 那肯定是基本的url.request无法满足这里的需求</p>
+                        <hr class="text-hr">
+                        <p>在某些分步加载的网页中, 由于其异步问题, 网页中的所有内容是不会一下子全部加载出来的, 通过url.request打印的信息也是如此只能打印一部分
+                            而其实远远不止这些。具体情况如下图所示:
+                        </p>
+                        <div class="imgbox"><img src="../assets/2022/9-2/1.png"></div>
+                        <div class="imgbox"><img src="../assets/2022/9-2/2.png"></div>
+                        <p>一般而言, url.request需要配合正则匹配来进行对应元素目标位置的锁定。但是既然出不来那也就无从谈起。</p>
+                        <p>
+                            因此, 我这里选择的方法是。采用Selenium通过搜索整个html code里的元素path, 来达到对应图片的爬取。
+                            此外由于该网页存在下拉加载, 因此需要同时进行自动的下拉操作。
+                        </p>
+                        <p>Selenium框架会生成一个对应的浏览器窗口模拟行为进行网页的浏览和抓取</p>
+                        <pre>
+driver = webdriver.Chrome(options=hide())
+driver.maximize_window()
+driver.get(url) # url为对应的域名</pre>
+                        <p>这里的options调整了两个params, 都算是Chrome官方推荐的</p>
+                        <pre>
+chrome_options = Options()
+chrome_options.add_argument('--disable-gpu')
+chrome_options.add_argument('--hide-scrollbars')</pre>
+                        <p>
+                            之后需要实现下拉功能, 一段简单的js代码:
+                        </p>
+                        <pre>
+for i in range(1, 10000): # 大概要下拉多少次, 300为在网页上所呈现的图片小图的高度估值, 可小不可太大。
+    if (i - 1) % 4 == 0:
+        dis = 300 * ((i - 1) // 4)
+        js = "var q=document.documentElement.scrollTop={}".format(dis)
+        driver.execute_script(js)</pre>
+                        <p>
+                            Selenium给我们提供了很多找元素的参照, 包括class / id / xpath。具体路径可在devtools里面找到, 对应元素右键即可。
+                            重要的是找到你想要爬下来的这一批元素的共同点, 比如我这里是用Xpath路径, 只有一个地方不一样且是按规律变化的:
+                        </p>
+                        <pre>
+xpath = '//*[@id="page_index"]/div/div[1]/div[2]/div[2]/div/div/div[{}]/img'.format(i)
+elements = driver.find_elements_by_xpath(xpath)</pre>
+                        <p>之后就是拿图片的地址并保存了。众所周知img标签下的地址为src。</p>
+                        <pre>
+for ele in elements:
+    name = ele.text
+    img_url = ele.get_attribute('src')
+    print(i, name, img_url)
+    if img_url:
+        request.urlretrieve(img_url, f'./{title}/{i}.jpg')
+        suc += 1
+        print('-------------------------------')
+    else:
+        fal += 1
+        print('----  this process errored, success = {}, failed = {}  ----'.format(suc, fal))
+        break</pre>
+                        <p>整体代码</p>
+                        <pre>
+from urllib import request
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+import time
+
+def hide():
+    chrome_options = Options()
+    chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--hide-scrollbars')
+    return chrome_options
+
+def process(url, title):
+    driver = webdriver.Chrome(options=hide())
+    driver.maximize_window()
+    driver.get(url)
+
+    suc, fal = 0, 0
+
+    for i in range(1, 10000):
+        if (i - 1) % 4 == 0:
+            dis = 300 * ((i - 1) // 4)
+            js = "var q=document.documentElement.scrollTop={}".format(dis)
+            driver.execute_script(js)
+
+        xpath = '//*[@id="page_index"]/div/div[1]/div[2]/div[2]/div/div/div[{}]/img'.format(i)
+        elements = driver.find_elements_by_xpath(xpath)
+        if not elements:
+            break
+        time.sleep(0.2)
+        for ele in elements:
+            name = ele.text
+            img_url = ele.get_attribute('src')
+            print(i, name, img_url)
+            if img_url:
+                request.urlretrieve(img_url, f'./{title}/{i}.jpg')
+                suc += 1
+                print('-------------------------------')
+            else:
+                fal += 1
+                print('----  this process errored, success = {}, failed = {}  ----'.format(suc, fal))
+                break
+
+def main():
+    url2title = ['https://111.com', '1'],
+                ['https://222.com', '2'],
+                ['https://333.com', '3'],
+                ['https://444.com', '4']]
+    process()
+
+main()</pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="item" id="i3">
+                <div class="main-title">
+                    2022-09-02
+                </div>
+                <div class="main-content">
+                    <div class="content-title">FRANK</div>
+                    <div class="content" id="content">
                     </div>
                 </div>
             </div>
@@ -81,6 +261,14 @@
         Goro Majima
     </div>
 
+    <script>
+        $(".next-link > a").click(function(){
+            var idx = $(".next-link > a").index(this)
+            console.log(idx)
+            $("#i"+ idx).siblings(".item").css({"display":"none"})
+            $("#i"+ idx).css({"display":"block"})
+        })
     </script>
+
 </body>
 </html>
