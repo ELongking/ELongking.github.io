@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="../css/spirit.css">
     <link rel="icon" href="../texture/icon.png">
 
-    <script src="../jquery/jquery-3.5.1.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-3.5.0.min.js"></script>
 </head>
 
 <body>
@@ -52,6 +52,7 @@
                     <ul class="nav">
                         <li class="next-link"><a href="#">实例分割 调参Tips</a></li>
                         <li class="next-link"><a href="#">Selenium</a></li>
+                        <li class="next-link"><a href="#">Github-Pages</a></li>
                     </ul>
                 </li>
                 <li class="link">-----
@@ -85,7 +86,7 @@
                     <div class="content" id="content" style="text-align: center;">
                         <p>旨在分析一个普通交叉学科学生的代码日常。</p>
                         <p>所有的分享都是基于实际自己做过的小案例, 毕竟文档大家都会看不是。</p>
-                        <p>日期均为创建时间</p>
+                        <p>日期均为条目创建时间。</p>
                     </div>
                 </div>
             </div>
@@ -242,11 +243,42 @@ main()</pre>
 
             <div class="item" id="i3">
                 <div class="main-title">
-                    2022-09-02
+                    2022-09-04
                 </div>
                 <div class="main-content">
-                    <div class="content-title">FRANK</div>
+                    <div class="content-title">Github-Pages Tips</div>
                     <div class="content" id="content">
+                        <p>
+                            该条目长期更新, 为个人使用Github服务器挂靠网页时所遇到的问题记录, 尽量可以帮到希望使用Github-Pages作为自己的第一个个人主页的朋友。
+                        </p>
+                        <p>
+                            Github-Pages整体用下来的感觉是: 很方便只需要写完后Push就行了; 不收你一分钱; 不会HTML的话也有基于Markdown的模板不过Theme有限。
+                            缺点是国内网络在使用(push)的时候可能会受到客观的阻碍, 访问是没问题的; 另外这是一个纯前端网页, 毕竟人家不会让你从服务器上拿数据, 你的表单也不知道提交到哪里。
+                        </p>
+                        <p>
+                            关于Github怎么注册, 怎么申请Page的Repo, 怎么push你的project, 这些步骤很简单搜一下就有了。好像Gitee也支持Pages功能了我没试过。
+                        </p>
+                        <hr class="text-hr">
+                        <p>
+                            <span style="font-weight: bold; font-style: italic;">1. index.html</span>
+                        </p>
+                        <p>
+                            众所周知, 每一个网站都是有个主页的。而Github-Pages的主页的网页名称必须为<span style="color: red;">index</span>,
+                            且必须放在repo的最上层目录。如果你是用Markdown使用模板作为语言编写, 则还需要带有<span style="color: red;">config.yaml</span>(这个东西创建完主题会自带),
+                            这个yaml文件里保存了你所使用的主题, 网页的名称, header显示的内容等。
+                        </p>
+                        <p>
+                            另外提一嘴, 如果你从没有过代码项目的经历, 请记住所有的路径引用必须为相对路径, 毕竟你也不知道github给你的绝对路径是什么。网站代码开源可以去我的Github Repo里面直接查看。
+                        </p>
+                        <hr class="text-hr">
+                        <p>
+                            <span style="font-weight: bold; font-style: italic;">2. Error with Permissions-Policy header</span>
+                        </p>
+                        <p>
+                            完整报错命令为<span style="color: blue; font-style:italic">Error with Permissions-Policy header: Origin trial controlled feature not enabled: 'interest-cohort'</span>.
+                            可以在DevTools中查看。我这边发现此错误的原因是使用了JQuery官网下载下来的脚本库, 在Chrome浏览器上触发了谷歌的同类群组联合学习技术: Federated Learning of Cohorts(edge浏览器正常运行),
+                            而Github也是反该项技术可能会抓取用户隐私的成员之一, 具体解释可查看<a href="https://blog.csdn.net/WHQ78164/article/details/120566824">这里</a>。解决方法是使用CDN分发, 我这边用的是微软的分发。
+                        </p>
                     </div>
                 </div>
             </div>
