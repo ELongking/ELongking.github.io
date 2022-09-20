@@ -32,11 +32,15 @@ a:hover{
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: fixed;
+
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .top{
 
     height: 500px;
+    width: 100%;
 
     font-style: italic;
     font-family: Georgia, 'Times New Roman', Times, serif;
@@ -52,6 +56,7 @@ a:hover{
     padding-right: 200px;
 
     height: 260px;
+    width: 100%;
 
     font-size: 24px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -62,8 +67,10 @@ a:hover{
 
 .top-add{
     padding-right: 10px;
+    padding-bottom: 10px;
 
     height: 10px;
+    width: 100%;
 
     font-style: italic;
     font-family: Georgia, 'Times New Roman', Times, serif;
@@ -89,6 +96,7 @@ a:hover{
 }
 
 .branch{
+    display: flex;
     height: auto;
     width: 100%;
 	margin-right: auto;
@@ -112,14 +120,20 @@ a:hover{
     background-position: center;
     background-size: 33%;
     background-repeat: repeat-x;
+
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .shadow{
     height: 10px;
     border: 0;
     box-shadow: 0 10px 10px -10px #8c8b8b inset;
+
+    width: 100%;
 }
 
 .frank{
+    width: 100%;
     padding: 20px 0;
 }

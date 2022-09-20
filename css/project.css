@@ -1,9 +1,15 @@
+.branch{
+    flex-wrap: wrap;
+}
+
 .part{
-    padding-top: 100px;
+    padding-top: 50px;
     padding-left: 50px;
 
     font-size: 24px;
     font-family: STKaiti;
+
+    width: 100%;
 }
 
 .part a{

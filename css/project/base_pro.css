@@ -1,9 +1,15 @@
+.branch{
+    flex-wrap: wrap;
+}
+
 p{
     text-indent: 2em;
 }
 
 
 .text-part{
+    width: 100%;
+
     padding-top: 30px;
     padding-bottom: 30px;
     padding-left: 50px;
@@ -12,17 +18,27 @@ p{
     font-size: 18px;
     font-family: STKaiti;
     line-height: 28px;
+
+    display: flex;
+    flex-wrap: wrap;
 }
 
+.imgbox{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
 .image{
     padding: 10px;
-
     position: relative;
 }
 
 
 
 .bookends {
+    width: 100%;
+
     border: 0;
     margin: 1.35em auto;
     max-width: 100%;
@@ -35,6 +51,10 @@ p{
     height: 12px;
     border-style: double;
     width: 40%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .bookends:before,
 .bookends:after {

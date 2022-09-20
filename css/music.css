@@ -8,9 +8,13 @@
     src: url("../font/KaushanScript-Regular.otf") format("opentype");
 }
 
+.branch{
+    flex-wrap: wrap;
+}
 
 .fav-introduction{
     height: auto;
+    width: 100%;
     padding-top: 100px;
     
     color:rgb(21, 111, 248);
