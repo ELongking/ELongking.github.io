@@ -32,17 +32,19 @@
     <HR style="border:3 double center" width="100%" color=gray SIZE=3>
 
     <div class="branch">
-        <div class="text-part"><strong><span style="font-size: 24px;">写在前面：</span></strong>
+        <div class="text-part">
+            <p class="para-start">写在前面:</p>
             <p>本程序的底层框架采用PyQt5自主编写, 不放出源代码, 但是如果你想要的话可以说明来意, 我会酌情考虑。</p>
-                <p>主要服务目标关键词为：抗震分析、拟静力试验、骨架曲线。</p>
-                <p>龙王在实习的某一天, 因为工作的某些缘故, 突发奇想, 做了一点反编译的措施。如果您是大佬, 那当我没说。不过既然您都反汇编了, 那请您给我的代码做个Review再走呗。</p>
-                <p>另外, 程序里面是夹带了一点私货的(不是那种, 会读你数据的私货, 我根本都不是做这个的也没那个兴趣)。指数据导入特定格式的时候, 会有防伪的弹出框。</p>
-                <p>欢迎所有的bug反馈, 尤其是在弹出特殊报错框的时候, 前提是你的步骤是对的。</p>
+            <p>主要服务目标关键词为：抗震分析、拟静力试验、骨架曲线。</p>
+            <p>龙王在实习的某一天, 因为工作的某些缘故, 突发奇想, 做了一点反编译的措施。如果您是大佬, 那当我没说。不过既然您都反汇编了, 那请您给我的代码做个Review再走呗。</p>
+            <p>另外, 程序里面是夹带了一点私货的(不是那种, 会读你数据的私货, 我根本都不是做这个的也没那个兴趣)。指数据导入特定格式的时候, 会有防伪的弹出框。</p>
+            <p>欢迎所有的bug反馈, 尤其是在弹出特殊报错框的时候, 前提是你的步骤是对的。</p>
         </div>
 
         <hr class="bookends">
 
-        <div class="text-part"><strong><span style="font-size: 24px;">如何掌握报错信息和进行反馈：</span></strong>
+        <div class="text-part">
+            <p class="para-start">如何掌握报错信息和进行反馈:</p>
             <p>一般可能会发生的错误, 例如数据没导入就进行分析, 导入数据格式不一致, 都进行了弹出提示框的对应。此外任何步骤顺利进行完之后都会有相应的提示。</p>
             <p>但是毕竟Bug千奇百怪, 我的能力也有限, 因此软件底层加入了python的traceback机制, 用以完全掌握报错的信息和来源。
                 如果你在运行软件的过程中, <span style="color: red;">报错框为红色且一堆英文。</span>那么大概说明这类报错属于比较特殊的报错, 且一般于数据本身存在关系, 
@@ -52,16 +54,17 @@
 
         <hr class="bookends">
 
-        <div class="text-part"><strong><span style="font-size: 24px;color: peru;">总览：</span></strong>
+        <div class="text-part">
+            <p class="para-start" style="color: peru;">总览：</p>
             <p>程序的目录脑图如下图所示:</p>
             <div class="imgbox"><img class="image" src="../../texture/project/p1/nt.png" alt="目录结构脑图" height="300px"></div>
             <p>所有文件的路径(绝对路径)不能有中文和特殊符号, 否则一定会报错</p>
-
         </div>
 
         <hr class="bookends">
 
-        <div class="text-part"><strong><span style="font-size: 24px;color: navy;">首页界面：</span></strong>
+        <div class="text-part">
+            <p class="para-start" style="color: navy;">首页界面：</p>
             <p>如下图所示</p>
             <div class="imgbox"><img class="image" src="../../texture/project/p1/home.png" alt="程序首页界面" height="400px"></div>
             <p>点就完事儿</p>
@@ -69,7 +72,8 @@
 
         <hr class="bookends">
 
-        <div class="text-part"><strong><span style="font-size: 24px;color: navy;">第一个程序：</span></strong>
+        <div class="text-part">
+            <p class="para-start" style="color: navy;">第一个程序：</p>
             <p style="color: red;"><strong>该程序的主要流程是: 导入原始数据文件, 生成骨架曲线并导出。</strong></p>
             <div class="imgbox"><img class="image" src="../../texture/project/p1/APP1.png" alt="程序1界面" height="400px"></div>
             <ol>
@@ -77,25 +81,27 @@
                 <p>提示, 如果你的数据是文本文件且主要数据部分数据之间都是逗号隔开的形式, 可以通过直接更改后缀的形式强制转化为.csv</p>
                 <p>注意, 这里所导入的文件, 不能有表头。很多朋友喜欢把excel表的第一行写上表头, 例如：</p>
                 <br>
-                <table table border="1" width="400px" height="150px" align="center" cellspacing="0" cellpadding="0" 
-                style="position: relative; left: 35%;">
-                    <tr align="center" valign="middle">
-                        <td><del>strain</del></td>
-                        <td><del>stress</del></td>
-                    </tr>
-                    <tr align="center" valign="middle">
-                        <td>...</td>
-                        <td>...</td>
-                    </tr>
-                    <tr align="center" valign="middle">
-                        <td>...</td>
-                        <td>...</td>
-                    </tr>
-                    <tr align="center" valign="middle">
-                        <td>...</td>
-                        <td>...</td>
-                    </tr>
-                </table>
+                <div class="tb-container">
+                    <table table border="1" width="400px" height="150px" align="center" cellspacing="0" cellpadding="0">
+                        <tr align="center" valign="middle">
+                            <td><del>strain</del></td>
+                            <td><del>stress</del></td>
+                        </tr>
+                        <tr align="center" valign="middle">
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                        <tr align="center" valign="middle">
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                        <tr align="center" valign="middle">
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                    </table>
+                </div>
+                
                 <br>
                 <p>请把表头的starin和stress等均删除, <strong><span style="color: red;">且只许为两列的格式, </span></strong>第一列为x(应变),第二列为y(应力)</p>
                 <p>此步骤是整个流程中最需要时间的地方, 请耐心等待(亲测, 15000组点大概需要15s的时间)</p>
@@ -114,15 +120,20 @@
                 <li>保存骨架点数据</li>
                 <p>会在软件目录下的output文件夹下生成<span style="color: red;">skeleton_points.xlsx文件</span></p>
             </ol>
-            <div class="warning">
-                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                由于数据等问题<br>提取出的骨架点会存在一些离群值<br>请手动去除, 否则会严重干扰后面的分析
+            
+            <div class="add-container">
+                <div class="warning">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                    由于数据等问题<br>提取出的骨架点会存在一些离群值<br>请手动去除, 否则会严重干扰后面的分析
+                </div>
             </div>
+            
         </div>
 
         <hr class="bookends">
 
-        <div class="text-part"><strong><span style="font-size: 24px;color: navy;">第二个程序：</span></strong>
+        <div class="text-part">
+            <p class="para-start" style="color: navy;">第二个程序：</p>
             <p style="color: red;"><strong>该程序的主要流程是: 导入骨架曲线文件和周期图像及对应信息文件夹, 进行分析并产生对应结果。</strong></p>
             <div class="imgbox"><img class="image" src="../../texture/project/p1/APP2.png" alt="程序2界面" height="400px"></div>
             <ol>

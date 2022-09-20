@@ -33,7 +33,8 @@
     <HR style="border:3 double center" width="100%" color=gray SIZE=3>
 
     <div class="branch">
-        <div class="text-part"><strong><span style="font-size: 24px;">写在前面：</span></strong>
+        <div class="text-part">
+            <p class="para-start">写在前面：</p>
             <p>本程序的底层框架采用PyQt自主编写, 学习部分基于Sklearn, 多目标优化框架基于Pymoo。
                 实验和经验发现对于表格类数据, 传统机器学习具有相比于深度学习方法更高的精度和更快的速度。因此在子方法中没有MLP等深度学习方法, 未来可能会加入GANs或者Diffusion Model等方法进行数据扩充。</p>
             <p>主要服务目标关键词为：混凝土优化, 混凝土配合比, 多目标优化</p>
@@ -42,7 +43,8 @@
 
         <hr class="bookends">
 
-        <div class="text-part"><strong><span style="font-size: 24px;">如何掌握报错信息和进行反馈：</span></strong>
+        <div class="text-part">
+            <p class="para-start">如何掌握报错信息和进行反馈:</p>
             <p>一般可能会发生的错误, 例如数据没导入就进行分析, 导入数据格式不一致, 都进行了弹出提示框的对应。此外任何步骤顺利进行完之后都会有相应的提示。</p>
             <p>但是毕竟Bug千奇百怪, 我的能力也有限, 因此软件底层加入了python的traceback机制, 用以完全掌握报错的信息和来源。
                 如果你在运行软件的过程中, <span style="color: red;">报错框为红色且一堆英文, 或者再日志信息处出现了报错信息。</span>那么大概说明这类报错属于比较特殊的报错, 且一般和数据本身存在关系, 
@@ -52,7 +54,8 @@
 
         <hr class="bookends">
 
-        <div class="text-part"><strong><span style="font-size: 24px;color: peru;">总览：</span></strong>
+        <div class="text-part">
+            <p class="para-start" style="color: peru;">总览：</p>
             <p>程序的目录脑图如下图所示:</p>
             <div class="imgbox"><img class="image" src="../../texture/project/p2/nt.png" alt="目录结构脑图" height="300px"></div>
             <p>所有文件的路径(绝对路径)不能有中文和特殊符号。</p>
@@ -66,18 +69,24 @@
 
         <hr class="bookends">
 
-        <div class="text-part"><strong><span style="font-size: 24px;color: navy;">首页界面：</span></strong>
+        <div class="text-part">
+            <p class="para-start" style="color: navy;">首页界面：</p>
             <p>如下图所示</p>
-            <div class="imgbox"><img class="image" src="../../texture/project/p2/home.png" alt="首页界面" height="400px"></div>
+            <div class="imgbox">
+                <img class="image" src="../../texture/project/p2/home.png" alt="首页界面" height="400px">
+            </div>
             <p>点就完事儿</p>
         </div>
 
         <hr class="bookends">
 
-        <div class="text-part"><strong><span style="font-size: 24px;color: navy;">第一个程序：</span></strong>
+        <div class="text-part">
+            <p class="para-start" style="color: navy;">第一个程序：</p>
             <p style="color: red;"><strong>该程序的主要流程是: 导入原始表格文件, 进行每一个标签的预测模型的求解, 并进行简易测试</strong></p>
-            <img class="image" src="../../texture/project/p2/app1-1.png" alt="程序1界面1" height="400px" style="left: 5%;">
-            <img class="image" src="../../texture/project/p2/app1-2.png" alt="程序1界面2" height="400px" style="left: 13%;">
+            <div class="imgbox">
+                <img class="image" src="../../texture/project/p2/app1-1.png" alt="程序1界面1" height="400px">
+                <img class="image" src="../../texture/project/p2/app1-2.png" alt="程序1界面2" height="400px">
+            </div>
             <ol>
                 <li>读取文件(支持xlsx, xls和csv三种格式)</li>
                 <p>提示, 如果你的数据是文本文件且主要数据部分数据之间都是逗号隔开的形式, 可以通过直接更改后缀的形式强制转化为.csv</p>
@@ -88,45 +97,47 @@
                 </p>
                 <p>示例如下所示:</p>
                 <br>
-                <table table border="1" width="400px" height="150px" align="center" cellspacing="0" cellpadding="0" 
-                style="position: relative; left: 35%;">
-                    <tr align="center" valign="middle">
-                        <td>水泥</td>
-                        <td>水</td>
-                        <td>粉煤灰</td>
-                        <td>机制砂</td>
-                        <td>...</td>
-                        <td>抗压强度</td>
-                        <td>流动度</td>
-                    </tr>
-                    <tr align="center" valign="middle">
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                    </tr>
-                    <tr align="center" valign="middle">
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                    </tr>
-                    <tr align="center" valign="middle">
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                        <td>...</td>
-                    </tr>
-                </table>
+                <div class="tb-container">
+                    <table table border="1" width="400px" height="150px" align="center" cellspacing="0" cellpadding="0" >
+                        <tr align="center" valign="middle">
+                            <td>水泥</td>
+                            <td>水</td>
+                            <td>粉煤灰</td>
+                            <td>机制砂</td>
+                            <td>...</td>
+                            <td>抗压强度</td>
+                            <td>流动度</td>
+                        </tr>
+                        <tr align="center" valign="middle">
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                        <tr align="center" valign="middle">
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                        <tr align="center" valign="middle">
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                            <td>...</td>
+                        </tr>
+                    </table>
+                </div>
+               
                 <br>
                 <p>
                     <span style="color: red;">之后在第一部分的白框处将会显示一个简易表格, 需要用户在这里设置各个标签的属性, 共有三列。</span>
@@ -181,7 +192,8 @@
 
         <hr class="bookends">
 
-        <div class="text-part"><strong><span style="font-size: 24px;color: navy;">第二个程序：</span></strong>
+        <div class="text-part">
+            <p class="para-start" style="color: navy;">第二个程序：</p>
             <p style="color: red;"><strong>该程序的主要流程是: 导入已经完成的预测文件夹或已经处理好的多目标优化配置文件, 进行多目标优化流程。</strong></p>
             <div class="imgbox">
                 <img class="image" src="../../texture/project/p2/app2-1.png" alt="程序2界面1" height="400px">
@@ -277,7 +289,8 @@
         
             <hr class="bookends">
 
-        <div class="text-part"><strong><span style="font-size: 24px;color: peru;">结尾：</span></strong>
+        <div class="text-part">
+            <p class="para-start" style="color: peru;">结尾：</p>
         </div>
 
 

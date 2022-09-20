@@ -6,6 +6,14 @@ p{
     text-indent: 2em;
 }
 
+.para-start{
+    text-indent: 0;
+    font-weight: bold;
+    font-size: 24px;
+
+    width: 100%;
+}
+
 
 .text-part{
     width: 100%;
@@ -77,11 +85,22 @@ p{
     right: -21px;
 }
 
+.tb-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+}
+
 
 .warning {
-    text-align: justify;
-    position: relative;
-    left: 32%;
 
     color: #ffffff;
     background-color: #FF8080;
@@ -93,4 +112,5 @@ p{
     margin: 10px 0px;
     padding:12px;
     width: 500px;
+
 }
