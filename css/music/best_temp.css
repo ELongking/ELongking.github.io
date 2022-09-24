@@ -1,3 +1,8 @@
+@font-face {
+    font-family: malvie;
+    src: url("../../font/Malvie-2.otf") format("opentype");
+}
+
 .branch{
 	flex-wrap: wrap;
 }
@@ -19,28 +24,46 @@
 	background-image: url("../../texture/music/imgbg1.jpg");
 	background-size: cover;
 	background-repeat: repeat-y;
+	width:100%;
+	padding-top: 10px;
 }
 
-.imgbox {
-	text-align: center;
-	overflow: hidden; 
-}
 .imgrow {
-	text-align: center;
-	overflow: hidden; 
-    margin-left: 10%;
-    margin-right: 10%;
+	width: 100%; 
+
+	display: flex;
+	justify-content: center;
 }
-.imgrow>.box {
-    margin: 1%;
-
-	width: 23%;
+.row-item{
+	width: 21%;
+	margin: 1%;
 	padding-bottom: 0%;
-	border-radius: 0%;
-	float: left;
+	border-radius: 5%;
 
-    object-fit: cover;
-    display: block;
+    display: flex;
+	flex-direction: column;
+}
+.img-item{
+	display: block;
+	transition: all 0.5s linear;
+	border: 1px black solid;
+}
+.define{
+	opacity: 0;
+	transition: all 0.5s linear;
+	text-align: left;
+	font-family: malvie;
+	font-size: 18px;
+
+	padding-left: 20px;
+}
+.row-item:hover .define{
+	opacity: 1;
+	transform: translateY(calc(-15vw));
+}
+.row-item:hover .img-item{
+	opacity: 0.4;
+	transform: translateX(50px);
 }
 
 .box-split{
