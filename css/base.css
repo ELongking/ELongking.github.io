@@ -3,6 +3,7 @@
     src: url("../font/Dhanikans-Signature-Italic-dafont-2.ttf");
 }
 
+
 *{
     margin: 0px;
     padding: 0px;
@@ -14,10 +15,13 @@ p{
 
 html, body{
     height: 100%;
+    cursor: url(../texture/cursor/SNormalSkyrim.cur), auto;
 }
+
 
 a{
     color: white;
+    cursor: url(../texture/cursor/SNopeSkyrim.cur), auto;
 }
 
 a:visited{
