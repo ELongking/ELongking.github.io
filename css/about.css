@@ -3,10 +3,13 @@ ol li,ul li{
 }
 
 .branch{
-    height: 700px;
+    height: auto;
 }
 
 .introduction{
+    display: flex;
+    flex-wrap: wrap;
+
     padding-top: 100px;
     padding-left: 5%;
 
@@ -16,6 +19,10 @@ ol li,ul li{
 }
 
 .in-part{
+    width: 90%;
+    justify-content: center;
+    align-items: center;
+
     padding-bottom: 50px;
 
     font-family: STXinwei;
