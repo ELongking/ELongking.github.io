@@ -24,8 +24,42 @@
 
 .wrapper{
     width: 15%;
-    height: 100%;
-    position: sticky;  
+    height: auto;
+    text-align: center;
+}
+.wrapper ul{
+    position: sticky; 
+    z-index: 100;
+    float: left;
+    top: 200px;
+    left: 28px;
+    width: 70%;
+    height: 200px;
+
+	background: white;
+	background-clip: padding-box;
+	border: solid 4px transparent;
+	border-radius: 0.8rem;
+}
+.wrapper ul::after{
+    content: "";
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: -1;
+	margin: -4px;
+	border-radius: inherit;
+	background-image: url(../../texture/game/left.jpg);
+    background-size: cover;
+}
+.wrapper ul li{
+    list-style-type: none;
+    width: 100%;
+    height: auto;
+    line-height: 50px;
+
 }
 
 .main{
@@ -38,6 +72,10 @@
 
 .item{
     width: 100%;
+    margin-top: 300px;
+}
+.item:nth-child(1){
+    margin-top: 20px;
 }
 .title{
     width: 100%;
@@ -66,15 +104,20 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    cursor: pointer;
-    background: repeating-linear-gradient(45deg, black 10%,gray 25%, white 50%,gray 75%,black 90%);
+    transform: skewX(25deg);
     border: 1px solid black;
-    color: black;
-
+    background-color: black;
 }
 .top-selector > ul > li:nth-child(-n+4){
-    background: repeating-linear-gradient(135deg, white 10%,gray 25%, black 50%,gray 75%,white 90%);
+    background-color: white;
+}
+.top-selector > ul > li > a{
+    transform: skewX(-25deg);
     color: white;
+    font-size: 18px;
+}
+.top-selector > ul > li:nth-child(-n+4) > a{
+    color: black;
 }
 
 .command{
@@ -98,12 +141,13 @@
     margin: 0;
     display: none;
     width: 100%;
+    height: auto;
     opacity: 0;
 }
 .text > .active{
     display: block;
     width: 100%;
-    transform: translateY(-300px) translateX(60px);
+    transform: translateY(-320px) translateX(60px);
 }
 .text .p{
     margin-bottom: 4%;

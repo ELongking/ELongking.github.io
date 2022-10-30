@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no">
-    <title>Longking Website - Project</title>
+    <title>Longking Website - Game Guide</title>
 
     <link rel="stylesheet" type="text/css" href="../../css/base.css">
     <link rel="stylesheet" type="text/css" href="../../css/game/guide.css">
@@ -36,10 +36,10 @@
     <div class="branch">
         <div class="wrapper">
             <ul>
-                <li>主观评分下排</li>
-                <li>8-10</li>
-                <li>6-8</li>
-                <li>&lt;6</li>
+                <li><span style="color: white;">Guide Score</span></li>
+                <li><a href="#class1">8-10</a></li>
+                <li><a href="#class2">6-8</a></li>
+                <li><a>&lt;6</a></li>
             </ul>
         </div>
 
@@ -47,20 +47,20 @@
             <div class="item">
 
                 <div class="title">
-                    <div class="label">Hollow Knight</div>
+                    <div class="label" id="class1">Hollow Knight</div>
                     <div class="score">Recommend Score: 8/10</div>
                 </div>
 
                 <div class="top-selector">
                     <ul>
-                        <li>游戏性</li>
-                        <li>音乐</li>
-                        <li>美术风格</li>
-                        <li>机制复杂程度</li>
-                        <li>难易度</li>
-                        <li>配置要求</li>
-                        <li>剧情</li>
-                        <li>中文和价格</li>
+                        <li><a>游戏性</a></li>
+                        <li><a>音乐</a></li>
+                        <li><a>美术风格</a></li>
+                        <li><a>机制复杂程度</a></li>
+                        <li><a>难易度</a></li>
+                        <li><a>配置要求</a></li>
+                        <li><a>剧情</a></li>
+                        <li><a>中文和价格</a></li>
                     </ul>
                 </div>
                 
@@ -120,14 +120,14 @@
 
                 <div class="top-selector">
                     <ul>
-                        <li>游戏性</li>
-                        <li>音乐</li>
-                        <li>美术风格</li>
-                        <li>机制复杂程度</li>
-                        <li>难易度</li>
-                        <li>配置要求</li>
-                        <li>剧情</li>
-                        <li>中文和价格</li>
+                        <li><a>游戏性</a></li>
+                        <li><a>音乐</a></li>
+                        <li><a>美术风格</a></li>
+                        <li><a>机制复杂程度</a></li>
+                        <li><a>难易度</a></li>
+                        <li><a>配置要求</a></li>
+                        <li><a>剧情</a></li>
+                        <li><a>中文和价格</a></li>
                     </ul>
                 </div>
                 
@@ -151,8 +151,8 @@
                             <p>牛逼。不过没什么好说的。</p>
                         </div>
                         <div id="t4">
-                            <div class="p">3/10</div>
-                            <p>套装无敌, 我喜欢狮鹫套加狐女。</p>
+                            <div class="p">4/10</div>
+                            <p>套装无敌, 我喜欢狼套加湖女。就是A。</p>
                         </div>
                         <div id="t5">
                             <div class="p">5/10</div>
@@ -187,20 +187,20 @@
             <div class="item">
 
                 <div class="title">
-                    <div class="label">Genshin Impact</div>
+                    <div class="label" id="class2">Genshin Impact</div>
                     <div class="score">Recommend Score: 7/10</div>
                 </div>
 
                 <div class="top-selector">
                     <ul>
-                        <li>游戏性</li>
-                        <li>音乐</li>
-                        <li>美术风格</li>
-                        <li>机制复杂程度</li>
-                        <li>难易度</li>
-                        <li>配置要求</li>
-                        <li>剧情</li>
-                        <li>中文和价格</li>
+                        <li><a>游戏性</a></li>
+                        <li><a>音乐</a></li>
+                        <li><a>美术风格</a></li>
+                        <li><a>机制复杂程度</a></li>
+                        <li><a>难易度</a></li>
+                        <li><a>配置要求</a></li>
+                        <li><a>剧情</a></li>
+                        <li><a>中文和价格</a></li>
                     </ul>
                 </div>
                 
@@ -275,15 +275,19 @@
                 var itemIdx = $(this).parents(".item").attr("id")
 
                 var selectQuery = "#" + itemIdx + "> .top-selector > ul > li"
-                var textIdx = $(selectQuery).index(this) + 1;
+                var textIdx = $(selectQuery).index(this) + 1
 
-                var query = "#" + itemIdx + " > .command > .text > #t" + textIdx
+                var textQuery = "#" + itemIdx + " > .command > .text > #t" + textIdx
+                var marginQuery = "#" + itemIdx + 1
                 var imageQuery = "#" + itemIdx + " > .command > .cover"
 
-                $(query).siblings("div").removeClass("active");
-                $(query).siblings("div").css({"opacity": 0});
-                $(query).addClass('active');
-                $(query).animate({opacity: 1}, 1000, "swing");
+                var hiddenHeight = $(textQuery).attr("height")
+
+                $(textQuery).siblings("div").removeClass("active");
+                $(textQuery).siblings("div").css({"opacity": 0});
+                $(textQuery).addClass('active');
+                $(textQuery).animate({opacity: 1}, 1000, "swing");
+                $(marginQuery).css({"margin-top": 300-hiddenHeight + "px"})
                 $(imageQuery).css({"opacity": 0.2});
             })
         })
