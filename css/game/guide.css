@@ -1,0 +1,116 @@
+@font-face {
+    font-family: asfj;
+    src: url(../../font/a-song-for-jennifer-3.ttf) format("truetype");
+}
+@font-face {
+    font-family: asfj-bold;
+    src: url(../../font/a-song-for-jennifer-bold-2.ttf) format("truetype");
+}
+@font-face {
+    font-family: malvie;
+    src: url(../../font/Malvie-2.otf) format("opentype");
+}
+
+.text p{
+    width: 90%;
+    word-break: break-all;
+    word-wrap: break-word;
+    text-indent: 2em;
+    font-size: 16px;
+    line-height: 28px;
+    font-family: STFangsong;
+    font-weight: bold;
+}
+
+.wrapper{
+    width: 15%;
+    height: 100%;
+    position: sticky;  
+}
+
+.main{
+    width: 84%;
+    height: auto;
+    border-left: solid 3px;
+    border-image: yellow;
+    padding-left: 4%;
+}
+
+.item{
+    width: 100%;
+}
+.title{
+    width: 100%;
+    font-family: asfj;
+    font-size: 32px;
+    line-height: 64px;
+}
+
+.top-selector{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    margin-top: 20px;
+    font-family: STXinwei;
+}
+.top-selector > ul{
+    width: auto;
+    list-style-type: none;
+    display: flex;
+    
+    height: 50px;
+}
+.top-selector > ul > li{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    background: repeating-linear-gradient(45deg, black 10%,gray 25%, white 50%,gray 75%,black 90%);
+    border: 1px solid black;
+    color: black;
+
+}
+.top-selector > ul > li:nth-child(-n+4){
+    background: repeating-linear-gradient(135deg, white 10%,gray 25%, black 50%,gray 75%,white 90%);
+    color: white;
+}
+
+.command{
+    position: relative;
+    width: 60%;
+    margin: auto;
+}
+.cover{
+    width: 100%;
+    height: 400px;
+    margin: auto;
+    margin-top: 20px;
+    display: block;
+    background-size: cover;
+}
+.text{
+    width: 100%;
+    margin: auto;
+}
+.text > div{
+    margin: 0;
+    display: none;
+    width: 100%;
+    opacity: 0;
+}
+.text > .active{
+    display: block;
+    width: 100%;
+    transform: translateY(-300px) translateX(60px);
+}
+.text .p{
+    margin-bottom: 4%;
+    margin-right: 6%;
+    font-family: malvie;
+    font-size: 24px;
+}
+
+
+
