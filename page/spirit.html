@@ -53,6 +53,7 @@
                         <li class="next-link"><a href="#">实例分割 调参Tips</a></li>
                         <li class="next-link"><a href="#">Selenium</a></li>
                         <li class="next-link"><a href="#">Github-Pages</a></li>
+                        <li class="next-link"><a href="#">Pyinstaller Error</a></li>
                     </ul>
                 </li>
                 <li class="link">-----
@@ -384,7 +385,86 @@ main()</pre>
                     </div>
                 </div>
             </div>
+
+            <div class="item" id="i4">
+                <div class="main-title">2022-11-26</div>
+                <div class="main-content">
+                    <div class="content-title">如何规避Pyinstaller存在的种种打包Bug</div>
+                    <div class="content" id="content">
+                        <p>
+                            众所周知, 在Py上打包一些较为简易的程序, 大多数还是会用Pyinstaller。但是吧代码量小还好, 代码量大的话经常会出现这个没打包进去, 那个DDL缺失的情况。
+                            最近各类大大小小的软件也做了不少, 总结了一下值得注意的东西。
+                        </p>
+                        <hr class="text-hr">
+                        <p>
+                            怎么使用就不介绍了, 我一般不会把其打包成一个总的, 运行速度太慢, 即加上参数 -D -w。
+                            有人会问如果我的程序打包存在问题, 但我没法儿发现怎么办。这里我所知道的大概有三种解决方法:
+                            <ol>
+                                <li>Python traceback</li>
+                                <p>
+                                    比如你的代码里, 某一个类是主类然后主要也靠它调用东西, 那么你就可以用traceback去掌握报错信息。
+                                    此方法也特别适合你懒得写那么多的专门的ValueError的提示框和判断, 也适合打包程序后的Debug处理。
+                                </p>
+                                <pre>
+    class MainClass:
+        ...
+        ...
+        def start(self):
+            ...
+                                </pre>
+                                <p>这个时候就很适合去加一个hook并回溯报错了。具体是这样的(PyQt5的程序)</p>
+                                <pre>
+    import sys
+
+    class MainClass:
+        ...
+        def __init__(self):
+            self.old_hook = sys.excepthook
+            sys.excepthook = self._catch_error
+
+        def _catch_error(self, ty, value, tb):
+            traceback_format = traceback.format_exception(ty, value, tb)
+            traceback_string = "".join(traceback_format)
+            QtWidgets.QMessageBox.critical(self, "额外报错, ", "{}".format(traceback_string))
+            self.old_hook(ty, value, tb)
+                                </pre>
+                                <p>这样的话不管是什么稀奇古怪的报错, 都可以起到提示的作用, 你在IDE里看到的是啥报错这里就给你弹的是什么。可以掌管任何在此class里引用出现的函数变量和类。</p>
+
+                                <li>命令行执行</li>
+                                <p>方法如其名, windows cmd + xxx.exe 即可, 报错信息直接在命令行中输出。</p>
+                                <li>Pyinstaller 打包时, 更改Spec文件</li>
+                                <p>众所周知, 打包时一般会生成三类文件: build dir(打包流程) / dist dir(最终的软件) / xxx.spec(打包配置文件)。</p>
+                                <p>而spec文件中可以通过更改 console和debug参数, 输出更为详细的报错信息, 并更改最终软件的形式来达到Debug的效果。但此方法支持的报错不支持软件内部操作报错。</p>
+                            </ol>
+                        </p>
+                        <hr class="text-hr">
+                        <p>
+                            拿到了报错信息, 就要进行对应的操作了, 要是Code本身的报错还好, 看得懂知道在哪儿改。
+                            但是由于Pyinstaller自身Package打包的兼容性问题, 经常会出现其他的一些问题。这里举几个经常会出现的问题。
+                        </p>
+                        <p>
+                            <ol>
+                                <li>Module xxx not found</li>
+                                <p>提示说有什么包没打包进来, 常见的有scipy, xgboost, py4j。</p>
+                                <p>解决方法: <span style="color: red;">直接将对应环境site-packages下的对应第三方包文件夹整体复制进来即可。</span></p>
+                                <li>DLL load failed while importing xxx</li>
+                                <p>在导入某第三方包时找不到对应的DLL文件, 信息会直接在锁定在import xxx那一行。</p>
+                                <p>解决方法大致有三种: 
+                                    <span style="color: red;">该第三方包的版本打包兼容性有误, 卸载并重新安装别的版本即可。</span>
+                                    <span style="color: orange;">网络方法, 程序目录下缺少python3.dll文件, 将对应环境site-packages下的python3.dll和python3x.dll复制进来即可。</span>
+                                    <span style="color: blue">有时候由于代码复杂, 某些DLL会存在没有复制进来的情况。若其他方法均失败, 编写一个基于相同importing package的简易软件并打包。
+                                        若后者正常运行, 检查两者目录下DLL文件的异同, 并将后者目录下的DLL全数复制进第一个, 筛选复制也可以。哪怕是原也得打包Qt不是↓</span>
+                                </p>
+                                <div class="imgbox"><img src="../assets/2022/11-26/genshin.png" alt=""></div>
+                            </ol>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        
+            
         </div>
+        
     </div>
     
     <div class="bottom">
