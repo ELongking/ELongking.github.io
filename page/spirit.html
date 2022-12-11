@@ -237,7 +237,7 @@
                         <p>起因来源于实习中的一个小任务, 平常是基本不做爬虫的</p>
                         <p>既然提到了Selenium这个框架, 那肯定是基本的url.request无法满足这里的需求</p>
                         <hr class="text-hr">
-                        <p>在某些分步加载的网页中, 由于其异步问题, 网页中的所有内容是不会一下子全部加载出来的, 通过url.request打印的信息也是如此只能打印一部分
+                        <p>在依靠JS等脚本加载的网页中, 由于其异步问题, 网页中的所有内容是不会一下子全部加载出来的需要靠脚本后端往服务器里要数据, 通过url.request打印的信息也是如此只能打印一部分静态网页和大量的JS脚本
                             而其实远远不止这些。具体情况如下图所示:
                         </p>
                         <div class="imgbox"><img src="../assets/2022/9-2/1.png"></div>
@@ -340,7 +340,166 @@ def main():
     process()
 
 main()</pre>
-                    </div>
+
+                    <hr class="text-hr">
+                    
+                    <p>然后是一个同学委托的企查查的网页数据爬取, 从一个EXCEL表格读取一系列指定的企业名称并获得三项信息</p>
+                    <p>
+                        具体代码和注释见下, 值得注意的是这类需要登录的网站, 需要指定个人保存登录信息的文件夹, 并事先给予自己一定的前置时间。
+                        另外整体操作不能太快, 例如爬取一家公司的信息后间隔一会儿再进行下一个公司信息的爬取进程, 否则容易被限制IP (企查查可以通过购买会员的方式解决, 但别的网站就不一定了)。
+                    </p>
+
+                    <pre>
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+import pandas as pd
+import numpy as np
+import re
+import time
+
+
+def opt():
+    '''
+        Chrome浏览器作为爬虫主体, 大概设置
+    '''
+
+    option = webdriver.ChromeOptions()
+    option.add_experimental_option('excludeSwitches', ['enable-automation'])
+    option.add_experimental_option('useAutomationExtension', False)
+    option.add_argument(
+        '--user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.146 Safari/537.36"')  # user-agent请求头伪装
+    option.add_argument(
+        r"user-data-dir=C:\Users\Longking\AppData\Local\Google\Chrome\User\User Data")  # 登录信息保存默认文件夹
+    return option
+
+
+def get_page_html(firm_name, driver, interval=0.3):
+    inputBox = driver.find_element(By.CSS_SELECTOR, '#searchKey')  # 获取搜索栏
+    searchBtn = driver.find_element(By.CSS_SELECTOR, '.input-group-btn>.btn-primary')  # 获取搜索按钮
+
+    time.sleep(interval)  # 等待-输入-等待-点击-跳转
+    inputBox.clear()
+    inputBox.send_keys(firm_name)
+    time.sleep(interval)
+    driver.execute_script('arguments[0].click()', searchBtn)
+
+    try:
+        # 万一没有这家公司就直接跳过
+        css_txt = "body>div>div.app-search>div.container.m-t>div.adsearch-list>div>div.msearch.select-search-enable>div>table>tr>td:nth-child(3)>div>div.app-copy-box.copy-hover-item.copy-part>span.copy-title"  # 获取点击的超链接
+        itemLink = driver.find_element(By.CSS_SELECTOR, css_txt)
+        time.sleep(interval)
+        itemLink.click()
+
+        try:
+            # 万一没有注销时间直接跳过
+            all_handle = driver.window_handles
+            driver.switch_to.window(all_handle[-1])  # 将句柄置于当前窗口
+
+            css_txt = ".bar-click"  # 获取位置元素
+            try:
+
+                zhuxiao_time = driver.find_element(By.CSS_SELECTOR, css_txt)
+                zhuxiao = zhuxiao_time.text
+                zhuxiao = re.findall(r'[0-9]+-[0-9]+-[0-9]+', zhuxiao)[0]  # 剪掉多余信息
+            except:
+                zhuxiao = 'none'
+            time.sleep(interval)
+
+            css_txt = "#cominfo>div.cominfo-normal>table>tr:nth-child(5)>td:nth-child(4)"
+            try:
+                yingye_qixian = driver.find_element(By.CSS_SELECTOR, css_txt)
+                yingye = yingye_qixian.text
+            except:
+                yingye = 'none'
+            time.sleep(interval)
+
+            css_txt = "#cominfo>div.cominfo-normal>table>tr:nth-child(6)>td:nth-child(6)>div>span.copy-value"
+            try:
+                hezhun_qixian = driver.find_element(By.CSS_SELECTOR, css_txt)
+                hezhun = hezhun_qixian.text
+            except:
+                hezhun = 'none'
+            time.sleep(interval)
+
+            return [zhuxiao, yingye, hezhun], True
+        except:
+            return ['level2', 'level2', 'level2'], False
+    except:
+        return ['leve1', 'leve1', 'leve1'], False
+
+
+def main(login_prepare=5, change=10):
+    """ 以获取注销时间为案例, login_prepare为预留的手动登录的时间, change为切换公司的等待时间, 单位为秒 """
+
+    data = pd.read_excel('output.xlsx')  # 表格第一行不是表头, 所以跳过从第二行开始读
+
+    total = data.shape[0]  # 总行数
+    zhuxiao_list = [''] * total  # 列表程度保持和总行数相同
+    yingye_list = [''] * total
+    hezhun_list = [''] * total
+
+    if '注销时间' in data.columns:
+        zhuxiao_list = list(data['注销时间'])
+        yingye_list = list(data['营业期限'])
+        hezhun_list = list(data['核准日期'])
+
+        for i in range(total):
+            if type(zhuxiao_list[i]) == float:
+                idx = i
+                print(idx)
+                break
+    else:
+        idx = 0
+
+    driver = webdriver.Chrome(options=opt())  # 浏览器选项加入
+    driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
+        "source": """
+        Object.defineProperty(navigator, 'webdriver', {
+            get: () => undefined
+        })
+        """
+    })  # 防止被检测
+    driver.maximize_window()  # 窗口最大化, 小了的话可能拿不到元素
+    driver.get('https://www.qichacha.com/user_login')  # 从登录开始
+    time.sleep(login_prepare)  # 等待手动登录时间
+
+    while idx < total:  # 获取每一个公司名称
+        firm = data['企业名称'][idx]
+        print(f'---- Now ==> {firm}')
+        [zx, yy, hz], condition = get_page_html(firm, driver)  # 主函数
+        print([zx, yy, hz])  # 没有填None, 有的话就填原来的。
+        if condition:
+            zhuxiao_list[idx] = zx
+            yingye_list[idx] = yy
+            hezhun_list[idx] = hz
+        else:
+            zhuxiao_list[idx] = 'none'
+            yingye_list[idx] = 'none'
+            hezhun_list[idx] = 'none'
+
+        memory = idx + 1
+
+        if memory % 10 == 0:  # 每10个公司保存一次，可自己更改
+            data_copy = data.copy()
+            data_copy.loc[:, '注销时间'] = zhuxiao_list
+            data_copy.loc[:, '营业期限'] = yingye_list
+            data_copy.loc[:, '核准日期'] = hezhun_list
+            data_copy.to_excel('output.xlsx', index=None)
+
+        idx += 1
+        time.sleep(change)
+
+    data_copy = data.copy()
+    data_copy.loc[:, '注销时间'] = zhuxiao_list
+    data_copy.loc[:, '营业期限'] = yingye_list
+    data_copy.loc[:, '核准日期'] = hezhun_list
+    data_copy.to_excel('output.xlsx', index=None)
+
+
+main()
+                    </pre>
+
+                    </div> 
                 </div>
             </div>
 

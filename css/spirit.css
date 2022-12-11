@@ -24,7 +24,7 @@ pre{
     background: rgb(78, 78, 78);
     color: salmon;
 
-    white-space: pre;
+    white-space: pre-wrap;
     word-wrap: break-word;
 }
 
