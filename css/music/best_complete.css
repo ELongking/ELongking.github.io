@@ -68,6 +68,7 @@
     width: 100%;
     height: auto;
     line-height: 50px;
+    font-size: 12px;
 
 }
 
@@ -96,6 +97,8 @@
 
 .outside-text{
     margin-bottom: 50px;
+    margin-top: 50px;
+    font-size: 14px;
 }
 
 .kpop-album{
@@ -276,4 +279,46 @@
     font-family: malvie;
     font-size: 18px;
     color: chocolate;
+}
+
+.imgrow {
+	width: 85%; 
+    margin: auto;
+
+	display: flex;
+	justify-content: center;
+}
+.row-item{
+	width: 28%;
+	margin: 4%;
+	padding-bottom: 0%;
+	border-radius: 5%;
+
+    display: flex;
+	flex-direction: column;
+}
+.img-item{
+	display: block;
+	transition: all 0.5s linear;
+	border: 1px black solid;
+}
+.define{
+	opacity: 0;
+	transition: all 0.5s linear;
+	text-align: left;
+	font-family: malvie;
+	font-size: 18px;
+
+	padding-left: 20px;
+}
+.define a{
+    color: rgb(2, 64, 2);
+}
+.row-item:hover .define{
+	opacity: 1;
+	transform: translateY(calc(-13vw));
+}
+.row-item:hover .img-item{
+	opacity: 0.4;
+	transform: translateX(50px);
 }
