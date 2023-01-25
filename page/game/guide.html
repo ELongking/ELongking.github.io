@@ -37,8 +37,8 @@
         <div class="wrapper">
             <ul>
                 <li><span style="color: white;">Guide Score</span></li>
-                <li><a href="#class1">8-10</a></li>
-                <li><a href="#class2">6-8</a></li>
+                <li><a href="#class1" onclick="toClass1()">8-10</a></li>
+                <li><a href="#class2" onclick="toClass2()">6-8</a></li>
                 <li><a href="#class3">Tips</a></li>
             </ul>
         </div>
@@ -46,8 +46,8 @@
         <div class="main">
             <div class="item">
 
-                <div class="title">
-                    <div class="label" id="class1">Hollow Knight</div>
+                <div class="title" id="class1">
+                    <div class="label">Hollow Knight</div>
                     <div class="score">Recommend Score: 8/10</div>
                 </div>
 
@@ -779,7 +779,7 @@
                         <div id="t8">
                             <p>中文字幕√</p>
                             <p>Nintento 日版商店8700日元, 个人买的一手卡带340RMB</p>
-                            <p>DLC 3000日元, 目前4块只有前两块, 根据异度2的惯例, 前三个是物资, 新角色和挑战等, 最后一个是剧情DLC。总体来说还不错, 适合打完一周目搜集全宝珠全职阶和全灵魂骇客的玩家 (正在打泳装)。</p>
+                            <p>DLC 3000日元, 目前4块只有前两块, 根据异度2的惯例, 前三个是物资, 新角色和挑战等, 最后一个是剧情DLC。总体来说还不错, 适合打完一周目搜集全宝珠全职阶和全灵魂骇客的玩家。</p>
                         </div>
                     </div>
                 </div>
@@ -905,11 +905,14 @@
                         </div>
                         <div id="t2">
                             <div class="p">7/10</div>
-                            <p>贝姐3的音乐是我认为这款游戏的唯一的败笔, 相比于它的游戏性过于平庸。</p>
+                            <p>贝姐3的音乐是我认为这款游戏的唯一的败笔, 相比于它的游戏性过于平庸, 不如放自己的。</p>
                         </div>
                         <div id="t3">
                             <div class="p">8/10</div>
-                            <p>除开壮观的巨型怪物和崩坏的末日世界。美国->日本->古代中国... 这种场景风格的转换我是认可的。</p>
+                            <p>
+                                除开壮观的巨型怪物, 崩坏的末日世界和形如最后一关复杂的场景变化。美国->日本->古代中国...
+                                这种场景风格的转换我是认可的。可惜受限于Switch的机能, 要不是独占我才不到SW上买。
+                            </p>
                             <p>就是打起架来不好调视角。</p>
                         </div>
                         <div id="t4">
@@ -927,7 +930,7 @@
                             <p>主机游戏不作评价, 反正加载的时候有训练模式也不会没事儿干。</p>
                         </div>
                         <div id="t7">
-                            <div class="p">5/10</div>
+                            <div class="p">4/10</div>
                             <p>异世界(迫真)杀橡胶人(确信)</p>
                         </div>
                         <div id="t8">
@@ -1929,8 +1932,8 @@
 
             <div class="item">
 
-                <div class="title">
-                    <div class="label" id="class2">Genshin Impact</div>
+                <div class="title" id="class2">
+                    <div class="label">Genshin Impact</div>
                     <div class="score">Recommend Score: 7/10</div>
                 </div>
 
@@ -2401,6 +2404,11 @@
 
             <!---->
 
+            <div class="next-page">
+                <button id="_prev" onclick="prev_cli()" disabled="disabled">&lt;</button>
+                <button id="_next" onclick="next_cli()">&gt;</button>
+            </div>
+
             <div class="item">
 
                 <div class="title">
@@ -2435,7 +2443,7 @@
                         <div id="t2">
                             <div class="p">2.</div>
                             <p>
-                                可能会发现除了原神没有一款网游, 因为网游天生在可玩性上比单机游戏优秀(包括单机游戏的线上模式), 毕竟毛泽东同志曾经说过: "与人斗其乐无穷",
+                                可能会发现除了原神没有一款网游, 因为拙见网游天生在可玩性上比单机游戏优秀(包括单机游戏的线上模式), 毕竟毛泽东同志曾经说过: "与人斗其乐无穷",
                                 况且这种可玩性跟我这里的游戏性不同, 它也不一定是制作者专门设计出来的。
                             </p>
                             <p>鄙人能力有限, 无法相对客观的抛开这一因素去给一个指标。而原神因其弱联网弱社交重内容的属性, 勉强能够排除在外。</p>
@@ -2489,8 +2497,19 @@
     </div>
 
     <script>
-        var run = changeItemId;
-        run();
+        var run1 = changeItemId;
+        var run2 = pageBtnClicked;
+        var run3 = toClass
+        var items = document.getElementsByClassName("item")
+        
+        var pageMem = run1(items)
+        var pageNum = pageMem[pageMem.length - 1]
+
+        function prev_cli() {run2(items, pageMem, pageNum, "left")}
+        function next_cli() {run2(items, pageMem, pageNum, "right")}
+
+        function toClass1() {run3(items, pageMem, pageNum, 1)}
+        function toClass2() {run3(items, pageMem, pageNum, 2)}
     </script>
 
     <script>
