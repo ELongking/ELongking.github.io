@@ -40,10 +40,16 @@
                 <li><a href="#class1" onclick="toClass1()">8-10</a></li>
                 <li><a href="#class2" onclick="toClass2()">6-8</a></li>
                 <li><a href="#class3">Tips</a></li>
+                <li style="font-size: 12px; border-top: 2px dashed white;">
+                    <p><a href="./guide.html?mode=title">标题升序排序</a></p>
+                    <p><a href="./guide.html?mode=score">评分降序排序</a></p>
+                </li>
             </ul>
         </div>
 
+
         <div class="main">
+
             <div class="item">
 
                 <div class="title" id="class1">
@@ -333,7 +339,7 @@
             <div class="item">
 
                 <div class="title">
-                    <div class="label">The Legend of Zelda: Breathe of The Wild (Still Playing)</div>
+                    <div class="label">The Legend of Zelda: Breathe of The Wild (Still Playing...)</div>
                     <div class="score">Recommend Score: 9.5/10</div>
                 </div>
 
@@ -2586,11 +2592,20 @@
 
     <script>
         var run0 = sortAllItems
-        var run1 = changeItemId;
-        var run2 = pageBtnClicked;
+        var run1 = changeItemId
+        var run2 = pageBtnClicked
         var run3 = toClass
+
+        var loc = window.location.href
+        var mode = ""
+        if (loc.indexOf("?") == -1){
+            mode = "title"
+        }
+        else{
+            mode = loc.slice(-5, )
+        }
         
-        var condition = run0()
+        var condition = run0(mode)
         if (condition){
             var items = document.getElementsByClassName("item")
             var pageMem = run1(items)
