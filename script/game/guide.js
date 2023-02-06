@@ -1,3 +1,56 @@
+function sortAllItems(){
+    var _childs = document.querySelectorAll(".main > div")
+    var newList = [].slice.apply(_childs).slice(0, -2)
+    var _aux = [].slice.apply(_childs).slice(-2, )
+    console.log(newList);
+
+    var Class1List = [], Class2List = []
+    var flag = -1
+    for (var i = 0; i < newList.length; i++){
+        if (newList[i].children[0].getAttribute("id") == "class1"){
+            flag = 1
+        }
+        else if (newList[i].children[0].getAttribute("id") == "class2"){
+            flag = 2
+        }
+
+        if (flag == 1){
+            Class1List.push(newList[i])
+        }
+        else if (flag == 2){
+            Class2List.push(newList[i])
+        }
+    }
+
+    for (var i = 0; i < _childs.length; i++){
+        _childs[i].remove()
+    }
+    Class1List.sort(function (x1, x2){return x1.children[0].children[0].innerText < x2.children[0].children[0].innerText ? -1 : 1})
+    Class2List.sort(function (x1, x2){return x1.children[0].children[0].innerText < x2.children[0].children[0].innerText ? -1 : 1})
+
+    var cons_1 = false, cons_2 = false
+    for (var i = 0; i < Class1List.length; i++) {
+        if (Class1List[i].children[0].getAttribute("id") == "class1") {Class1List[i].children[0].removeAttribute("id"); cons_1 = true}
+        if (i == 0) {Class1List[i].children[0].setAttribute("id", "class1"); cons_2 = true}
+        if (cons_1 && cons_2) {break}
+    }
+    var cons_1 = false, cons_2 = false
+    for (var i = 0; i < Class2List.length; i++) {
+        if (Class2List[i].children[0].getAttribute("id") == "class2") {Class2List[i].children[0].removeAttribute("id"); cons_1 = true}
+        if (i == 0) {Class2List[i].children[0].setAttribute("id", "class2"); cons_2 = true}
+        if (cons_1 && cons_2) {break}
+    }
+
+    var mainElement = document.getElementsByClassName("main")[0]
+    for (var i1 = 0; i1 < Class1List.length; i1++) {mainElement.appendChild(Class1List[i1])}
+    for (var i2 = 0; i2 < Class2List.length; i2++) {mainElement.appendChild(Class2List[i2])}
+    for (var j = 0; j < _aux.length; j++) {mainElement.appendChild(_aux[j])}
+
+    return true
+    
+}
+
+
 function changeItemId(items){
     var maxItems = 12
     var pageNum = 1, cnt = 0, changed = false
