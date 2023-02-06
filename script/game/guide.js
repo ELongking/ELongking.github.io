@@ -1,8 +1,18 @@
+function _custom_sort(x1, x2){
+    var c1 = x1.children[0].children[1].innerText.split("/")[0].split(" ")[2]
+    var c2 = x2.children[0].children[1].innerText.split("/")[0].split(" ")[2]
+    if (Number(c1) != Number(c2)){
+        return Number(c1) > Number(c2) ? -1 : 1
+    }
+    else{
+        return x1.children[0].children[0].innerText < x2.children[0].children[0].innerText ? -1 : 1
+    }
+}
+
 function sortAllItems(mode){
     var _childs = document.querySelectorAll(".main > div")
     var newList = [].slice.apply(_childs).slice(0, -2)
     var _aux = [].slice.apply(_childs).slice(-2, )
-    console.log(newList)
 
     var Class1List = [], Class2List = []
     var flag = -1
@@ -32,27 +42,13 @@ function sortAllItems(mode){
     }
     else if (mode == "score"){
         Class1List.sort(function (x1, x2){
-            var c1 = x1.children[0].children[1].innerText.split("/")[0].split(" ")[2]
-            var c2 = x2.children[0].children[1].innerText.split("/")[0].split(" ")[2]
-            console.log(c1);
-            if (Number(c1) != Number(c2)){
-                return Number(c1) > Number(c2) ? -1 : 1
-            }
-            else{
-                return x1.children[0].children[0].innerText < x2.children[0].children[0].innerText ? -1 : 1
-            }
+            return _custom_sort(x1, x2)
         })
         Class2List.sort(function (x1, x2){
-            if (Number(x1.children[0].children[1].innerText) != Number(x1.children[0].children[1].innerText)){
-                return Number(x1.children[0].children[1].innerText) < Number(x1.children[0].children[1].innerText) ? -1 : 1
-            }
-            else{
-                return x1.children[0].children[0].innerText < x2.children[0].children[0].innerText ? -1 : 1
-            }
+            return _custom_sort(x1, x2)
         })
 
     }
-    
 
     var cons_1 = false, cons_2 = false
     for (var i = 0; i < Class1List.length; i++) {

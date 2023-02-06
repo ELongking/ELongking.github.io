@@ -275,7 +275,7 @@
 
                 <div class="title">
                     <div class="label">Red Dead Redemption 2 (Still Playing...)</div>
-                    <div class="score">Recommend Score: x/10</div>
+                    <div class="score">Recommend Score: -1/10</div>
                 </div>
 
                 <div class="top-selector">
@@ -2602,7 +2602,7 @@
             mode = "title"
         }
         else{
-            mode = loc.slice(-5, )
+            mode = loc.split("=")[1].slice(0, 5)
         }
         
         var condition = run0(mode)
