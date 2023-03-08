@@ -56,9 +56,9 @@
                         <li class="next-link"><a href="#">Pyinstaller Error</a></li>
                     </ul>
                 </li>
-                <li class="link">-----
+                <li class="link">Year 2023
                     <ul class="nav">
-                        <li class="next-link"><a href="#">1</a></li>
+                        <li class="next-link"><a href="#">MyBatisPlus 整合</a></li>
                         <li class="next-link"><a href="#">2</a></li>
                     </ul>
                 </li>
@@ -145,7 +145,7 @@
                             效率为王。买课的话, 我觉得没必要, 因为哪怕是身边科班的同学, 他们告诉我的情况是即便是科班甚至TOP科班, 大部分的Code Tricks也是非课堂时间学到的, 而且有的卖课的真的很水。
                         </p>
                         <p style="color: red;">
-                            这里我想解释一下, 举个小例子。对于计算机专业或者机械电气信息等的同学来说, Linux很重要。事实上它们对我也很重要因为我的模型是在服务器上跑的, 我这里用的服务器的操作系统是CentOS。
+                            这里我想解释一下, 举个小例子。对于计算机专业或者机械电气信息等的同学来说, Linux很重要。事实上它们对我也很重要因为我的模型是在服务器上跑的, 操作系统是CentOS。
                             但是对于一些传统专业, 甚至都没有类似的编程环境和设备供使用, 与其去学一些如果不转行甚至都用不上的东西, 不如好好研究一下自己领域的东西不是吗。
                         </p>
                         <p>
@@ -182,11 +182,11 @@
                         </p>
                         <p style="color: red;">
                             顺带一提, 当你在Coding上遇到Bug或者困难的时候, 多去查一查, Github / Stackoverflow / CSDN / 甚至专属的论坛, 你的错误可能别人早都发现并且解决了。
-                            Coding有时候就像炼丹, Bug千奇百怪, 问一两个人真不一定能得到解决结果, 需要自己具有找寻答案的能力
+                            Coding有时候就像炼丹, Bug千奇百怪, 问一两个人真不一定能得到解决结果, 需要自己具有找寻答案的能力。
                         </p>
                         <br>
                         <p>
-                            此外就是我个人学的一些其他东西了比如 MySQL / HTML / 以及正在学的JS。这么多语言这么多框架, 前端和后端这么多东西, 还是多学一点好, 也是一个完整项目的必要条件不是吗。
+                            此外就是我个人学的一些其他东西了比如 SQL / HTML / JS / Java。这么多语言这么多框架, 前端和后端这么多东西, 还是多学一点好, 也是一个完整项目的必要条件不是吗。
                         </p>
 
                     </div>
@@ -502,6 +502,8 @@ main()
                     </div> 
                 </div>
             </div>
+            
+            <!---->
 
             <div class="item" id="i3">
                 <div class="main-title">
@@ -620,7 +622,45 @@ main()
                     </div>
                 </div>
             </div>
-        
+
+            <!---->
+
+            <div class="item" id="i5">
+                <div class="main-title">
+                    2023-03-05
+                </div>
+                <div class="main-content">
+                    <div class="content-title">SpringBoot 3+ 整合MyBatis和MyBatisPlus</div>
+                    <div class="content" id="content">
+                        <p>困扰了我一个月的问题。</p>
+                        <p>MyBatis和MyBatisPlus 二者之间关联较小, 无非是继承和被继承的关系, 基本上存在冲突也会报错。</p>
+                        <p>
+                            结论: 如果SpringBoot版本较高, 请使用MyBatisPlus 3.5.3.1及以上的版本,
+                            否则会提醒缺少<i>sqlSessionFactory</i> 和 <i>sqlSessionTemplate</i> =>
+                            即<span>Property 'sqlSessionFactory' or 'sqlSessionTemplate' are required</span>
+                        </p>
+                        <p>若无法下载, 需要添加镜像文件</p>
+                        <pre>
+&lt;repositories&gt;
+    &lt;repository&gt;
+        &lt;id&gt;ossrh&lt;/id&gt;
+        &lt;name&gt;OSS Snapshot repository&lt;/name&gt;
+        &lt;url&gt;https://oss.sonatype.org/content/repositories/snapshots/&lt;/url&gt;
+        &lt;release&gt;
+            &lt;enabled&gt;false&lt;/enabled&gt;
+        &lt;/release&gt;
+        &lt;snapshots&gt;
+            &lt;enabled&gt;true&lt;/enabled&gt;
+        &lt;/snapshots&gt;
+    &lt;/repository&gt;
+&lt;/repositories&gt;
+                        </pre>
+                        
+                    </div>
+                </div>
+            </div>
+
+            <!---->
             
         </div>
         
