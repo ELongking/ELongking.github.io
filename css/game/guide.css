@@ -140,6 +140,8 @@
     color: black;
 }
 
+
+
 .command{
     position: relative;
     width: 60%;
@@ -172,7 +174,7 @@
 }
 .text .p{
     margin-bottom: 2%;
-    margin-right: 6%;
+    margin-right: 2em;
     font-family: malvie;
     font-size: 24px;
 }

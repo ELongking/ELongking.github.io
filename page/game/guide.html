@@ -961,8 +961,11 @@
                             <p>有深度且好懂, 嘉隆技能人物技能自由度很高。最关键天平的设定真的让我眼前一亮, 非常有意思。</p>
                         </div>
                         <div id="t5">
-                            <div class="p">7.5/10</div>
-                            <p>整体战斗主打一个节奏感。第四章为分水岭, 四章之后难度陡增, 无论是保存点的设置, 怪物难度和地形障碍。毕竟个人工作室, 数值上的考究还是欠了点。</p>
+                            <div class="p">8.5/10</div>
+                            <p>
+                                整体战斗主打一个节奏感。第四章为分水岭, 如果说1-3章难度只有6分, 四章之后恐怕要逼近9分了。
+                                无论是保存点的设置, 怪物难度和地形障碍。毕竟个人工作室, 数值上的考究还是欠了点。
+                            </p>
                             <p>顺带一提, 个人最讨厌以运气为难易变化核心的怪物, 你一下子召唤俩飞龙我是真顶不住。</p>
                         </div>
                         <div id="t6">
@@ -1425,7 +1428,7 @@
                         </div>
                         <div id="t4">
                             <div class="p">4/10</div>
-                            <p>无非就是武器属性克制+什么时候按哪个大招。虽然真三7有复杂动作操作, 但是除非打地狱难度否则感觉用不上。因为武将是可以升级的。</p>
+                            <p>无非就是武器属性克制 + 什么时候按哪个大招。虽然真三7有复杂动作操作, 但是除非打地狱难度否则感觉用不上。因为武将是可以升级的。</p>
                         </div>
                         <div id="t5">
                             <div class="p">6/10</div>
@@ -1444,7 +1447,7 @@
                         <div id="t7">
                             <div class="p">7/10</div>
                             <p>史实就那样。IF线牛逼</p>
-                            <p>三英战吕布但是魏蜀吴; 合肥孙十万反包张八百; 郭嘉天妒判桃子赤壁反杀; 独眼龙司马师抢侄孙皇位...太搞了。</p>
+                            <p>三英战吕布但是魏蜀吴; 合肥孙十万反包张八百; 郭嘉天妒判桃子赤壁反杀; 独眼龙司马师抢侄孙皇位...</p>
                         </div>
                         <div id="t8">
                             <p>中文字幕√</p>
@@ -1509,7 +1512,7 @@
                         </div>
                         <div id="t4">
                             <div class="p">8/10</div>
-                            <p>回合制角色扮演就没有机制简单的, 想想当年的英雄连。</p>
+                            <p>回合制角色扮演 + 各种反应是这样的。</p>
                         </div>
                         <div id="t5">
                             <div class="p">7/10</div>
@@ -2818,14 +2821,41 @@
 
     <script>
         $(document).ready(function(){
+
             $(".item > .top-selector > ul > li").click(function(){
+                var black = "rgb(255, 255, 255)"
+                var white = "rgb(0, 0, 0)"
+
                 var itemIdx = $(this).parents(".item").attr("id")
 
                 var selectQuery = "#" + itemIdx + "> .top-selector > ul > li"
                 var textIdx = $(selectQuery).index(this) + 1
+                var atWhichSelectQuery = "#" + itemIdx + "> .top-selector > ul > li" + ":nth-child(" + textIdx + ")"
 
                 var textQuery = "#" + itemIdx + " > .command > .text > #t" + textIdx
                 var imageQuery = "#" + itemIdx + " > .command > .cover"
+                
+                if ($(atWhichSelectQuery).css("background-color") == black){
+                    $(atWhichSelectQuery).css({"background-color": white})
+                    $(atWhichSelectQuery + "> a").css({"color": black})
+                }
+                else{
+                    $(atWhichSelectQuery).css({"background-color": black})
+                    $(atWhichSelectQuery + "> a").css({"color": white})
+                }
+                
+                for (var i = 1; i < 9; i++){
+                    var ansQuery = "#" + itemIdx + "> .top-selector > ul > li" + ":nth-child(" + i + ")"
+                    if (i == textIdx){}
+                    else if (i >= 1 && i <= 4){
+                        $(ansQuery).css({"background-color": black})
+                        $(ansQuery + "> a").css({"color": white})
+                    }
+                    else{
+                        $(ansQuery).css({"background-color": white})
+                        $(ansQuery + "> a").css({"color": black})
+                    }
+                }
 
                 $(textQuery).siblings("div").removeClass("active");
                 $(textQuery).siblings("div").css({"opacity": 0});

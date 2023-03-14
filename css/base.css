@@ -46,8 +46,7 @@ a:hover{
 }
 
 .top{
-
-    height: 500px;
+    height: 200px;
     width: 100%;
 
     font-style: italic;
@@ -56,14 +55,16 @@ a:hover{
     word-spacing: 12px;
     text-transform: capitalize;
     text-align: center;
-    line-height: 600px;
+    
+    padding-top: 200px;
 }
 
 .top-selection{
     padding-left: 200px;
     padding-right: 200px;
+    padding-top: 60px;
 
-    height: 260px;
+    height: 280px;
     width: 100%;
 
     font-size: 24px;
