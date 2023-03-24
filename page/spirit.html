@@ -59,7 +59,7 @@
                 <li class="link">Year 2023
                     <ul class="nav">
                         <li class="next-link"><a href="#">MyBatisPlus 整合</a></li>
-                        <li class="next-link"><a href="#">2</a></li>
+                        <li class="next-link"><a href="#">MMEditing使用</a></li>
                     </ul>
                 </li>
                 <li class="link">-----
@@ -121,8 +121,8 @@
                         <p>
                             <ul>
                                 <li>
-                                    想完全转行 ==> 这种情况我反而不推荐全网都在学的Python。PY的优点是学起来简单容易上手; 缺点也很明显, 太慢了。而且单论工作的话明显C++/Java/JS的工作是最多的。
-                                    所以这个时候不如去学一门C++或者JAVA, 等你还要学PY的时候也会简单很多毕竟从难倒易很轻松, 反过来就不一定了。
+                                    想完全转行 ==> 这种情况我反而不推荐全网都在学的Python。PY的优点是学起来简单容易上手; 缺点也很明显, 太慢了工作也少。而且单论工作的话明显C++/Java/JS的工作是最多的。
+                                    所以这个时候不如去学一门JS或者JAVA, 等你还要学PY的时候也会简单很多毕竟从难倒易很轻松, 反过来就不一定了。
                                 </li>
                                 <li>
                                     想半转(交叉) ==> Python(或者R语言, 对于某些专业来说)作为ML/DL的核心语言肯定是你的不二之选。这个时候我不推荐你学Matlab, 因为既然你是半转行, 那么Matlab的局限就很大了。
@@ -161,21 +161,21 @@
                             </ul>
                         </p>
                         <p>
-                            然后我个人是极其推荐各位去刷刷题练练手, 看看别人代码的。尤其对于Python这种以packages为核心的语言, 很多方法可能你都不知道以至于花费了很多的时间去做无用功。
+                            然后我个人是极其推荐各位去刷刷题练练手, 看看别人代码的。尤其对于Python这种以第三方库为重点的语言, 很多方法可能你都不知道以至于花费了很多的时间去做无用功。
                             尤其对于交叉学科的同学来说, 看文档本身就是一件难以在短时间内习惯的事情。通过阅读别人的代码, 不仅能增加自己代码的编写水平, 掌握相应的Coding技巧, 还能了解到很多很好用的工具和方法。
                             C++等语言也适用。
                         </p>
                         <br>
                         <p>
-                            第二, 由于现在ML/DL的火热, 估计很多人在掌握好基础后都会想到往算法这边靠一点, 至少对研究有很大的好处。所以接下来讲一讲我是怎么学ML/DL的吧。
+                            第二, 由于现在ML/DL的火热, 估计很多人在掌握好基础后都会想到往算法这边靠一点, 至少对研究有很大的好处。
                         </p>
                         <p>
-                            基础当然是吴恩达老师的机器学习基础, 比利比利上有同源视频。虽然只用的话一个Sklearn / Pytorch 等Import就能解决, 但是再怎么说, 原理你得知道吧, 写代码不能老当调包侠。
+                            基础当然是吴恩达老师的机器学习基础, 比利比利上有同源视频。虽然只用的话一个Sklearn / Pytorch 等Import就能解决, 但是再怎么说, 原理你得知道吧, 写代码虽说不一定什么时候都有造轮子的能力不能老当调包侠。
                             之后我是看的李航的数学统计方法, 深入了解这些ML Method的原理。之后又看了一些东西, 包括这些库怎么用, 若干案例分享七七八八的, 然后就去Kaggle上做练习去了。 
                         </p>
                         <p>
                             DL方面除了上面所提到的一些东西, arkiv上的论文, 比利比利上的各位大佬的精读讲解和经验分享(Mu Li is all your need)甚至知乎上的大佬(知乎计算机区还是很可靠的)都是可以学习的。
-                            我认为CS领域给我留下最深刻的一点印象就是, 虽然真的很卷全是怪物, 但是真的很开放, 大家都愿意把自己写的代码放出来给别人参考或者指正。或许这也是它卷的根源之一, 但是对于小白来说真的极其友好。
+                            我认为CS领域给我留下最深刻的一点印象就是, 虽然真的很卷全是怪物, 但是很开放, 大家都愿意把自己写的代码放出来给别人参考或者指正。或许这也是它卷的根源之一, 但是对于小白来说真的极其友好。
                         </p>
                         <p>
                             之后因为要做部署, 就是顺带学了一下C++。从简单到困难真的很不容易, 一个指针概念我都看了三天还专门上油管看的印度人的视频, 劝大家学有余力的话都去试一下。
@@ -207,7 +207,7 @@
                         </div>
                         <p>差的还是挺明显的。</p>
                         <p>数据集概况: 三类, 其中第一类为主要类别, 后两类是我希望让网络学到的废类别(相当于一种先验知识)。不然是很容易将这三类互相搞混的(实验得到)。三类数目分别为4700 3600 300, 每张图片大概有100-200个目标(三类加在一起)。图片大小为1200*800的双通道图(Hik原本拍出来的是3072*2048)。</p>
-                        <p>设备概况: 一张NVIDIA-V100 32G, Python 3.9, Torch 1.11, CUDA 11.3, 基本上Batch只能有2, 训练500Epoch需要16h左右。顺带一提我这边的实验前40个Epoch AP稳定为0, 当时吓得以为我哪里整错了。</p>
+                        <p>设备概况: 一张NVIDIA-V100 32G, Python 3.9, Torch 1.11, CUDA 11.3, 基本上Batch只能有4, 训练500Epoch需要16h左右。顺带一提我这边的实验前40个Epoch AP稳定为0, 当时吓得以为我哪里整错了。</p>
                         <hr class="text-hr">
                         <p>调参嘛, 无非就是各种loss, lr, 以及结构参数之类的这些东西</p>
                         <p>首先, 这里的类别Loss选择的是Focal Loss。
@@ -237,7 +237,7 @@
                         <p>起因来源于实习中的一个小任务, 平常是基本不做爬虫的</p>
                         <p>既然提到了Selenium这个框架, 那肯定是基本的url.request无法满足这里的需求</p>
                         <hr class="text-hr">
-                        <p>在依靠JS等脚本加载的网页中, 由于其异步问题, 网页中的所有内容是不会一下子全部加载出来的需要靠脚本后端往服务器里要数据, 通过url.request打印的信息也是如此只能打印一部分静态网页和大量的JS脚本
+                        <p>在依靠ajax等框架加载的网页中, 由于其异步问题, 网页中的所有内容是不会一下子全部加载出来的需要靠脚本后端往服务器里要数据, 通过url.request打印的信息也是如此只能打印一部分静态网页和大量的JS脚本
                             而其实远远不止这些。具体情况如下图所示:
                         </p>
                         <div class="imgbox"><img src="../assets/2022/9-2/1.png"></div>
@@ -251,12 +251,14 @@
                         <pre>
 driver = webdriver.Chrome(options=hide())
 driver.maximize_window()
-driver.get(url) # url为对应的域名</pre>
+driver.get(url) # url为对应的域名
+                        </pre>
                         <p>这里的options调整了两个params, 都算是Chrome官方推荐的</p>
                         <pre>
 chrome_options = Options()
 chrome_options.add_argument('--disable-gpu')
-chrome_options.add_argument('--hide-scrollbars')</pre>
+chrome_options.add_argument('--hide-scrollbars')
+                        </pre>
                         <p>
                             之后需要实现下拉功能, 一段简单的js代码:
                         </p>
@@ -479,7 +481,7 @@ def main(login_prepare=5, change=10):
 
         memory = idx + 1
 
-        if memory % 10 == 0:  # 每10个公司保存一次，可自己更改
+        if memory % 10 == 0:  # 每10个公司保存一次, 可自己更改
             data_copy = data.copy()
             data_copy.loc[:, '注销时间'] = zhuxiao_list
             data_copy.loc[:, '营业期限'] = yingye_list
@@ -547,6 +549,8 @@ main()
                 </div>
             </div>
 
+            <!---->
+
             <div class="item" id="i4">
                 <div class="main-title">2022-11-26</div>
                 <div class="main-content">
@@ -567,27 +571,27 @@ main()
                                     此方法也特别适合你懒得写那么多的专门的ValueError的提示框和判断, 也适合打包程序后的Debug处理。
                                 </p>
                                 <pre>
-    class MainClass:
+class MainClass:
+    ...
+    ...
+    def start(self):
         ...
-        ...
-        def start(self):
-            ...
                                 </pre>
                                 <p>这个时候就很适合去加一个hook并回溯报错了。具体是这样的(PyQt5的程序)</p>
                                 <pre>
-    import sys
+import sys
 
-    class MainClass:
-        ...
-        def __init__(self):
-            self.old_hook = sys.excepthook
-            sys.excepthook = self._catch_error
+class MainClass:
+    ...
+    def __init__(self):
+        self.old_hook = sys.excepthook
+        sys.excepthook = self._catch_error
 
-        def _catch_error(self, ty, value, tb):
-            traceback_format = traceback.format_exception(ty, value, tb)
-            traceback_string = "".join(traceback_format)
-            QtWidgets.QMessageBox.critical(self, "额外报错, ", "{}".format(traceback_string))
-            self.old_hook(ty, value, tb)
+    def _catch_error(self, ty, value, tb):
+        traceback_format = traceback.format_exception(ty, value, tb)
+        traceback_string = "".join(traceback_format)
+        QtWidgets.QMessageBox.critical(self, "额外报错, ", "{}".format(traceback_string))
+        self.old_hook(ty, value, tb)
                                 </pre>
                                 <p>这样的话不管是什么稀奇古怪的报错, 都可以起到提示的作用, 你在IDE里看到的是啥报错这里就给你弹的是什么。可以掌管任何在此class里引用出现的函数变量和类。</p>
 
@@ -656,6 +660,221 @@ main()
 &lt;/repositories&gt;
                         </pre>
                         
+                    </div>
+                </div>
+            </div>
+
+            <!---->
+
+            <div class="item" id="i6">
+                <div class="main-title">2023-03-24</div>
+                <div class="main-content">
+                    <div class="content-title">MMEditing 简单使用</div>
+                    <div class="content" id="content">
+                        <p>
+                            没研究过也更没做过超分, 但是项目又得用超分, 有人会选择<a href="https://github.com/XPixelGroup/BasicSR">BasicSR</a>,
+                            这边还是选择的<a href="https://github.com/open-mmlab/mmediting">MMEditing</a>, 商汤的框架用惯了, 懒得写的时候直接就用。
+                        </p>
+                        <p>
+                            网上的介绍比较少, 官方1.x的文档更新的也很有限。稍微写一下, 我这边只做了图像超分所以也只能写图像超分。
+                        </p>
+                        <hr class="text-hr">
+                        <p>
+                            图像超分顾名思义, 你希望将一张分辨率较低的图像送进网络去获得一张高分辨率的图片。
+                            因此在做数据的时候, 需要高分辨率的原图和低分辨率的对应图片。MMEditing在超分这块仅支持<a href="https://data.vision.ee.ethz.ch/cvl/DIV2K/">DIV2K</a>数据集, 且为修改过的DIV2K数据集。
+                            整个数据集分为三块: 本身和下采样2 3 4倍的对应图像, Set5和Set14的两个验证集。请注意,
+                            <span style="color: red;">Set5 和 Set14数据集也是超分的Benchmark之一, 下载地址请见<a href="https://www.kaggle.com/datasets/jesucristo/super-resolution-benchmarks">这里</a>。不过最终发现不要这个也行。</span>
+                        </p>
+                        <p>整个数据集文件夹最终的呈现效果如下方所示。<span style="color: red;">请注意: 所有文件必须为png格式, 且不同文件夹下对应图片名称相同。</span></p>
+                        <pre>
+data
+├─DIV2K
+│  ├─DIV2K_train_HR         &lt;--- 原分辨率的图片, 训练集
+│  ├─DIV2K_train_LR_bicubic
+│  │  ├─X2          &lt;--- 2倍下采样
+│  │  ├─X3          &lt;--- 3倍下采样
+│  │  └─X4          &lt;--- 4倍下采样
+│  ├─DIV2K_valid_HR         &lt;--- 原分辨率的图片, 验证集
+│  └─DIV2K_valid_LR_bicubic
+│      ├─X2          
+│      ├─X3
+│      └─X4
+├─val_set14         &lt;--- 更改名字即可
+│  ├─Set14_mod12
+│  ├─original
+│  ├─Set14_bicLRx2
+│  ├─Set14_bicLRx3
+│  └─Set14_bicLRx4
+└─val_set5          &lt;--- 更改名字即可
+    ├─Set5_mod12
+    ├─original
+    ├─Set5_bicLRx2
+    ├─Set5_bicLRx3
+    └─Set5_bicLRx4</pre>
+                        <hr class="text-hr">
+                        <p>
+                            第一步当然是要做这个数据集。
+                        </p>
+                        <p>
+                            下采样的方法其实从文件夹命名就可以看出来, 一个bicubic就能搞定。
+                            代码参照<a href="https://blog.csdn.net/Crystal_remember/article/details/122899283">这里</a>并做了下修改
+                        </p>
+                        <pre>
+import os
+import argparse
+import cv2
+ 
+parser = argparse.ArgumentParser(description='Downsize images at 2x using bicubic interpolation')
+parser.add_argument("-k", "--keepdims", help="keep original image dimensions in downsampled images", action="store_true")
+parser.add_argument('--hr_img_dir', type=str, default=None,
+                    help='path to high resolution image dir')
+parser.add_argument('--lr_img_dir', type=str, default=None,
+                    help='path to desired output dir for downsampled images')
+args = parser.parse_args()
+ 
+hr_image_dir = args.hr_img_dir
+lr_image_dir = args.lr_img_dir
+ 
+ 
+os.makedirs(lr_image_dir + "/X2", exist_ok=True)
+os.makedirs(lr_image_dir + "/X3", exist_ok=True)
+os.makedirs(lr_image_dir + "/X4", exist_ok=True)
+ 
+supported_img_formats = (".bmp", ".dib", ".jpeg", ".jpg", ".jpe", ".jp2",
+                         ".png", ".pbm", ".pgm", ".ppm", ".sr", ".ras", ".tif",
+                         ".tiff")
+ 
+
+for filename in os.listdir(hr_image_dir):
+    if not filename.endswith(supported_img_formats):
+        continue
+ 
+    name, ext = os.path.splitext(filename)
+ 
+    hr_img = cv2.imread(os.path.join(hr_image_dir, filename))
+    hr_img_dims = (hr_img.shape[1], hr_img.shape[0])
+ 
+    hr_img = cv2.GaussianBlur(hr_img, (0,0), 1, 1)
+    lr_image_2x = cv2.resize(hr_img, (0,0), fx=0.5, fy=0.5, interpolation=cv2.INTER_CUBIC)
+    if args.keepdims:
+        lr_image_2x = cv2.resize(lr_image_2x, hr_img_dims, interpolation=cv2.INTER_CUBIC)
+ 
+    cv2.imwrite(os.path.join(lr_image_dir + "/X2", filename.split('.')[0] + ext), lr_image_2x)
+ 
+    lr_img_3x = cv2.resize(hr_img, (0, 0), fx=(1 / 3), fy=(1 / 3),
+                           interpolation=cv2.INTER_CUBIC)
+    if args.keepdims:
+        lr_img_3x = cv2.resize(lr_img_3x, hr_img_dims,
+                               interpolation=cv2.INTER_CUBIC)
+    cv2.imwrite(os.path.join(lr_image_dir + "/X3", filename.split('.')[0] + ext), lr_img_3x)
+ 
+    lr_img_4x = cv2.resize(hr_img, (0, 0), fx=0.25, fy=0.25,
+                           interpolation=cv2.INTER_CUBIC)
+    if args.keepdims:
+        lr_img_4x = cv2.resize(lr_img_4x, hr_img_dims,
+                               interpolation=cv2.INTER_CUBIC)
+    cv2.imwrite(os.path.join(lr_image_dir + "/X4", filename.split('.')[0] + ext), lr_img_4x)</pre>
+                        <hr class="text-hr">
+                        <p>
+                            第二步在MMEditing内预处理数据集
+                        </p>
+                        <p>
+                            官方提供的数据集格式有 SRAnnotationDataset --> 以图片文件和独立的ann.txt文件组成;
+                            SRFolderDataset --> 直接以图片文件组成;
+                            SRLmdbDataset --> 以图片和lmdb文件组成。官方建议的是使用lmdb数据集, io处理速度快, 但是以文件夹为核心的数据集也不错, 起码制作起来简单。
+                        </p>
+                        <p>
+                            为了扩充数据 (和获取ann.txt及lmdb文件), 首先得进一遍 tools/data/super-resolution/div2k/preprocess_div2k_dataset.py。
+                            具体命令为 (假设你的数据文件夹名为data, 如同上方所示):
+                        </p>
+                        <pre>
+python tools/data/super-resolution/div2k/preprocess_div2k_dataset.py --data-root ./data/DIV2K --make-lmdb</pre>
+                        <p>
+                            之后你的data文件夹多了几个lmdb和_sub文件夹, 如下方所示。_sub文件夹内即为经裁剪后的图片, lmdb就是所需的数据文件了。
+                        </p>
+                        <pre>
+data
+├── DIV2K
+│   ├── DIV2K_train_HR
+│   ├── DIV2K_train_HR_sub
+│   ├── DIV2K_train_HR_sub.lmdb
+│   │   ├── data.mdb
+│   │   ├── lock.mdb
+│   │   ├── meta_info.txt
+│   ├── DIV2K_train_LR_bicubic
+│   │   ├── X2
+│   │   ├── X3
+│   │   ├── X4
+│   │   ├── X2_sub
+│   │   ├── X3_sub
+│   │   ├── X4_sub
+│   ├── DIV2K_train_LR_bicubic_X2_sub.lmdb
+│   ├── DIV2K_train_LR_bicubic_X3_sub.lmdb
+│   ├── DIV2K_train_LR_bicubic_X4_sub.lmdb
+│   ├── ...</pre>
+                        <p>
+                            这时候有人就会问为什么valid没有执行这一步骤, 因为默认确实不执行, 不过也好说。train_pipeline用lmdb, val_pipeline就用folder呗。毕竟val也不做裁剪。
+                        </p>
+                        <hr class="text-hr">
+                        <p>
+                            第三步修改配置文件
+                        </p>
+                        <p>
+                            如果你之前接触过类似于paddlepaddle, mmcv这类多任务的开源框架的话, 改配置对你来说就肯定不算难事情了。
+                            你如果不改网络结构的话, 也就Augmentation / lr_config / loss and optimizer 和日志以及保存部分需要改。
+                        </p>
+                        <p>
+                            不过既然是超分, 那就难免有不同的地方。所以就列举几个比较特殊的需要更改的点,
+                            大体例子参照官方提供的<a href="https://mmediting.readthedocs.io/zh_CN/latest/config.html#id8">EDSR模型配置文件</a>。不是很了解的也可以顺便看看对应参数的解释。
+                            <span style="color: red;">请注意, 该配置文件仅训练2倍下采样的数据。</span>
+                        </p>
+                        <p>
+                            如果使用的是 SRAnnotationDataset 数据集格式进行训练, 则需要修改以下位置:
+                        </p>
+                        <pre>
+# data -> train -> dataset
+lq_folder='data/DIV2K/DIV2K_train_LR_bicubic/X2_sub'
+gt_folder='data/DIV2K/DIV2K_train_HR_sub'
+ann_file='data/DIV2K/DIV2K_train_HR_sub.lmdb/meta_info.txt'         &lt;--- 经preprocess_div2k_dataset.py处理后生成的txt文件
+
+# data -> val or test -> dataset
+lq_folder='./data/val_set5/Set5_bicLRx2'
+gt_folder='./data/val_set5/Set5_mod12'          &lt;--- 这里可以改为你想要当作验证和测试的数据文件夹, 因为默认是 SRFolderDataset 因此没有ann.txt</pre>
+                        <p>
+                            如果使用的是 SRLmdbDataset 数据集格式进行训练, 则需要修改以下位置:
+                        </p>
+                        <pre>
+# train_dataset_type
+train_dataset_type = 'SRLmdbDataset'
+
+# data -> train -> dataset
+lq_folder='data/DIV2K/DIV2K_train_LR_bicubic_X2_sub.lmdb'
+gt_folder='data/DIV2K/DIV2K_train_HR_sub.lmdb
+# 并注释掉原来的ann_file
+
+# train_pipeline, 前两个dict
+dict(
+    type='LoadImageFromFile',
+    io_backend='lmdb',
+    key='lq',
+    db_path='data/DIV2K/DIV2K_train_LR_bicubic_X2_sub.lmdb',
+    flag='unchanged'),
+dict(
+    type='LoadImageFromFile',
+    io_backend='lmdb',
+    key='gt',
+    db_path='data/DIV2K/DIV2K_train_HR_sub.lmdb',
+    flag='unchanged')</pre>
+                        <p>
+                            其他修改:
+                        </p>
+                        <pre>
+# evaluation
+# 删除gpu_collect项</pre>
+                    <hr class="text-hr">
+                    <p>
+                        第四步训练, 懂的都懂。
+                    </p>
                     </div>
                 </div>
             </div>
