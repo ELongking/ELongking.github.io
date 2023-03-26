@@ -826,7 +826,7 @@ data
                         <p>
                             不过既然是超分, 那就难免有不同的地方。所以就列举几个比较特殊的需要更改的点,
                             大体例子参照官方提供的<a href="https://mmediting.readthedocs.io/zh_CN/latest/config.html#id8">EDSR模型配置文件</a>。不是很了解的也可以顺便看看对应参数的解释。
-                            <span style="color: red;">请注意, 该配置文件仅训练2倍下采样的数据。</span>
+                            <span style="color: red;">请注意, 该配置文件仅训练2倍下采样的数据。可在scale处修改。</span>
                         </p>
                         <p>
                             如果使用的是 SRAnnotationDataset 数据集格式进行训练, 则需要修改以下位置:
@@ -875,6 +875,48 @@ dict(
                     <p>
                         第四步训练, 懂的都懂。
                     </p>
+                    <hr class="text-hr">
+                    <p>
+                        第五步, 直接用api作推理。
+                    </p>
+                    <p>
+                        如果你曾经使用过mmcv任何工具框架的api, 可能会像下面这样做:
+                    </p>
+                    <pre>
+from mmedit.apis import init_model, restoration_inference
+
+def infer_restoration(img, cfg, ckpt):
+    model = init_model(config=cfg, checkpoint=ckpt, device="cuda:0")
+    infer = restoration_inference(model=model, img=item))
+    return infer
+
+if __name__ == '__main__':
+    res = infer_restoration(img="xxx.jpg",
+                            cfg="xxx.py",
+                            ckpt="xxx.pth")</pre>
+
+                    <p>
+                        然后你会发现, res矩阵里面全都是在0-1之间的数, 你可能会想到是不是做了归一化。
+                        之后一通 *255 再 reshape 再 tensor.numpy(), 发现出来的结果怎么是原低分辨率的图复制了几次而已。
+                        没辙了。
+                    </p>
+                    <p>
+                        其实有一个叫做tensor2img的函数是需要一起配套使用的, 阅读源码发现是需要再另外做一系列后处理的,
+                        即如下面所示即可:
+                    </p>
+                    <pre>
+from mmedit.apis import init_model, restoration_inference
+from mmedit.core import tensor2img
+
+def infer_restoration(img, cfg, ckpt):
+    model = init_model(config=cfg, checkpoint=ckpt, device="cuda:0")
+    infer = tensor2img(restoration_inference(model=model, img=item)))
+    return infer
+
+if __name__ == '__main__':
+    res = infer_restoration(img="xxx.jpg",
+                            cfg="xxx.py",
+                            ckpt="xxx.pth")</pre>
                     </div>
                 </div>
             </div>

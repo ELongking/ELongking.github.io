@@ -1,0 +1,123 @@
+.branch {
+    flex-flow: row wrap;
+}
+
+
+aside {
+    overflow-y: auto;
+    width: 280px;
+    border-right: 1px solid #ddd;
+}
+
+aside::-webkit-scrollbar {
+    width: 3px;
+}
+
+aside::-webkit-scrollbar-thumb {
+    background: #ccc;
+}
+
+main {
+    flex: 1;
+    overflow: auto;
+}
+
+.container {
+    margin: 0 auto;
+    min-width: 960px;
+    max-width: 1440px;
+    padding: 20px;
+}
+
+.side-nav {
+    border-top: 1px solid #ddd;
+    line-height: 2em;
+    padding: 10px 0 20px 30px;
+}
+
+.side-nav p {
+    margin-top: 10px;
+    font-weight: 700;
+}
+
+.side-nav ul {
+    padding: 0;
+    margin-left: 30px;
+}
+
+.side-nav li.active {
+    color: var(--color-primary);
+    border-right: 2px solid var(--color-primary);
+}
+
+.side-nav a {
+    color: inherit;
+}
+
+.logo a {
+    color: var(--color-primary);
+}
+
+aside .logo {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 24px;
+    text-align: center;
+    padding: 20px 0;
+}
+
+header, header .container {
+    background: #565656;
+}
+
+header .container {
+    display: flex;
+    height: 30px;
+    color: white;
+    padding: 0 20px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header .logo {
+    font-size: 24px;
+    color: white;
+}
+
+.nav-item {
+    color: white;
+    cursor: pointer;
+    margin-left: 16px;
+}
+
+.nav {
+    justify-content: space-between;
+}
+
+.nav .item:hover {
+    color: #f1f1f1;
+}
+
+.main {
+    width: auto;
+}
+
+.base {
+    margin-left: 10%;
+    margin-right: 10%;
+    margin-top: 10px;
+}
+
+.title {
+    width: 100%;
+    height: auto;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.file {
+    width: 100%;
+    height: auto;
+    border: 1px solid black;
+}

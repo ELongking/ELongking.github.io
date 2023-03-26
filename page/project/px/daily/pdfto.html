@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Longking Website - Project</title>
+
+    <link rel="stylesheet" type="text/css" href="../../../../css/base.css">
+    <link rel="stylesheet" type="text/css" href="../../../../css/project/toolbox.css">
+    <link rel="icon" href="../../../../texture/icon.png">
+</head>
+
+<body>
+    <a href="#top-all" class="totop"></a>
+    <div id="top-all">
+        <div class="top" style="color: white;">
+            --- welcome to longking's layer ---
+        </div>
+        <div class="top-selection">
+            <a href="../index.html" style="text-decoration: underline; width: 25%; padding: 0 10px;">home</a>
+            <a href="m&g.html" style="text-decoration: underline; width: 25%; padding: 0 10px;">m&g</a>
+            <a href="spirit.html" style="text-decoration: underline; width: 25%;padding: 0 10px;">spirit</a>
+            <a href="project.html" style="text-decoration: underline; width: 25%; padding: 0 10px;">project</a>
+            <a href="about.html" style="text-decoration: underline; width: 25%; padding: 0 10px;">about</a>
+            <br>
+        </div>
+        <div class="top-add">
+            All the image textures are all from <a href="https://unsplash.com">unsplash<sup>&copy;</sup></a>
+        </div>
+    </div>
+
+    <HR style="border:3 double center" width="100%" color=gray SIZE=3>
+
+    <div class="branch">
+
+        <aside>
+            <h1 class="logo"><a href="../../projectx.html">Longking ToolBox</a></h1>
+            <nav class="side-nav">
+                <p>日常类</p>
+                <ul>
+                    <li><a href="./pdfto.html">PDF转图片</a></li>
+                    <li><a href="./"></a></li>
+                    <li><a href="./"></a></li>
+                    <li><a href="./"></a></li>
+                </ul>
+                <p>数据类</p>
+                <ul>
+                    <li><a href="../data/">快速绘图</a></li>
+                    <li><a href="../data/"></a></li>
+                </ul>
+                <p>其他类</p>
+                <ul>
+                    <li><a href="../unknown/"></a></li>
+                    <li><a href="../unknown/"></a></li>
+                    <li><a href="../unknown/"></a></li>
+                    <li><a href="../unknown/"></a></li>
+                    <li><a href="../unknown/"></a></li>
+                    <li><a href="../unknown/"></a></li>
+                    <li><a href="../unknown/"></a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="main">
+            <div class="title base">PDF转图片</div>
+            <div class="file base">
+                <span class="file-btn">
+                    <input class="ipt-file" type="file" accept="application/pdf" onchange="">
+                    <img class="file-icon" src="../../../../assets/project/toolbox/file-pdf.svg"></span>
+                    <span class="file-notice">选择一个PDF文件</span>
+                </span>
+                <span class="file-path"></span>
+            </div>
+            <div class="format-choice base">
+                <ul>
+                    <li><a>JPG</a></li>
+                    <li><a>JPEG</a></li>
+                    <li><a>PNG</a></li>
+                    <li><a>JFIF</a></li>
+                    <li><a>BMP</a></li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+    
+    <hr class="shadow">
+    <div class="bottom">
+        <br>
+        Right, wrong... Nobody's got a clue what the difference is in this town. So I'm gonna have more fun... and live crazier than any of 'em.
+        <br>
+        Goro Majima
+    </div>
+
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.bootcss.com/pdf.js/2.2.228/pdf.worker.min.js';
+
+        const preview = document.getElementById('preview');
+        const page_num = document.getElementById('page_num');
+        const out_type = document.getElementById('out_type');
+
+        let pdfFile, pdf, pageNum, context = preview.getContext('2d');
+
+        out_type.querySelectorAll('.button').forEach(function (btn) {
+            btn.onclick = function () {
+                out_type.querySelector('.primary').classList.remove('primary');
+                btn.classList.add('primary');
+            }
+        });
+
+        // 加载PDF文件
+        function loadPDF(file) {
+            pdfFile = file;
+            file_name.innerHTML = file.name;
+
+            let reader = new FileReader();
+            reader.onload = (e) => showPDF(e.target.result);
+            reader.readAsDataURL(file);
+        }
+
+        // 预览PDF
+        function showPDF(url) {
+            let loadingTask = pdfjsLib.getDocument(url);
+            loadingTask.promise.then(function (doc) {
+                pdf = doc;
+                pageNum = 1;
+                preview.hidden = false;
+                readerPage()
+            }, function (reason) {
+                alert(reason)
+            });
+        }
+
+        // 预览上一页
+        function prevPage() {
+            if (pageNum <= 1) {
+                return;
+            }
+            pageNum--;
+            readerPage()
+        }
+
+        //预览下一页
+        function nextPage() {
+            if (pageNum >= pdf.numPages) {
+                return;
+            }
+            pageNum++;
+            readerPage()
+        }
+
+        //渲染页面
+        function readerPage(callback) {
+            pdf.getPage(pageNum).then(function (page) {
+                let scale = 1.5;
+                let viewport = page.getViewport({scale: scale});
+
+                preview.height = viewport.height;
+                preview.width = viewport.width;
+
+                let renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                page.render(renderContext).promise.then(callback);
+            });
+            page_num.innerText = `页码 : ${pageNum} / ${pdf.numPages}`;
+        }
+
+        // 保存当前页
+        function save() {
+            let a = document.createElement('a');
+            let event = new MouseEvent('click');
+            let type = out_type.querySelector('.primary').innerText.toLowerCase();
+            a.download = pdfFile.name + '-' + pageNum + '.' + type;
+            a.href = preview.toDataURL(type === 'png' ? 'image/png' : 'image/jpeg');
+            a.dispatchEvent(event)
+        }
+
+        //保存全部页面
+        function saveAll() {
+            pageNum = 1;
+            savePage()
+        }
+
+        function savePage() {
+            if (pageNum > pdf.numPages) {
+                alert('全部保存成功');
+                return
+            }
+
+            readerPage(function () {
+                save();
+                pageNum++;
+                savePage();
+            });
+        }
+    </script>
+
+</body>
+</html>
