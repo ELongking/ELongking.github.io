@@ -22,13 +22,6 @@ main {
     overflow: auto;
 }
 
-.container {
-    margin: 0 auto;
-    min-width: 960px;
-    max-width: 1440px;
-    padding: 20px;
-}
-
 .side-nav {
     border-top: 1px solid #ddd;
     line-height: 2em;
@@ -43,6 +36,13 @@ main {
 .side-nav ul {
     padding: 0;
     margin-left: 30px;
+}
+
+.side-nav li{
+    color: brown;
+}
+.side-nav li:hover {
+    color: peru;
 }
 
 .side-nav li.active {
@@ -66,31 +66,6 @@ aside .logo {
     padding: 20px 0;
 }
 
-header, header .container {
-    background: #565656;
-}
-
-header .container {
-    display: flex;
-    height: 30px;
-    color: white;
-    padding: 0 20px;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-}
-
-header .logo {
-    font-size: 24px;
-    color: white;
-}
-
-.nav-item {
-    color: white;
-    cursor: pointer;
-    margin-left: 16px;
-}
-
 .nav {
     justify-content: space-between;
 }
@@ -106,7 +81,16 @@ header .logo {
 .base {
     margin-left: 10%;
     margin-right: 10%;
-    margin-top: 10px;
+    margin-top: 20px;
+}
+
+.intro {
+    width: 100%;
+}
+.intro > p {
+    text-indent: 2em;
+    font-size: 16px;
+    line-height: 28px;
 }
 
 .title {
