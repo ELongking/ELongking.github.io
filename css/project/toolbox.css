@@ -17,11 +17,6 @@ aside::-webkit-scrollbar-thumb {
     background: #ccc;
 }
 
-main {
-    flex: 1;
-    overflow: auto;
-}
-
 .side-nav {
     border-top: 1px solid #ddd;
     line-height: 2em;
@@ -75,7 +70,10 @@ aside .logo {
 }
 
 .main {
-    width: auto;
+    display: block;
+    width: 68%;
+    align-items: center;
+    justify-content: center;
 }
 
 .base {
@@ -104,4 +102,42 @@ aside .logo {
     width: 100%;
     height: auto;
     border: 1px solid black;
+}
+
+
+.lev-1 {
+    grid-area: lev-1;
+}
+.lev-2 {
+    grid-area: lev-2;
+}
+.lev-3 {
+    grid-area: lev-3;
+}
+.lev-4 {
+    grid-area: lev-4;
+}
+.lev-5 {
+    grid-area: lev-5;
+}
+
+.lev {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(5, minmax(100px, auto));
+    grid-template-areas: "lev-1 lev-2"
+                         "lev-3 lev-3"
+                         "lev-4 lev-4"
+                         "lev-5 lev-5";
+    
+    gap: 10px;
+}
+
+.setting {
+    display: block;
+    padding: 5px;
+}
+.setting > * {
+    margin: 2px;
 }
