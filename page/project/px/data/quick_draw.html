@@ -10,7 +10,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../css/project/toolbox.css">
     <link rel="icon" href="../../../../texture/icon.png">
     <script src="https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/xlsx/0.18.2/xlsx.full.min.js"></script>
-    <script src="https://cdn.bootcdn.net/ajax/libs/vue/3.2.47/vue.global.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.2/echarts.js"></script>
     <script src="../../../../script/project/quick_draw.js"></script>
 </head>
 
@@ -67,7 +68,7 @@
 
         <div class="main">
 
-            <div class="title base">快速绘图</div>
+            <div class="title base">快速绘图 (基于ECharts)</div>
             <div class="lev base">
 
                 <div class="setting lev-1" style="background: rgb(68, 121, 68);">
@@ -76,44 +77,55 @@
                         <option value="0">--请选择--</option>
                         <option value="1">线面图</option>
                         <option value="2">柱状图</option>
-                        <option value="3">饼状图</option>
+                        <option value="3">散点图</option>
                     </select>
                 </div>
 
-                <div class="setting lev-2" style="background: rgb(215, 156, 162); display: none;">
+                <div class="setting lev-2" id="l11" style="background: rgb(215, 156, 162); display: none;">
                     <span style="color: white;">LEVEL 2</span>
                     <div style="margin: auto; display: block;">
-                        <div id="l11">
-                            <input type="radio" name="choice"/> 按计算式
-                            <input type="text" placeholder="  请写入计算式"/>
+                        <div>
+                            按计算式
+                            <input type="text" id="l2-exp-text" placeholder="  请写入计算式"/>
+                            <input type="submit" id="l2-exp-btn" onclick="level2Click()">
                         </div>
                         <br>
-                        <div id="l12">
-                            <input type="radio" name="choice"/> 按数据表格
+                        <div>
+                            按数据表格
                             <input type="file" accept="application/xlsx" id="xlsx-ipt" onchange="importData(this)"/>
                         </div>
                     </div>
                 </div>
 
                 <div class="setting lev-3" id="l11-l21" style="background: rgb(197, 161, 99); display: none;">
-                    x: <input type="text" placeholder="Eg => 1,10">
-                    y: <input type="text" placeholder="Eg => 1,10">
-                    z: <input type="text" placeholder="Eg => 1,10">
+                    <span style="color: white;">LEVEL 3</span>
+                    x: <input id="l3-text-x" type="text" placeholder="Eg => 1,10">
+                    y: <input id="l3-text-y" type="text" placeholder="Eg => 1,10">
+                    z: <input id="l3-text-z" type="text" placeholder="Eg => 1,10">
+                    <input type="submit" id="l11-l21-sub" onclick="l3tol4()">
                 </div>
                 <div class="setting lev-3" id="l11-l22" style="background: rgb(197, 161, 99); display: none;">
-                    x y z
-                    x:
-                    <select name="" id="">
-                        
-                    </select>
+                    <span style="color: white;">LEVEL 3</span>
+                    x: <select id="l3-select-x"></select>
+                    y: <select id="l3-select-y"></select>
+                    z: <select id="l3-select-z"></select>
+                    <input type="submit" id="l11-l22-sub" onclick="l3tol4()">
                 </div>
 
-                <div class="setting lev-4" style="background: rgb(105, 175, 228);">
+                <div class="setting lev-4" id="l11-x-x" style="background: rgb(105, 175, 228); display: none;">
+                    <span style="color: white;">LEVEL 4</span>
+                    <select id="l4-var-select"></select>
                     variable settings
+                    <div id="dimension">变量维度: <b>3</b>(若有错误请检查前面流程)</div>
+                    <div id="line">
+                        线宽 ==> <input type="text" name="" id="">
+                        线样式  ==> <select name="" id=""></select>
+                        线颜色
+                    </div>
                 </div>
 
-                <div class="setting lev-5" style="background: rgb(142, 115, 158);">
-                    settings sample
+                <div class="setting lev-5">
+                    RESULT
                 </div>
             </div>
 
@@ -131,6 +143,8 @@
     <script>
         var level1 = level1Select
         var importData = importExcelFile
+        var level2Click = level2ExpClicked
+        var l3tol4 = level3ToLevel4
     </script>
 
 </body>
