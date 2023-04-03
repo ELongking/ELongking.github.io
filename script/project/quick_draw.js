@@ -305,7 +305,14 @@ function optSave(mode){
 }
 
 function level4ToLevel5(){
-    var symbol = ["x", "y", "z"] 
+    var symbol = ["x", "y", "z"]
+    for (var i = 0; i < Number(essionStorage.getItem("grade")); i++){
+        if (sessionStorage.getItem(symbol[i] + "-cfg") == null){
+            alert(symbol[i] + "并未设置, 请重试")
+            return
+        }
+    }
+
     $("#l11-x-x-x").css("display", "block")
 }
 
@@ -471,6 +478,12 @@ function mergeOption(){
 function canvasResultPlot(){
     if (chart != null && chart != "" && chart != undefined) {
         chart.dispose();
+    }
+
+    var fig = sessionStorage.getItem("fig")
+    if (sessionStorage.getItem(fig + "-cfg") == null){
+        alert("LEVEL 5未保存, 请重试")
+        return
     }
 
     option = mergeOption()
