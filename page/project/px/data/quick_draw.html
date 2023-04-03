@@ -76,7 +76,7 @@
             <div class="help base">
                 <p>使用时请注意, 若要重置状态, 请刷新页面。</p>
                 <p>
-                    表达式书写暂时遵循<a href="https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/First_steps/Math"></a>JS规范
+                    表达式书写暂时遵循<a href="https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/First_steps/Math">JS规范</a>
                 </p>
                 <p>
                     即 +-*/ 加减乘除, ** 次幂等
@@ -100,7 +100,7 @@
                     <div style="margin: auto; display: block;">
                         <div>
                             按计算式 (维度为 x y z 的个数加一)
-                            <input type="text" id="l2-exp-text" value="x+1" placeholder="请写入计算式"/>
+                            <input type="text" id="l2-exp-text" value="x**2+1" placeholder="请写入计算式"/>
                             <input type="submit" id="l2-exp-btn" onclick="level2Click()">
                         </div>
                         <br>
@@ -113,9 +113,9 @@
 
                 <div class="setting lev-3" id="l11-l21" style="background: rgb(197, 161, 99); display: none;">
                     <span style="color: white;">LEVEL 3</span>
-                    x: <input id="l3-text-x" type="text" value="-1 1 0.01" placeholder="Eg => -1 1 0.01">
-                    y: <input id="l3-text-y" type="text" value="-1 1 0.01" placeholder="Eg => -1 1 0.01">
-                    z: <input id="l3-text-z" type="text" placeholder="Eg => -1 1 0.01">
+                    x: <input id="l3-text-x" type="text" value="-1 1 0.01" placeholder="左端 右端 小间距(越小精度越好, 但也越慢)">
+                    y: <input id="l3-text-y" type="text" value="-1 1 0.01" placeholder="左端 右端 (越小精度越好, 但也越慢)">
+                    z: <input id="l3-text-z" type="text" placeholder="左端 右端 小间距(越小精度越好, 但也越慢)">
                     <input type="submit" id="l11-l21-sub" onclick="l3tol4()">
                 </div>
                 <div class="setting lev-3" id="l11-l22" style="background: rgb(197, 161, 99); display: none;">
@@ -137,7 +137,7 @@
                                 数据缩放(仅对数字数据有效) ==> 
                                 <select name="" id="axis-zoom">
                                     <option value="ori">None</option>
-                                    <option value="log">LOG2</option>
+                                    <option value="log">Log</option>
                                     <option value="minmax">MinMax</option>
                                 </select>
                             </li>

@@ -260,6 +260,8 @@ function level3ToLevel4(){
 }
 
 function level4SetIndexCfg(){
+    $("#l4-var-select").empty()
+
     var symbol = ["x", "y", "z"]
     var symbol = symbol.slice(0, sessionStorage.getItem("grade"))
 
@@ -415,7 +417,7 @@ function mergeOption(){
                     tooltip:{
                         show:true,
                         trigger: 'axis',
-                        formatter: '{b0}: {c0}<br />{b1}: {c1}'
+                        formatter: '{b0}: {c0}<br />{x}: {y}'
                     },
                     dataZoom:[
                         {
