@@ -110,7 +110,7 @@ function sheet2Data(){
 function dataScale(data, mode, tag){
     var minVal = Math.min.apply(Math, data)
     var maxVal = Math.max.apply(Math, data)
-    var minMaxRange = {"min": minVal * 0.8, "max": maxVal * 1.2}
+    var minMaxRange = {"min": minVal - 1, "max": maxVal + 1}
     sessionStorage.setItem(tag + "-range", JSON.stringify(minMaxRange))
 
     if (mode == "ori"){return data}
@@ -173,7 +173,7 @@ function level2ExpClicked(){
     $("#l11-l21").css("display", "block");
     var symbol = ["x", "y", "z"];
     $.each(symbol, function(s_idx, s){
-        if (s_idx < grade){
+        if (s_idx < grade - 1){
             $("#l3-text-" + s).css("display", "incline")
         }
         else{
@@ -306,7 +306,7 @@ function optSave(mode){
 
 function level4ToLevel5(){
     var symbol = ["x", "y", "z"]
-    for (var i = 0; i < Number(essionStorage.getItem("grade")); i++){
+    for (var i = 0; i < Number(sessionStorage.getItem("grade")); i++){
         if (sessionStorage.getItem(symbol[i] + "-cfg") == null){
             alert(symbol[i] + "并未设置, 请重试")
             return
@@ -480,9 +480,8 @@ function canvasResultPlot(){
         chart.dispose();
     }
 
-    var fig = sessionStorage.getItem("fig")
-    if (sessionStorage.getItem(fig + "-cfg") == null){
-        alert("LEVEL 5未保存, 请重试")
+    if (sessionStorage.getItem("pub-cfg") == null){
+        alert("公有配置未保存, 请重试")
         return
     }
 
