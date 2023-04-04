@@ -13,7 +13,7 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.2/echarts.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/echarts-gl/2.0.8/echarts-gl.js"></script>
-    <script src="../../../../script/project/quick_draw.js"></script>
+    <script src="../../../../script/project/quick_draw/main.js"></script>
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </head>
 
@@ -93,8 +93,8 @@
                     <select id="l1-select" style="margin: auto; display: block;" onchange="level1()">
                         <option value="0">--请选择--</option>
                         <option value="1">线面图</option>
-                        <option value="2">柱状图</option>
-                        <option value="3">散点图</option>
+                        <option value="2">散点图</option>
+                        <option value="3">柱状图</option>
                     </select>
                 </div>
 
@@ -154,7 +154,14 @@
                     <span style="color: white;">LEVEL 5</span> <input type="submit" value="保存" id="l5-save" onclick="varSave('l5')">
 
                     <div id="line line-cfg">
-                        <ul style="list-style-type: none">
+                        样式 (二维不支持面图, 三维表达式不支持线图) ==> 
+                        <select name="" id="line-type" onchange="lineSurfaceChange()">
+                            <option value="none">---</option>
+                            <option value="line">线图</option>
+                            <option value="surface">面图</option>
+                        </select>
+
+                        <ul id="line-line" style="list-style-type: none; display: none;">
                             <li>线宽 ==> <input type="text" value="2" id="line-width"></li>
                             <li>线样式 ==> 
                                 <select name="" id="line-cat">
@@ -178,6 +185,20 @@
                                 </select>
                             </li>
                         </ul>
+                        
+                        <ul id="line-surface" style="list-style-type: none; display: none;">
+                            <li>渲染方式 ==> 
+                                <select name="" id="surface-shade">
+                                    <option value="color">按颜色渲染</option>
+                                    <option value="lambert">光照渲染</option>
+                                    <option value="realistic">真实渲染</option>
+                                </select>
+                            </li>
+                            <li>面颜色 ==> <input type="text" id="surface-color" value="red" placeholder="支持输入单词和rgb值, rgb格式为(x1,x2,x3)"></li>
+                        </ul>
+
+
+
                     </div>
 
                     <input type="submit" value="进行下一步骤" onclick="submit2plot()">
@@ -205,6 +226,7 @@
         var level2Click = level2ExpClicked
         var l3tol4 = level3ToLevel4
         var l4tol5 = level4ToLevel5
+        var lineSurfaceChange = lineOrSurface
         var varSave = optSave
         var submit2plot = canvasResultPlot
     </script>
