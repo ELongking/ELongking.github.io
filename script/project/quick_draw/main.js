@@ -10,6 +10,25 @@ function getParams(k){
     }
 }
 
+function dim3sort(x, y){
+    if (x[0] >= y[0]) {return 1}
+    else if (x[0] < y[0]) {return -1}
+    else if (x[1] >= y[1]) {return 1}
+    else if (x[1] < y[1]) {return -1}
+    else if (x[2] >= y[2]) {return 1}
+    else if (x[2] < y[2]) {return -1}
+    else {return 0}
+}
+
+function advancedExpression(expStr){
+    var ori = ["sin", "cos", "tan", "e", "pi", "log"]
+    var math = ["Math.sin", "Math.cos","Math.tan", "Math.E", "Math.PI", "Math.log"]
+    for (var i =0 ; i < ori.length; i++){
+        expStr = expStr.replace(new RegExp(ori[i], 'g'), math[i])
+    }
+    return expStr;
+}
+
 
 function clsSessionInfo(){
     sessionStorage.clear()
@@ -31,6 +50,7 @@ function checkNumeric(df, labels){
         $.each(df, function(d_idx, item){
             if (isNaN(Number(item[label]))){
                 styles.splice(l_idx, 1, "category")
+                
                 return
             }
         })
@@ -160,9 +180,11 @@ function sheet2Data(){
             }
             ans.push(part)
         }
-        res = {"x": xRes, "y":yRes, "z": zRes, "all": ans}
+        if (getParams("lineSub") == "surface") {ans.sort(dim3sort)}
+        res = {"x": xRes, "y": yRes, "z": zRes, "all": ans}
     }
-    sessionStorage.setItem("res", res)
+
+    sessionStorage.setItem("res", JSON.stringify(res))
 }
 
 function dataScale(data, mode, tag){
@@ -225,17 +247,17 @@ function level2ExpClicked(){
     if (grade < 2){alert("请至少填入x y里的前一项"); return;}
 
     sessionStorage.setItem("mode", "exp")
-    sessionStorage.setItem("exp", expression)
+    sessionStorage.setItem("exp", advancedExpression(expression))
     sessionStorage.setItem("grade", grade)
 
     $("#l11-l21").css("display", "block");
     var symbol = ["x", "y", "z"];
     $.each(symbol, function(s_idx, s){
         if (s_idx < grade - 1){
-            $("#l3-text-" + s).css("display", "incline")
+            $("#l3-group-" + s).css("display", "block")
         }
         else{
-            $("#l3-text-" + s).css("display", "none")
+            $("#l3-group-" + s).css("display", "none")
         }
     })
     $("#l3-text-z").css("display", "none")
@@ -281,6 +303,7 @@ function importExcelFile(obj){
 };
 
 function level3ToLevel4(){
+    var flag = true
     var mode = getParams("mode")
     if (mode == "exp"){
         var df = {}
@@ -306,18 +329,25 @@ function level3ToLevel4(){
             }
             else if (_mem.indexOf(ans) != -1){
                 alert("不同的两个轴上存在相同的变量, 请更改")
+                flag = false
                 return
             }
         })
 
-        if (_mem.length == 0) {alert("无有效变量, 请检查"); return;} 
-        sessionStorage.setItem("grade", _mem.length)
-        sessionStorage.setItem("labels", JSON.stringify({"key": labels}))
-        checkNumeric(df, labels)
+        if (flag){
+            if (_mem.length == 0) {alert("无有效变量, 请检查"); return;} 
+            sessionStorage.setItem("grade", _mem.length)
+            sessionStorage.setItem("labels", JSON.stringify({"key": labels}))
+            checkNumeric(df, labels)
+        }
+        
     }
     
-    $("#l11-x-x").css("display", "block")
-    level4SetIndexCfg()
+    if (flag){
+        $("#l11-x-x").css("display", "block")
+        level4SetIndexCfg()
+    }
+    
 }
 
 function level4SetIndexCfg(){
@@ -405,7 +435,7 @@ function optSave(mode){
 function level4ToLevel5(){
     var symbol = ["x", "y", "z"]
     for (var i = 0; i < Number(getParams("grade")); i++){
-        if (getParams(symbol[i] + "-cfg") == null){
+        if (getParams(symbol[i] + "-cfg") == "{}"){
             alert(symbol[i] + "并未设置, 请重试")
             return
         }
@@ -416,265 +446,7 @@ function level4ToLevel5(){
 // -------------------
 // -------------------
 
-function mergeOption(){
-    var fig = getParams("fig")
-    var grade = getParams("grade")
-    var lineSub = getParams("line-sub")
-    var pubCfg = JSON.parse(getParams("pub-cfg"))
-    var styles = JSON.parse(getParams("styles"))["key"]
-    var res = JSON.parse(getParams("res"))
 
-    if (fig == "line"){
-
-        var xCfg = JSON.parse(getParams("x-cfg"))
-        var yCfg = JSON.parse(getParams("y-cfg"))
-
-        if (getParams("mode") == "file"){
-            if (grade == 3){
-
-                var zCfg = JSON.parse(getParams("z-cfg"))
-
-                var option = {
-                    tooltip:{
-                        show: true,
-                        trigger: 'axis',
-                        formatter: '{b0}: {c0}: {d0}<br />x, y, z'
-                    },
-                    grid3D: {
-                        show: true,
-                        axisLine: {
-                            show: true,
-                        },
-                    },
-                    xAxis3D: {
-                        type: styles[0],
-                        data: res["x"],
-                        name: xCfg["axis-name"],
-                        min: (styles[0] == "value") ? JSON.parse(getParams("x-range"))["min"] : undefined,
-                        max: (styles[0] == "value") ? JSON.parse(getParams("x-range"))["max"] : undefined,
-                        axisLine: {
-                            symbol: ["none", "arrow"],
-                            lineStyle:{
-                                type: "dashed"
-                            }
-                        }
-                    },
-                    yAxis3D: {
-                        type: styles[1],
-                        data: res["y"],
-                        name: yCfg["axis-name"],
-                        min: (styles[1] == "value") ? JSON.parse(getParams("y-range"))["min"] : undefined,
-                        max: (styles[1] == "value") ? JSON.parse(getParams("y-range"))["max"] : undefined,
-                        axisLine: {
-                            symbol: ["none", "arrow"],
-                            lineStyle:{
-                                type: "dashed"
-                            }
-                        }
-                    },
-                    zAxis3D: {
-                        type: styles[2],
-                        data: res["z"],
-                        name: zCfg["axis-name"],
-                        min: (styles[2] == "value") ? JSON.parse(getParams("z-range"))["min"] : undefined,
-                        max: (styles[2] == "value") ? JSON.parse(getParams("z-range"))["max"] : undefined,
-                        axisLine: {
-                            symbol: ["none", "arrow"],
-                            lineStyle:{
-                                type: "dashed"
-                            }
-                        }
-                    },
-                    series: [
-                        {
-                        type: "line3D",
-                        data: res["all"],
-                        lineStyle: {
-                            width: pubCfg["line-width"],
-                            color: pubCfg["line-color"]
-                        }
-                    }
-                ]
-            }
-        }
-            else{
-                var styles = JSON.parse(getParams("styles"))["key"]
-
-                var option = {
-                    tooltip:{
-                        show: true,
-                        trigger: 'axis',
-                        formatter: '{b0}: {c0}<br />x, y'
-                    },
-                    dataZoom:[
-                        {
-                            type: 'inside',
-                            orient: 'vertical',
-                        },{
-                            type: 'inside', 
-                        }
-                    ],
-                    xAxis: {
-                        type: styles[0], 
-                        data: res["x"],
-                        name: xCfg["axis-name"],
-                        min: (styles[0] == "value") ? JSON.parse(getParams("x-range"))["min"] : undefined,
-                        max: (styles[0] == "value") ? JSON.parse(getParams("x-range"))["max"] : undefined,
-                        axisLine: {
-                            symbol: ["none", "arrow"],
-                            lineStyle:{
-                                type: "dashed"
-                            }
-                        }
-                    },
-                    yAxis: {
-                        type: styles[1], 
-                        data: res["y"],
-                        name: yCfg["axis-name"],
-                        min: (styles[1] == "value") ? JSON.parse(getParams("y-range"))["min"] : undefined,
-                        max: (styles[1] == "value") ? JSON.parse(getParams("y-range"))["max"] : undefined,
-                        axisLine: {
-                            symbol: ["none", "arrow"],
-                            lineStyle:{
-                                type: "dashed"
-                            }
-                        }
-                    },
-                    series: [
-                        {
-                            type: "line", 
-                            data: res["all"], 
-                            smooth: (pubCfg["line-smooth"] == "1") ? true: false,
-                            center: ['50%', '50%'],
-                            showSymbol: (pubCfg["line-symbol"] == "1") ? true: false,
-                            lineStyle: {
-                                width: pubCfg["line-width"],
-                                type: pubCfg["line-cat"],
-                                color: pubCfg["line-color"]
-                            }
-                        }
-                    ],
-                    
-                }
-            }
-        }
-        else{
-            // exp
-            if (grade == 3){
-                var option = {
-                    grid3D: {
-                        show: true,
-                        axisLine: {
-                            show: true,
-                        },
-                    },
-                    xAxis3D: {
-                        type: "value",
-                        name: xCfg["axis-name"],
-                        axisLine: {
-                            symbol: ["none", "arrow"],
-                            lineStyle:{
-                                type: "dashed"
-                            }
-                        }
-                    },
-                    yAxis3D: {
-                        type: "value",
-                        name: yCfg["axis-name"],
-                        axisLine: {
-                            symbol: ["none", "arrow"],
-                            lineStyle:{
-                                type: "dashed"
-                            }
-                        }
-                    },
-                    zAxis3D: {
-                        type: "value",
-                        name: yCfg["axis-name"],
-                        axisLine: {
-                            symbol: ["none", "arrow"],
-                            lineStyle:{
-                                type: "dashed"
-                            }
-                        }
-                    },
-                    series:{
-                        type: "surface",
-                        data: res['key'],
-                        itemStyle:{
-                            color: lineSub["surface-color"]
-                        }
-                    },
-                    shading: lineSub["surface-shade"]
-                }
-            }
-            else{
-                var option = {
-                    tooltip:{
-                        show:true,
-                        trigger: 'axis',
-                        formatter: '{b0}: {c0}<br />x: y'
-                    },
-                    dataZoom:[
-                        {
-                            type: 'inside',
-                            orient: 'vertical',
-                        },{
-                            type: 'inside', 
-                        }
-                    ],
-                    xAxis: {
-                        type: "value",
-                        name: xCfg["axis-name"],
-                        min: JSON.parse(getParams("x-range"))["min"],
-                        max: JSON.parse(getParams("x-range"))["max"],
-                        axisLine: {
-                            symbol: ["none", "arrow"],
-                            lineStyle:{
-                                type: "dashed"
-                            }
-                        }
-                    },
-                    yAxis: {
-                        type: "value",
-                        name: yCfg["axis-name"],
-                        min: JSON.parse(getParams("y-range"))["min"],
-                        max: JSON.parse(getParams("y-range"))["max"],
-                        axisLine: {
-                            symbol: ["none", "arrow"],
-                            lineStyle:{
-                                type: "dashed"
-                            }
-                        }
-                    },
-                    series: [
-                        {
-                            type: "line", 
-                            data: res["key"],
-                            smooth: (pubCfg["line-smoooth"] == "1") ? true: false,
-                            center: ['50%', '50%'],
-                            showSymbol: (pubCfg["line-symbol"] == "1") ? true: false,
-                            lineStyle: {
-                                width: pubCfg["line-width"],
-                                type: pubCfg["line-cat"],
-                                color: pubCfg["line-color"]
-                            }
-                        }
-                    ]
-                }
-            }
-        }
-    }
-
-    // ---------------------
-
-    console.log(option);
-    return option
-}
-
-
-// -------------------
-// -------------------
 
 function canvasResultPlot(){
     if (chart != null && chart != "" && chart != undefined) {
@@ -686,8 +458,10 @@ function canvasResultPlot(){
         return
     }
 
-    try{range2ContiData()}catch{}
-    try{sheet2Data()}catch{}
+    if (getParams("fig") == "line"){
+        if (getParams("mode") == "exp") {range2ContiData()}
+        else {sheet2Data()}
+    }
 
     option = mergeOption()
     chart = echarts.init(document.getElementById("result"))

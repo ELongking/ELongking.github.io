@@ -14,6 +14,7 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.2/echarts.js"></script>
     <script src="https://cdn.bootcdn.net/ajax/libs/echarts-gl/2.0.8/echarts-gl.js"></script>
     <script src="../../../../script/project/quick_draw/main.js"></script>
+    <script src="../../../../script/project/quick_draw/option.js"></script>
     <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 </head>
 
@@ -74,22 +75,34 @@
 
             <div class="title base">快速绘图 (基于ECharts)</div>
             <div class="version base">
-                <b class="v-code">v0.1 ==> 初步上线本功能, 线面图二维已基本可以使用, 下版本更新三维面图和修改CSS样式</b>
+                <ul>
+                    <li class="v">
+                        <b class="v-code">v0.1 =>  </b>
+                        <p>初步上线本功能, 线面图二维已基本可以使用, 下版本更新三维面图和修改CSS样式</p>
+                    </li>
+                    <li class="v">
+                        <b class="v-code" style="color: red;">v0.2 =>  </b>
+                        <p>线面图已基本完成, 样式基本完成, 下版本更新散点图</p>
+                    </li>
+                    <li></li>
+                    <li></li>
+                </ul>
+                
             </div>
             <div class="help base">
-                <p>使用时请注意, 若要重置状态, 请刷新页面。</p>
+                <p>使用时请注意, 若要重置状态, 建议刷新页面。</p>
                 <p>
                     表达式书写暂时遵循<a href="https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/First_steps/Math">JS规范</a>
                 </p>
                 <p>
-                    即 +-*/ 加减乘除, ** 次幂等
+                    即 +-*/ 加减乘除, ** 次幂等。同时支持sin, cos, tan, pi, e(自然对数) 和 log(以e为底)
                 </p>
             </div>
             
             <div class="lev base">
 
                 <div class="setting lev-1" style="background: rgb(68, 121, 68);">
-                    <span style="color: white;">LEVEL 1</span>
+                    <span class="lev-head">LEVEL 1</span>
                     <select id="l1-select" style="margin: auto; display: block;" onchange="level1()">
                         <option value="0">--请选择--</option>
                         <option value="1">线面图</option>
@@ -99,109 +112,185 @@
                 </div>
 
                 <div class="setting lev-2" id="l11" style="background: rgb(215, 156, 162); display: none;">
-                    <span style="color: white;">LEVEL 2</span>
+                    <span class="lev-head">LEVEL 2</span>
                     <div style="margin: auto; display: block;">
-                        <div>
-                            按计算式 (维度为 x y z 的个数加一)
-                            <input type="text" id="l2-exp-text" value="x**2+1" placeholder="请写入计算式"/>
-                            <input type="submit" id="l2-exp-btn" onclick="level2Click()">
+                        <div class="layer">
+                            <span class="layer-head">按计算式 (维度为 x y z 的种类数加一)</span>
+                            <div>
+                                <input type="text" class="form-input" id="l2-exp-text" name="l2-exp-text" value="x**2+3*sin(x)" placeholder="Enter Your Expression"/>
+                                <label for="l2-exp-text" class="form-label">Enter Your Expression</label>
+                            </div>
+                            <input type="submit" class="form-btn" id="l2-exp-btn" onclick="level2Click()">
                         </div>
-                        <br>
-                        <div>
-                            按数据表格
-                            <input type="file" accept=".xlsx" id="xlsx-ipt" onchange="importData(this)"/>
+                        <div class="layer">
+                            <span class="layer-head">按数据表格(xlsx)</span>
+                            <div>
+                                <input type="file" class="form-file" accept=".xlsx" id="xlsx-ipt" onchange="importData(this)"/>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="setting lev-3" id="l11-l21" style="background: rgb(197, 161, 99); display: none;">
-                    <span style="color: white;">LEVEL 3</span>
-                    x: <input id="l3-text-x" type="text" value="-1 1 0.01" placeholder="左端 右端 小间距(越小精度越好, 但也越慢)">
-                    y: <input id="l3-text-y" type="text" value="-1 1 0.01" placeholder="左端 右端 (越小精度越好, 但也越慢)">
-                    z: <input id="l3-text-z" type="text" placeholder="左端 右端 小间距(越小精度越好, 但也越慢)">
-                    <input type="submit" id="l11-l21-sub" onclick="l3tol4()">
+                    <span class="lev-head">LEVEL 3</span>
+                    <div class="layer" id="l3-group-x">
+                        <span class="layer-head">x: </span>
+                        <div>
+                            <input class="form-input" id="l3-text-x" name="l3-text-x" type="text" value="-1 1 0.01" placeholder="Start End Interval">
+                            <label for="l3-text-x" class="form-label">Start End Interval</label>
+                        </div>
+                    </div>
+
+                    <div class="layer" id="l3-group-y">
+                        <span class="layer-head">y: </span>
+                        <div>
+                            <input class="form-input" id="l3-text-y" name="l3-text-y" type="text" value="-1 1 0.01" placeholder="Start End Interval">
+                            <label for="l3-text-y" class="form-label">Start End Interval</label>
+                        </div>
+                    </div>
+
+                    <div class="layer" id="l3-group-z">
+                        <span class="layer-head">z: </span>
+                        <div>
+                            <input class="form-input" id="l3-text-z" name="l3-text-z" type="text" value="-1 1 0.01" placeholder="Start End Interval">
+                            <label for="l3-text-z" class="form-label">Start End Interval</label>
+                        </div>
+                    </div>
+
+                    <input type="submit" class="form-btn" id="l11-l21-sub" onclick="l3tol4()">
                 </div>
                 <div class="setting lev-3" id="l11-l22" style="background: rgb(197, 161, 99); display: none;">
-                    <span style="color: white;">LEVEL 3</span>
-                    x: <select id="l3-select-x"></select>
-                    y: <select id="l3-select-y"></select>
-                    z: <select id="l3-select-z"></select>
-                    <input type="submit" id="l11-l22-sub" onclick="l3tol4()">
+                    <span class="lev-head">LEVEL 3</span>
+                    <div class="layer">
+                        <span class="layer-head">x:</span>
+                        <select id="l3-select-x"></select>
+                    </div>
+                    <div class="layer">
+                        <span class="layer-head">y:</span>
+                        <select id="l3-select-y"></select>
+                    </div>
+                    <div class="layer">
+                        <span class="layer-head">z:</span>
+                        <select id="l3-select-z"></select>
+                    </div>
+                    <input class="form-btn" type="submit" id="l11-l22-sub" onclick="l3tol4()">
                 </div>
 
                 <div class="setting lev-4" id="l11-x-x" style="background: rgb(105, 175, 228); display: none;">
-                    <span style="color: white;">LEVEL 4</span>
-                    <select id="l4-var-select"></select> <input type="submit" value="保存" id="l4-save" onclick="varSave('l4')">
+                    <span class="lev-head">LEVEL 4</span>
+                    <select id="l4-var-select"></select> <input class="form-btn" type="submit" value="保存" id="l4-save" onclick="varSave('l4')">
 
                     <div id="axis line-cfg">
                         <ul style="list-style-type: none">
-                            <li>轴标签名 ==> <input type="text" id="axis-name" value="axis"></li>
                             <li>
-                                数据缩放(仅对数字数据有效) ==> 
-                                <select name="" id="axis-zoom">
-                                    <option value="ori">None</option>
-                                    <option value="log">Log</option>
-                                    <option value="minmax">MinMax</option>
-                                </select>
+                                <div class="layer">
+                                    <span class="layer-head">轴标签名 =></span>
+                                    <div>
+                                        <input class="form-input" name="axis-name" placeholder="Enter Custom Axis Name" type="text" id="axis-name" value="axis">
+                                        <label class="form-label" for="axis-name">Enter Custom Axis Name</label>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="layer">
+                                    <span class="layer-head">数据缩放(仅对数字数据有效) => </span>
+                                    <select name="" id="axis-zoom">
+                                        <option value="ori">None</option>
+                                        <option value="log">Log</option>
+                                        <option value="minmax">MinMax</option>
+                                    </select>
+                                </div>
                             </li>
                         </ul>
                     </div>
             
-                    <input type="submit" value="进行下一步骤" onclick="l4tol5()">
+                    <input class="form-btn" type="submit" value="下一步" onclick="l4tol5()">
                 </div>
 
                 <div class="setting lev-5" id="l11-x-x-x" style="background: rgb(144, 137, 246); display: none;">
-                    <span style="color: white;">LEVEL 5</span> <input type="submit" value="保存" id="l5-save" onclick="varSave('l5')">
+                    <span class="lev-head">LEVEL 5</span> <input class="form-btn" type="submit" value="保存" id="l5-save" onclick="varSave('l5')">
 
                     <div id="line line-cfg">
-                        样式 (二维不支持面图, 三维表达式不支持线图) ==> 
-                        <select name="" id="line-type" onchange="lineSurfaceChange()">
-                            <option value="none">---</option>
-                            <option value="line">线图</option>
-                            <option value="surface">面图</option>
-                        </select>
+                        <div class="layer">
+                            <span class="layer-head">样式 (二维不支持面图, 三维表达式不支持线图) =></span>
+                            <select name="" id="line-type" onchange="lineSurfaceChange()">
+                                <option value="none">---</option>
+                                <option value="line">线图</option>
+                                <option value="surface">面图</option>
+                            </select>
+                        </div>
 
                         <ul id="line-line" style="list-style-type: none; display: none;">
-                            <li>线宽 ==> <input type="text" value="2" id="line-width"></li>
-                            <li>线样式 ==> 
-                                <select name="" id="line-cat">
-                                    <option value="solid">实线</option>
-                                    <option value="dashed">虚线</option>
-                                    <option value="dotted">点画线</option>
-                                </select>
-                            </li>
-                            <li>线颜色 ==> <input type="text" id="line-color" value="red" placeholder="支持输入单词和rgb值, rgb格式为(x1,x2,x3)"></li>
-                            <li>是否平滑 ==> 
-                                <select id="line-smooth">
-                                    <option value="1">是</option>
-                                    <option value="0">否</option>
-                                </select>
+                            <li>
+                                <div class="layer">
+                                    <span class="layer-head">线宽 =></span>
+                                    <div>
+                                        <input class="form-input" name="line-width" type="text" value="2" id="line-width" placeholder="Enter Line Width">
+                                        <label for="line-width" class="form-label">Enter Line Width</label>
+                                    </div>
+                                </div>
                             </li>
                             <li>
-                                是否显示数据点 ==>
-                                <select id="line-symbol">
-                                    <option value="1">是</option>
-                                    <option value="0" selected="selected">否</option>
-                                </select>
+                                <div class="layer">
+                                    <span class="layer-head">线样式 =></span>
+                                    <select name="" id="line-cat">
+                                        <option value="solid">实线</option>
+                                        <option value="dashed">虚线</option>
+                                        <option value="dotted">点画线</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="layer">
+                                    <span class="layer-head">线颜色 =></span>
+                                    <div>
+                                        <input class="form-input" name="line-width" type="text" value="red" id="line-color" placeholder="Support for word and RGB val, as (x1,x2,x3)">
+                                        <label for="line-color" class="form-label">Support for word and RGB val, as (x1,x2,x3)</label>
+                                    </div>
+                                </div>
+                            <li>
+                                <div class="layer">
+                                    <span class="layer-head">是否平滑 =></span>
+                                    <select id="line-smooth">
+                                        <option value="1">是</option>
+                                        <option value="0">否</option>
+                                    </select>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="layer">
+                                    <span class="layer-head">是否显示数据点 =></span>
+                                    <select id="line-symbol">
+                                        <option value="1">是</option>
+                                        <option value="0" selected="selected">否</option>
+                                    </select>
+                                </div>
                             </li>
                         </ul>
                         
                         <ul id="line-surface" style="list-style-type: none; display: none;">
-                            <li>渲染方式 ==> 
-                                <select name="" id="surface-shade">
-                                    <option value="color">按颜色渲染</option>
-                                    <option value="lambert">光照渲染</option>
-                                    <option value="realistic">真实渲染</option>
-                                </select>
+                            <li>
+                                <div class="layer">
+                                    <span class="layer-head">渲染方式 =></span>
+                                    <select name="" id="surface-shade">
+                                        <option value="color">按颜色渲染</option>
+                                        <option value="lambert">光照渲染</option>
+                                    </select>
+                                </div>
                             </li>
-                            <li>面颜色 ==> <input type="text" id="surface-color" value="red" placeholder="支持输入单词和rgb值, rgb格式为(x1,x2,x3)"></li>
+                            <li>
+                                <div class="layer">
+                                    <span class="layer-head">面颜色 =></span>
+                                    <div>
+                                        <input class="form-input" name="surface-color" type="text" value="red" id="surface-color" placeholder="Support for word and RGB val, as (x1,x2,x3)">
+                                        <label for="surface-color" class="form-label">Support for word and RGB val, as (x1,x2,x3)</label>
+                                    </div>
+                                </div>
+                            </li>
                         </ul>
-
-
-
                     </div>
 
-                    <input type="submit" value="进行下一步骤" onclick="submit2plot()">
+                    <input class="form-btn" type="submit" value="下一步" onclick="submit2plot()">
                 </div>
 
             </div>
