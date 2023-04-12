@@ -16,15 +16,15 @@ function mergeOption(){
     var styles = JSON.parse(getParams("styles"))["key"]
     var res = JSON.parse(getParams("res"))
 
+    var xCfg = JSON.parse(getParams("x-cfg"))
+    var yCfg = JSON.parse(getParams("y-cfg"))
+    var yCfg = JSON.parse(getParams("z-cfg"))
+
     if (fig == "line"){
 
-        var xCfg = JSON.parse(getParams("x-cfg"))
-        var yCfg = JSON.parse(getParams("y-cfg"))
 
         if (getParams("mode") == "file"){
             if (grade == 3){
-
-                var zCfg = JSON.parse(getParams("z-cfg"))
 
                 var option = {
                     tooltip:{
@@ -94,8 +94,6 @@ function mergeOption(){
             }
         }
             else{
-                var styles = JSON.parse(getParams("styles"))["key"]
-
                 var option = {
                     tooltip:{
                         show: true,
@@ -186,7 +184,7 @@ function mergeOption(){
                     },
                     zAxis3D: {
                         type: "value",
-                        name: yCfg["axis-name"],
+                        name: zCfg["axis-name"],
                         axisLine: {
                             symbol: ["none", "arrow"],
                             lineStyle:{
@@ -207,7 +205,7 @@ function mergeOption(){
             else{
                 var option = {
                     tooltip:{
-                        show:true,
+                        show: true,
                         trigger: 'axis',
                         formatter: '{b0}: {c0}<br />x: y'
                     },
@@ -263,6 +261,126 @@ function mergeOption(){
     }
 
     // ---------------------
+
+    else if (fig == "scatter"){
+        if (grade == 3){
+            var option = {
+                grid3D: {
+                    show: true,
+                    axisLine: {
+                        show: true,
+                    },
+                },
+                xAxis3D: {
+                    type: styles[0],
+                    name: xCfg["axis-name"],
+                    data: res["x"],
+                    min: (styles[0] == "value") ? JSON.parse(getParams("y-range"))["min"] : undefined,
+                    max: (styles[0] == "value") ? JSON.parse(getParams("y-range"))["max"] : undefined,
+                    axisLine: {
+                        symbol: ["none", "arrow"],
+                        lineStyle:{
+                            type: "dashed"
+                        }
+                    }
+                },
+                yAxis3D: {
+                    type: styles[1],
+                    name: yCfg["axis-name"],
+                    data: res["y"],
+                    min: (styles[1] == "value") ? JSON.parse(getParams("y-range"))["min"] : undefined,
+                    max: (styles[1] == "value") ? JSON.parse(getParams("y-range"))["max"] : undefined,
+                    axisLine: {
+                        symbol: ["none", "arrow"],
+                        lineStyle:{
+                            type: "dashed"
+                        }
+                    }
+                },
+                zAxis3D: {
+                    type: styles[2],
+                    name: zCfg["axis-name"],
+                    data: res["z"],
+                    min: (styles[2] == "value") ? JSON.parse(getParams("y-range"))["min"] : undefined,
+                    max: (styles[2] == "value") ? JSON.parse(getParams("y-range"))["max"] : undefined,
+                    axisLine: {
+                        symbol: ["none", "arrow"],
+                        lineStyle:{
+                            type: "dashed"
+                        }
+                    }
+                },
+                series: [
+                    {
+                        type: "scatter3D", 
+                        data: res["all"],
+                        symbolSize: (pubCfg["point-size"] == "Scalable") ? function(value, params){params.symbolSize = size[params.dataIndex]; return params.symbolSize;} : pubCfg["point-size"],
+                        center: ['50%', '50%'],
+                        itemStyle: {
+                            color: pubCfg["point-color"]
+                        }
+                    }
+                ],
+                blendMode: pubCfg["point-blend"],
+            }
+        }
+
+        else{
+            var option = {
+                tooltip:{
+                    show: true,
+                    trigger: 'axis',
+                    formatter: '{b0}: {c0}<br />x: y'
+                },
+                dataZoom:[
+                    {
+                        type: 'inside',
+                        orient: 'vertical',
+                    },{
+                        type: 'inside', 
+                    }
+                ],
+                xAxis: {
+                    type: styles[0],
+                    name: xCfg["axis-name"],
+                    data: res["x"],
+                    min: (styles[0] == "value") ? JSON.parse(getParams("y-range"))["min"] : undefined,
+                    max: (styles[0] == "value") ? JSON.parse(getParams("y-range"))["max"] : undefined,
+                    axisLine: {
+                        symbol: ["none", "arrow"],
+                        lineStyle:{
+                            type: "dashed"
+                        }
+                    }
+                },
+                yAxis: {
+                    type: styles[1],
+                    name: yCfg["axis-name"],
+                    data: res["y"],
+                    min: (styles[1] == "value") ? JSON.parse(getParams("y-range"))["min"] : undefined,
+                    max: (styles[1] == "value") ? JSON.parse(getParams("y-range"))["max"] : undefined,
+                    axisLine: {
+                        symbol: ["none", "arrow"],
+                        lineStyle:{
+                            type: "dashed"
+                        }
+                    }
+                },
+                series: [
+                    {
+                        type: "scatter", 
+                        data: res["all"],
+                        symbolSize: (typeof(pubCfg["point-size"]) == Number) ? pubCfg["point-size"] : function(value){value * 0.1},
+                        center: ['50%', '50%'],
+                        colorBy: pubCfg["point-dif"],
+                        itemStyle: {
+                            color: pubCfg["point-color"]
+                        },
+                    }
+                ],
+            }
+        }
+    }
 
     console.log(option);
     return option

@@ -15,7 +15,7 @@
     <script src="https://cdn.bootcdn.net/ajax/libs/echarts-gl/2.0.8/echarts-gl.js"></script>
     <script src="../../../../script/project/quick_draw/main.js"></script>
     <script src="../../../../script/project/quick_draw/option.js"></script>
-    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <!-- <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
 </head>
 
 <body>
@@ -111,6 +111,8 @@
                     </select>
                 </div>
 
+                <!-- exp: 1, file: 2 -->
+
                 <div class="setting lev-2" id="l11" style="background: rgb(215, 156, 162); display: none;">
                     <span class="lev-head">LEVEL 2</span>
                     <div style="margin: auto; display: block;">
@@ -130,8 +132,21 @@
                         </div>
                     </div>
                 </div>
+                <div class="setting lev-2" id="l12" style="background: rgb(215, 156, 162); display: none;">
+                    <span class="lev-head">LEVEL 2</span>
+                    <div style="margin: auto; display: block;">
+                        <div class="layer">
+                            <span class="layer-head">按数据表格(xlsx)</span>
+                            <div>
+                                <input type="file" class="form-file" accept=".xlsx" id="xlsx-ipt" onchange="importData(this)"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-                <div class="setting lev-3" id="l11-l21" style="background: rgb(197, 161, 99); display: none;">
+                <!---->
+
+                <div class="setting lev-3" id="l21" style="background: rgb(197, 161, 99); display: none;">
                     <span class="lev-head">LEVEL 3</span>
                     <div class="layer" id="l3-group-x">
                         <span class="layer-head">x: </span>
@@ -140,7 +155,6 @@
                             <label for="l3-text-x" class="form-label">Start End Interval</label>
                         </div>
                     </div>
-
                     <div class="layer" id="l3-group-y">
                         <span class="layer-head">y: </span>
                         <div>
@@ -148,7 +162,6 @@
                             <label for="l3-text-y" class="form-label">Start End Interval</label>
                         </div>
                     </div>
-
                     <div class="layer" id="l3-group-z">
                         <span class="layer-head">z: </span>
                         <div>
@@ -156,10 +169,9 @@
                             <label for="l3-text-z" class="form-label">Start End Interval</label>
                         </div>
                     </div>
-
-                    <input type="submit" class="form-btn" id="l11-l21-sub" onclick="l3tol4()">
+                    <input type="submit" class="form-btn" id="l21-sub" onclick="l3tol4()">
                 </div>
-                <div class="setting lev-3" id="l11-l22" style="background: rgb(197, 161, 99); display: none;">
+                <div class="setting lev-3" id="l22" style="background: rgb(197, 161, 99); display: none;">
                     <span class="lev-head">LEVEL 3</span>
                     <div class="layer">
                         <span class="layer-head">x:</span>
@@ -173,14 +185,16 @@
                         <span class="layer-head">z:</span>
                         <select id="l3-select-z"></select>
                     </div>
-                    <input class="form-btn" type="submit" id="l11-l22-sub" onclick="l3tol4()">
+                    <input class="form-btn" type="submit" id="l22-sub" onclick="l3tol4()">
                 </div>
+
+                <!---->
 
                 <div class="setting lev-4" id="l11-x-x" style="background: rgb(105, 175, 228); display: none;">
                     <span class="lev-head">LEVEL 4</span>
                     <select id="l4-var-select"></select> <input class="form-btn" type="submit" value="保存" id="l4-save" onclick="varSave('l4')">
 
-                    <div id="axis line-cfg">
+                    <div id="axis cfg">
                         <ul style="list-style-type: none">
                             <li>
                                 <div class="layer">
@@ -201,11 +215,24 @@
                                     </select>
                                 </div>
                             </li>
+                            <li>
+                                <div class="layer">
+                                    <span class="layer-head">绘制样式 => </span>
+                                    <select name="" id="axis-theme">
+                                        <option value="none">默认</option>
+                                        <option value="vintage">Vintage</option>
+                                        <option value="shine">Shine</option>
+                                        <option value="dark">Dark</option>
+                                    </select>
+                                </div>
+                            </li>
                         </ul>
                     </div>
             
                     <input class="form-btn" type="submit" value="下一步" onclick="l4tol5()">
                 </div>
+
+                <!---->
 
                 <div class="setting lev-5" id="l11-x-x-x" style="background: rgb(144, 137, 246); display: none;">
                     <span class="lev-head">LEVEL 5</span> <input class="form-btn" type="submit" value="保存" id="l5-save" onclick="varSave('l5')">
@@ -289,11 +316,78 @@
                             </li>
                         </ul>
                     </div>
-
                     <input class="form-btn" type="submit" value="下一步" onclick="submit2plot()">
                 </div>
 
+            <div class="setting lev-5" id="l12-x-x-x" style="background: rgb(144, 137, 246); display: none;">
+                <span class="lev-head">LEVEL 5</span> <input class="form-btn" type="submit" value="保存" id="l5-save" onclick="varSave('l5')">
+
+                <div id="scatter scatter-cfg">
+                    <ul id="scatter-2D" style="list-style-type: none; display: none;">
+                        <li>
+                            <div class="layer">
+                                <span class="layer-head">散点大小 =></span>
+                                <div>
+                                    <input class="form-input" name="point-size" type="text" value="Scalable" id="point-size" placeholder="Enter Point Size or Set Scalable Mode">
+                                    <label for="point-size" class="form-label">Enter Point Size or Set Scalable Mode</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="layer">
+                                <span class="layer-head">散点样式 =></span>
+                                <select name="" id="point-shape">
+                                    <option value="circle">圆圈</option>
+                                    <option value="rect">矩形</option>
+                                    <option value="triangle">三角形</option>
+                                    <option value="pin">大头针形</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="layer">
+                                <span class="layer-head">散点颜色 =></span>
+                                <div>
+                                    <input class="form-input" name="point-color" type="text" value="red" id="point-color" placeholder="Support for word and RGB val, as (x1,x2,x3)">
+                                    <label for="point-color" class="form-label">Support for word and RGB val, as (x1,x2,x3)</label>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="layer">
+                                <span class="layer-head">区分样式 =></span>
+                                <select name="" id="point-dif">
+                                    <option value="series">统一颜色</option>
+                                    <option value="data">各个区分</option>
+                                </select>
+                            </div>
+                        </li>
+                    </ul>
+                    <!---->
+                    <ul id="scatter-3D" style="list-style-type: none; display: none;">
+                        <li>
+                            <div class="layer">
+                                <span class="layer-head">混合方式 =></span>
+                                <select name="" id="point-blend">
+                                    <option value="source-over">默认混合</option>
+                                    <option value="lighter">层叠高亮</option>
+                                </select>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="layer">
+                                <span class="layer-head">面颜色 =></span>
+                                <div>
+                                    <input class="form-input" name="point-color" type="text" value="red" id="point-color" placeholder="Support for word and RGB val, as (x1,x2,x3)">
+                                    <label for="point-color" class="form-label">Support for word and RGB val, as (x1,x2,x3)</label>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <input class="form-btn" type="submit" value="下一步" onclick="submit2plot()">
             </div>
+        </div>
 
             <div class="base" id="result" style="width: 75%; height: 600px;">
             </div>

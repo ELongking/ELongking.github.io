@@ -65,7 +65,7 @@ function range2ContiData(){
     var zScaleMode = JSON.parse(getParams("z-cfg"))["axis-zoom"]
 
     if (getParams("grade") == 2){
-        range = JSON.parse(getParams("df"))['x']
+        var range = JSON.parse(getParams("df"))['x']
         var res = [], xRes = [], yRes = []
 
         try {
@@ -222,7 +222,7 @@ function level1Select(){
     var val2fig = {1: "line", 2: "scatter", 3: "bar"}
     sessionStorage.setItem("fig", val2fig[l1Val])
 
-    for (var i = 1; i < 2; i++){
+    for (var i = 1; i < 3; i++){
         var idx = "l1" + i
         var ele = document.getElementById(idx)
         if (i == l1Val){
@@ -294,8 +294,8 @@ function importExcelFile(obj){
 
         sessionStorage.setItem("mode", "file")
         sessionStorage.setItem("df", JSON.stringify(jsonDf))
-
-        $("#l11-l22").css("display", "block")
+        $("#l22").css("display", "block")
+        
         level3SelectAppend(jsonDf);
     }
     
@@ -385,17 +385,15 @@ function optSave(mode){
         var symbol = ["x", "y", "z"]
         var selected = $("#l4-var-select  option:selected").val()
         var varCfg = {}
-        var fig = getParams("fig")
-
-        if (fig == "line"){
-            axis_id = ["axis-name", "axis-zoom"]
-            varCfg[axis_id[0]] = $("#" + axis_id[0]).val()
-            varCfg[axis_id[1]] = $("#" + axis_id[1] + " option:selected").val()
+        
+        axis_id = ["axis-name", "axis-zoom", "axis-theme"]
+        varCfg[axis_id[0]] = $("#" + axis_id[0]).val()
+        varCfg[axis_id[1]] = $("#" + axis_id[1] + " option:selected").val()
+        sessionStorage.setItem("theme", $("#" + axis_id[2] + " option:selected").val())
 
         var varCfg = JSON.stringify(varCfg)
         sessionStorage.setItem(symbol[Number(selected)] + "-cfg", varCfg)
         alert("第" + (Number(selected) + 1).toString() + "个配置已保存")
-        }
     }
 
     else{
@@ -406,8 +404,7 @@ function optSave(mode){
             var lineNsurface = getParams("line-sub")
 
             if (lineNsurface == "line"){
-                $("#line-surface").css("display", "none")
-                line_id = ["line-width", "line-cat", "line-color", "line-smooth", "line-symbol"]
+                var line_id = ["line-width", "line-cat", "line-color", "line-smooth", "line-symbol"]
                 varCfg[line_id[0]] = $("#" + line_id[0]).val()
                 varCfg[line_id[1]] = $("#" + line_id[1] + " option:selected").val()
                 varCfg[line_id[2]] = $("#" + line_id[2]).val()
@@ -415,13 +412,30 @@ function optSave(mode){
                 varCfg[line_id[4]] = $("#" + line_id[4] + " option:selected").val()
             }
             else if (lineNsurface == "surface"){
-                surface_id = ["surface-shade", "surface-color"]
+                var surface_id = ["surface-shade", "surface-color"]
                 varCfg[surface_id[0]] = $("#" + surface_id[0] + " option:selected").val()
                 varCfg[surface_id[1]] = $("#" + surface_id[1]).val()
             }
             else{
                 alert("请选择线还是面")
                 return
+            }
+        }
+
+        else if (fig =="scatter"){
+            var grade = getParams("grade")
+            if (grade == 2){
+                var scatter_id = ["point-size", "point-shape", "point-color", "point-dif"]
+                var shape = $("#" + scatter_id[0]).val()
+                if (typeof(shape) == String) {}  // Todo
+                varCfg[scatter_id[1]] = $("#" + scatter_id[1] + " option:selected").val()
+                varCfg[scatter_id[2]] = $("#" + scatter_id[2]).val()
+                varCfg[scatter_id[3]] = $("#" + scatter_id[3] + " option:selected").val()
+            }
+            else{
+                var scatter_id = ["point-blend", "point-color"]
+                varCfg[scatter_id[0]] = $("#" + scatter_id[0] + " option:selected").val()
+                varCfg[scatter_id[1]] = $("#" + scatter_id[1]).val()
             }
         }
 
@@ -434,13 +448,26 @@ function optSave(mode){
 
 function level4ToLevel5(){
     var symbol = ["x", "y", "z"]
+    var fig = getParams("fig")
+    var grade = getParams("grade")
+
     for (var i = 0; i < Number(getParams("grade")); i++){
         if (getParams(symbol[i] + "-cfg") == "{}"){
             alert(symbol[i] + "并未设置, 请重试")
             return
         }
     }
-    $("#l11-x-x-x").css("display", "block")
+    if (fig == "line") {$("#l11-x-x-x").css("display", "block")}
+    else if (fig == "scatter") {
+        $("#l12-x-x-x").css("display", "block")
+        if (grade == 3){
+            $("#scatter-3D").css("display", "block")
+        }
+        else{
+            $("#scatter-2D").css("display", "block")
+        }
+    }
+        
 }
 
 // -------------------
@@ -453,7 +480,7 @@ function canvasResultPlot(){
         chart.dispose();
     }
 
-    if (getParams("pub-cfg") == null){
+    if (getParams("pub-cfg") == "{}"){
         alert("公有配置未保存, 请重试")
         return
     }
@@ -462,9 +489,10 @@ function canvasResultPlot(){
         if (getParams("mode") == "exp") {range2ContiData()}
         else {sheet2Data()}
     }
+    else if(getParams("fig") == "scatter") {sheet2Data()}
 
     option = mergeOption()
-    chart = echarts.init(document.getElementById("result"))
+    chart = echarts.init(document.getElementById("result"), getParams("theme"))
     chart.setOption(option)
 
     window.addEventListener("resize", function () {
