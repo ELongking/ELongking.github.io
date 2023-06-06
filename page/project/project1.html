@@ -37,10 +37,9 @@
     <div class="branch">
         <div class="text-part">
             <p class="para-start">写在前面:</p>
-            <p>本程序的底层框架采用PyQt5自主编写, 不放出源代码, 但是如果你想要的话可以说明来意, 我会酌情考虑。</p>
-            <p>主要服务目标关键词为：抗震分析、拟静力试验、骨架曲线。</p>
-            <p>龙王在实习的某一天, 因为工作的某些缘故, 突发奇想, 做了一点反编译的措施。如果您是大佬, 那当我没说。不过既然您都反汇编了, 那请您给我的代码做个Review再走呗。</p>
-            <p>另外, 程序里面是夹带了一点私货的(不是那种, 会读你数据的私货, 我根本都不是做这个的也没那个兴趣)。指数据导入特定格式的时候, 会有防伪的弹出框。</p>
+            <p>本程序的底层框架采用PyQt5自主编写, 不放出源代码</p>
+            <p>主要服务目标关键词为: Abaqus参数化建模, 有限元分析</p>
+            <p>目前版本为<span style="color: red;">1.0</span>, 未来将会进行更多案例的更新。</p>
             <p>欢迎所有的bug反馈, 尤其是在弹出特殊报错框的时候, 前提是你的步骤是对的。</p>
         </div>
 
@@ -60,8 +59,8 @@
         <div class="text-part">
             <p class="para-start" style="color: peru;">总览：</p>
             <p>程序的目录脑图如下图所示:</p>
-            <div class="imgbox"><img class="image" src="../../texture/project/p1/nt.png" alt="目录结构脑图" height="300px"></div>
-            <p>所有文件的路径(绝对路径)不能有中文和特殊符号, 否则一定会报错</p>
+            <div class="imgbox"><img class="image" src="../../texture/project/p3/nt.png" alt="目录脑图" height="200px"></div>
+            <p>建议所有文件的路径(绝对路径)不能有中文和特殊符号</p>
         </div>
 
         <hr class="bookends">
@@ -69,134 +68,85 @@
         <div class="text-part">
             <p class="para-start" style="color: navy;">首页界面：</p>
             <p>如下图所示</p>
-            <div class="imgbox"><img class="image" src="../../texture/project/p1/home.png" alt="程序首页界面" height="400px"></div>
-            <p>点就完事儿</p>
+            <div class="imgbox"><img class="image" src="../../texture/project/p3/login.png" alt="程序首页界面" height="400px"></div>
+            <p>请在联网状态下进行登录</p>
         </div>
 
         <hr class="bookends">
 
         <div class="text-part">
-            <p class="para-start" style="color: navy;">第一个程序：</p>
-            <p style="color: red;"><strong>该程序的主要流程是: 导入原始数据文件, 生成骨架曲线并导出。</strong></p>
-            <div class="imgbox"><img class="image" src="../../texture/project/p1/APP1.png" alt="程序1界面" height="400px"></div>
+            <p class="para-start" style="color: navy;">程序主界面：</p>
+            <p>如下图所示</p>
+            <div class="imgbox"><img class="image" src="../../texture/project/p3/main.png" alt="程序首页界面" height="400px"></div>
             <ol>
-                <li>读取文件(支持xlsx和csv两种格式)</li>
-                <p>提示, 如果你的数据是文本文件且主要数据部分数据之间都是逗号隔开的形式, 可以通过直接更改后缀的形式强制转化为.csv</p>
-                <p>注意, 这里所导入的文件, 不能有表头。很多朋友喜欢把excel表的第一行写上表头, 例如：</p>
+                <li>读取表格文件</li>
+                <p>表格文件模板存在于每一个工程项目中的sample.xlsx, 您可以重新复制一份进行修改内容或者文件名(因为最终工程名即为导入表格的名称)。</p>
+                <p>但是请勿修改表头的格式。</p>
+                <li>表格填入数据规范<span style="color: red;">(重点)</span></li>
+                <p>将以下方图片作为例子进行讲解。</p>
+                <div class="imgbox"><img class="image" src="../../texture/project/p3/sample.png" alt="程序首页界面" height="200px"></div>
+                <p>每一列的大致含义, 均在表格表头中有所体现。具体可查看对应工程样例文件夹的help.txt。</p>
+                <p>
+                    每一行即为一组数据, 如果多行数据中某些参数不变, 可采用图片中形如Hb/Lw/Wc的数据填入方式, 也可以通过如下准则进行数据填入:
+                    若表格有三列, 列名分别为ABC, 第一行填入的数字为100 200 300, 第二行希望填入的数据为100 200 400。即可按如下表格样式填写, 不变的地方空出来即可。
+                    即存在空余值的行的空余值自动保持和该行的上一行的对应值相同, 无法跨行。
+                </p>
                 <br>
                 <div class="tb-container">
                     <table table border="1" width="400px" height="150px" align="center" cellspacing="0" cellpadding="0">
                         <tr align="center" valign="middle">
-                            <td><del>strain</del></td>
-                            <td><del>stress</del></td>
+                            <td>A</td>
+                            <td>B</td>
+                            <td>C</td>
                         </tr>
                         <tr align="center" valign="middle">
-                            <td>...</td>
-                            <td>...</td>
+                            <td>100</td>
+                            <td>200</td>
+                            <td>300</td>
                         </tr>
                         <tr align="center" valign="middle">
-                            <td>...</td>
-                            <td>...</td>
-                        </tr>
-                        <tr align="center" valign="middle">
-                            <td>...</td>
-                            <td>...</td>
+                            <td></td>
+                            <td></td>
+                            <td>400</td>
                         </tr>
                     </table>
                 </div>
+                <br>
+                <p>
+                    首个字符带有"#"的数据表示改参数处于参数迭代模式, 且仅允许在首行出现一次(放在后面或者中途有变则会出错), 意为:
+                    如若将所有处于参数迭代模式的参数单独拿出来, 剩下的所有数据作为一个完整的案例后。处于参数迭代模式的参数将会做长度为n的内积并进行前文案例的拼接。
+                    例如上方图片, 钢材和砼材各有5个迭代, 则最终的工程个数将有 16*25=400 个。
+                </p>
+                <p>包括两种书写格式:</p>
+                <p>
+                    <span style="color: red;">第一种书写格式: #start-end-steps, 表示从start开始, 经过相同步长的steps后达到了end, 并且保留中间的每一个迭代值</span>。
+                    例如如果希望Hb从100到1000迭代9次, 则Hb列数据第一行需填入 #100-1000-9, 最终将会有10个数据(100 200 300 ... 900 1000)。
+                    该方法仅支持数字类型。
+                </p>
+                <p>
+                    <span style="color: red;">第二种书写格式: #(val1,val2,val3,val4....): 表示简单的val1, val2...的迭代方法。</span>
+                    该方法是为了字符串类型的迭代支持和非等间距步长的迭代支持。
+                </p>
+                <br>
+                <li>导入工程样例文件夹</li>
+                <p>
+                    导入对应的文件夹即可(请勿修改工程样例文件夹中除了表格的任何内容)。
+                    如若导入的表格文件和文件夹对应关系发生错误, 则会报错。
+                </p>
+                <br>
+                <li>开始生成脚本文件</li>
+                <p>
+                    文件最终保存在同级目录内, 命名方式为{$excel_name$}-{$now_time$}.py。
+                    拖动该脚本进入Abaqus相应位置运行即可。现在版本无需特意设置Python开发环境。
+                </p>
+                <p>
+                    请注意每一个小工程的起名方式遵循如下原则(竖线表示中间不存在间隔, 仅为了表达清晰): <span style="color: red;">导入的excel文件名-迭代参数名|迭代参数值-常规有变化参数名|常规有变化参数值</span>
+                </p>
                 
-                <br>
-                <p>请把表头的starin和stress等均删除, <strong><span style="color: red;">且只许为两列的格式, </span></strong>第一列为x(应变),第二列为y(应力)</p>
-                <p>此步骤是整个流程中最需要时间的地方, 请耐心等待(亲测, 15000组点大概需要15s的时间)</p>
-                <p>最后会生成两个文件和一个文件夹, 分别为circles(文件夹), standard.avi, data_after_delete_extra_zero.xlsx</p>
-                <p><strong><span style="color: red;">其中circles文件夹是第二个程序分析的主要数据来源</span></strong>; standard.avi是视频文件; 最后一个excel表格是抛去原数据中所有多余的原点所得到的数据, 供用户检查所用。</p>
-                <br>
-                <li>绘制图像</li>
-                <p>这部分点击即可, 左边生成原数据的折线图, 右边生成对应的视频展示(循环无停止)</p>
-                <br>
-                <li>进行提取(骨架点的提取)</li>
-                <p>点击即可, 运行完成后会生成对应的骨架点数据并保存在软件内部</p>
-                <br>
-                <li>两种骨架点的画图模式</li>
-                <p>左侧是原数据折线图+骨架点的散点图；右侧是骨架点的折线图。直接在绘图区显示</p>
-                <br>
-                <li>保存骨架点数据</li>
-                <p>会在软件目录下的output文件夹下生成<span style="color: red;">skeleton_points.xlsx文件</span></p>
-            </ol>
-            
-            <div class="add-container">
-                <div class="warning">
-                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                    由于数据等问题<br>提取出的骨架点会存在一些离群值<br>请手动去除, 否则会严重干扰后面的分析
-                </div>
-            </div>
-            
-        </div>
-
-        <hr class="bookends">
-
-        <div class="text-part">
-            <p class="para-start" style="color: navy;">第二个程序：</p>
-            <p style="color: red;"><strong>该程序的主要流程是: 导入骨架曲线文件和周期图像及对应信息文件夹, 进行分析并产生对应结果。</strong></p>
-            <div class="imgbox"><img class="image" src="../../texture/project/p1/APP2.png" alt="程序2界面" height="400px"></div>
-            <ol>
-                <li>读取骨架点文件并进行屈服点的提取(必需)
-                    <ul>
-                        <li>读取文件, 默认文件为: app/output/skeleton_points.xlsx.</li>
-                        <p><strong><span style="color: red;">请注意：一定要手动去除明显的离群点。
-                            如果你不知道离群点大概处于哪个位置, 你可以先用原始的骨架点文件在这里进行分析并观察绘图结果</span></strong></p>
-                        <li>分析, 点就完事儿</li>
-                        <li>在绘图区域显示正向和负向的骨架点折线图并标出对应的两个屈服点</li>
-                    </ul>
-                </li>
-                <br>
-                <li>导入图像信息文件夹(必需)并进行延性计算(非必需)
-                    <ul>
-                        <li>导入整个文件夹。默认位置为: app/output/circles</li>
-                        <p>首先介绍一下该文件夹里的文件性质, 共分为两类：</p>
-                        <p>output_i_.png, 表示原数据第i+1个周期内的折线图</p>
-                        <p>config.json, 表示上述所有数据的相应信息</p>
-                        <br>
-                        <p style="color: blue;">有些朋友可能就会存在疑惑了：你这里就只有这些图片, 数据也不互通(是的, 子软件的底层数据是不互通的), json文件也这么小, 咋算围起来的面积和比值等结果啊。
-                            这里采用了一种很特殊的方法来计算积分面积(在不减少精度的前提下, 目的是为了减小依赖库的使用和潜在的报错问题)。
-                            如果有曾经打包过python程序的经验, 可能聪明的你已经猜出来了。</p>
-                        <br>
-                        <p style="color:red;">(如界面上所说明的一样)请注意：由于数据本身存在的问题, 提取的周期并不一定每一个都是合乎情理的。
-                            因此在进行导入数据并分析之前, 需要用户自己进入app/output/circles文件夹内, 将不符合客观事实的图片直接删除。
-                            请勿修改config.json文件里的任何东西</p>
-                        <li>延性分析, 点击就行</li>
-                    </ul>
-                </li>
-                <br>
-                <li>
-                    滞回耗能相关指标分析
-                    <p>共有四种模式, '单圈滞回耗能', '累积滞回耗能', '能量耗散系数', '等效粘滞阻尼耗散系数'</p>
-                    <p>点击结果展示按钮, 左侧文本栏会生成相应的表格</p>
-                </li>
-                <br>
-                <li>
-                    刚度相关指标分析
-                    <p>共有三种模式, '割线刚度(单向)', '割线刚度(双向)', '强度退化系数'</p>
-                    <p>点击结果展示按钮, 左侧文本栏会生成相应的表格, 且绘图区会生成图像并标出三类关键点和对应的数值（峰值点, 屈服点, 极限点）</p>
-                </li>
             </ol>
         </div>
+
         
-            <hr class="bookends">
-
-        <div class="text-part"><strong><span style="font-size: 24px;color: peru;">结尾：</span></strong>
-            <p>
-                本软件全部由我和另一位同学独自完成(暂且称为X和T), 其中理论部分由T负责, 代码部分由X负责。
-                想到做这个起因是T从某鱼购买了一个, 15-16年左右一个土木博士写的基于tkinter的抗震分析软件(其实也没明确说是用tk写的, 只不过那个界面风格是真的像)。
-                然后跟X聊到了这个事情, 问X说咱能不能自己写一个, 于是就有了这款软件。
-                代码量1000多行吧, 手输Qt Code(主要也是Python写的方便点, 要是用C++写肯定就要用Creator)。
-                编写的过程还算顺利, 希望大家用的顺利, 多多批评。
-            </p>
-            <br>
-            <p>
-                谢谢 / Thank you for all support / ありがとうございます
-            </p>
-        </div>
 
 
     </div>
