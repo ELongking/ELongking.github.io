@@ -288,8 +288,84 @@
                         </div>
                         <div id="t8">
                             <p>中文字幕√</p>
-                            <p>Steam 329元, Nintento 日版商店7678日元, 个人一手卡带425RMB</p>
+                            <p>Steam 329元, Nintendo 日版商店7678日元, 个人一手卡带425RMB</p>
                             <p>讲道理在Switch上玩P5R蛮贵, 但这游戏掌机才玩的爽啊。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!---->
+
+            <div class="item">
+
+                <div class="title">
+                    <div class="label">Persona 5 Strikers</div>
+                    <div class="score">Recommend Score: 8.5/10</div>
+                </div>
+
+                <div class="top-selector">
+                    <ul>
+                        <li><a>游戏性</a></li>
+                        <li><a>音乐</a></li>
+                        <li><a>美术风格</a></li>
+                        <li><a>机制复杂度</a></li>
+                        <li><a>难易度</a></li>
+                        <li><a>配置要求</a></li>
+                        <li><a>剧情</a></li>
+                        <li><a>其他</a></li>
+                    </ul>
+                </div>
+                
+                <div class="command">
+                    <div class="cover" style="background-image: url(../../assets/guide/P5S.jpg);"></div>
+
+                    <div class="text">
+                        <div class="active"></div>
+                    
+                        <div id="t1">
+                            <div class="p">8/10</div>
+                            <p>虽说宣传是无双游戏, 其实更像动作类游戏, 大致有如下几点原因:</p>
+                            <p>难度不低且不是那种纯割草的快感, 闪避和动作反馈做的很到位, 能力克制明显需要手法和一定的操作。至于割草更多的还是体现在偷袭和破盾的总攻击罢了。</p>
+                            <p>作为P5的衍生作品, 本作也将打斗和闯关放在了第一位, 日常生活刻画就普普通通了。总体来说可玩性还是不少的, 只是若先入为主将其带入P5的印象, 恐怕没有那么美好。</p>
+                        </div>
+                        <div id="t2">
+                            <div class="p">9/10</div>
+                            <p>同P5R, 没啥好说的。</p>
+                        </div>
+                        <div id="t3">
+                            <div class="p">9.5/10</div>
+                            <p>同P5R, 没啥好说的。另外技能, 总攻击, 换手等操作移植到动作中也还蛮帅的。</p>
+                            <p>不过相比起来质量就有一些小瑕疵了, 姑且是时间的问题。</p>
+                        </div>
+                        <div id="t4">
+                            <div class="p">4.5/10</div>
+                            <p>进监狱刷商城一气呵成, 死不掉也基本没什么经济压力。</p>
+                            <p>Switch版Y+X(Joker YY+X)。破盾永远是最关键的。</p>
+                        </div>
+                        <div id="t5">
+                            <div class="p">5.5/10</div>
+                            <p>比起回合制, 动作类游戏讲究一个反应快。不过电脑还蛮给力的, 基本上都能躲招数。</p>
+                            <p>难度主要体现在前两次的监狱探索, 有时候队没配好或者级别不够, 打精英怪和王还是很费劲的。</p>
+                        </div>
+                        <div id="t6">
+                            <div class="p">6/10</div>
+                            <p>主机游戏不作评价, 讲道理加载时间有点长。</p>
+                        </div>
+                        <div id="t7">
+                            <div class="p">7.5/10</div>
+                            <p>
+                                虽然整体剧情还是比较好的, 7个年轻人选择追逐“属于自己的正义”, 从拯救善吉这样的小事到力挽狂澜战胜邪恶的大人这样的大事并默默无闻,
+                                团队、友情、感召他人与社会力量, 有直叙有反转有温情, 也一贯体现了P系列的核心主旨。
+                            </p>
+                            <p>
+                                不过对日常生活的刻画就很普通了, 无日期推动(每一天都是安排好的)导致打着打着有点流水账, 无额外Coup, 单独的人物剧情也一般般(就整个委托)等等。
+                                不过弄巧成拙, 五花八门的监狱可以重复去还是不错的, 黑乎乎的意念空间确实还是相形见绌了。
+                            </p>
+                        </div>
+                        <div id="t8">
+                            <p>中文字幕√</p>
+                            <p>Nintendo 美版商店17.99美元, 个人二手卡带185RMB</p>
                         </div>
                     </div>
                 </div>
@@ -3564,7 +3640,7 @@
                 var textQuery = "#" + itemIdx + " > .command > .text > #t" + textIdx
                 var imageQuery = "#" + itemIdx + " > .command > .cover"
                 
-                if ($(atWhichSelectQuery).css("background-color") == black){
+                if (textIdx > 4){
                     $(atWhichSelectQuery).css({"background-color": white})
                     $(atWhichSelectQuery + "> a").css({"color": black})
                 }
