@@ -359,8 +359,8 @@
                                 团队、友情、感召他人与社会力量, 有直叙有反转有温情, 也一贯体现了P系列的核心主旨。
                             </p>
                             <p>
-                                不过对日常生活的刻画就很普通了, 无日期推动(每一天都是安排好的)导致打着打着有点流水账, 无额外Coup, 单独的人物剧情也一般般(就整个委托)等等。
-                                不过弄巧成拙, 五花八门的监狱可以重复去还是不错的, 黑乎乎的意念空间确实还是相形见绌了。
+                                相反的是对日常生活的刻画就很普通了, 无日期推动(每一天都是安排好的)导致打着打着有点流水账, 无额外Coup, 单独的人物剧情也一般般(就整个委托)等等。
+                                不过弄巧成拙, 五花八门的监狱可以重复去还是不错的, 黑乎乎的意念空间确实还是相形见绌了。另外毕竟游戏时间过了一年, 各位的近况也是有些交代, 尤其是德裔日籍车神奥村春(doge)。
                             </p>
                         </div>
                         <div id="t8">
@@ -3635,12 +3635,13 @@
 
                 var selectQuery = "#" + itemIdx + "> .top-selector > ul > li"
                 var textIdx = $(selectQuery).index(this) + 1
+                console.log(textIdx);
                 var atWhichSelectQuery = "#" + itemIdx + "> .top-selector > ul > li" + ":nth-child(" + textIdx + ")"
 
                 var textQuery = "#" + itemIdx + " > .command > .text > #t" + textIdx
                 var imageQuery = "#" + itemIdx + " > .command > .cover"
                 
-                if (textIdx > 4){
+                if (textIdx <= 4){
                     $(atWhichSelectQuery).css({"background-color": white})
                     $(atWhichSelectQuery + "> a").css({"color": black})
                 }
