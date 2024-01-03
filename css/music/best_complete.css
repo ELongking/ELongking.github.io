@@ -169,7 +169,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 36px;
 }
 .kaitem{
     width: 100%;
@@ -245,12 +245,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 120px;
-    margin-bottom: 120px;
+    margin-top: 160px;
+    margin-bottom: 160px;
 }
 .e-album > img{
-    width: 30%;
-    margin-right: 10%;
+    width: 33%;
+    margin-right: 7%;
     border-radius: 5%;
     transition: all 1s;
 }
@@ -260,11 +260,11 @@
 .e-text>.title{
     font-size: 24px;
     font-family: asfj;
-    line-height: 60px;
+    line-height: 56px;
 }
 .e-text>.time-n-label, .e-text>.genre{
-    font-size: 18px;
-    line-height: 26px;
+    font-size: 16px;
+    line-height: 24px;
 }
 .e-text>.text{
     font-family: STKaiti;
